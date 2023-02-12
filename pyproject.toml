@@ -1,0 +1,18 @@
+[tool.black]
+    py311 = true
+    target-version = ['py311']
+    line-length = 80
+    include = '\.pyi?$'
+    exclude = '''
+    /(
+      \.git
+    | \.venv
+    | .*\b(api/models)\b.*$
+    | .*\b(api/objects)\b.*$
+    )/
+    '''
+
+[tool.isort]
+  profile = "black"
+  multi_line_output = 3
+  skip_glob = "^(api/test|api/objects)"

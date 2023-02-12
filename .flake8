@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+per-file-ignores = __init__.py:F401
+extend-ignore = E203, C901
+exclude = 
+    api/models/
+    api/objects
+    api/typing_utils.py
+    api/encoder.py
+    api/typing_utils.py
+    api/util.py
+    

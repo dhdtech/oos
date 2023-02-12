@@ -1,0 +1,39 @@
+version: '3'
+services:
+  oos:
+    container_name: api
+    env_file:
+      - .env
+    ports:
+      - '6661:8080'
+      - '6662:20005'
+      - '6663:20001'
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: >
+      bash -c "/bin/bash -c  'python -m debugpy --listen 0.0.0.0:20005 -m api'"
+    image: chamaleon-pass
+    volumes:
+      - './:/app'
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_ENV: development
+      PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
+    depends_on:
+      - redis
+    restart: always
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - '6679:6379'
+    command: redis-server --appendonly yes
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  

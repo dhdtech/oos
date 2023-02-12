@@ -1,0 +1,44 @@
+# .coveragerc to control coverage.py
+[run]
+include =
+    api/*
+    app/*
+omit =
+    */venv/*
+    test_*.py
+    */test/*
+    api/__init__.py
+    api/__main__.py
+    api/database.py
+    api/encoder.py
+    api/typing_utils.py
+    api/util.py
+    api/objects/*
+    api/models/*
+    src/*
+    application.py
+    api/controllers/security_controller_.py
+    app/as400/*
+[report]
+precision = 3
+fail_under = 70.00
+ignore_errors = False
+show_missing = True
+sort = Cover
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if __name__ == .__main__.:
+    raise exc.IntegrityError

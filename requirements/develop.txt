@@ -1,0 +1,16 @@
+bandit
+black
+debugpy
+pre-commit
+fakeredis
+flake8
+pytest
+pytest-cov
+coverage
+pytest-cov
+pytest-dotenv
+pytest-env
+pytest-randomly
+pytest-pythonpath
+pytest-xdist
+pytest-xdist[psutil]

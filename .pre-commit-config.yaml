@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        language_version: python3
+        exclude: ^api/models/|^api/objects/|api/typing_utils.py|api/encoder.py|api/typing_utils.py|api/util.py
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (python)            
+        exclude: ^api/models/|^api/objects/|api/typing_utils.py|api/encoder.py|api/typing_utils.py|api/util.py
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 4.0.1 
+    hooks:
+    -   id: flake8
+        language_version: python3
+        args: [--config, .flake8]
+        exclude: ^api/models/|^api/objects|^api/typing_utils.py|api/encoder.py|api/typing_utils.py|api/util.py
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+      - id: bandit
+        args: [-v, -r, -n 3, -lll, -iii]

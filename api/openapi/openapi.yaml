@@ -1,0 +1,356 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: WeWillHelpYou@dhdtech.io
+    name: dhdtech customer support
+    url: https://dhdtech.io
+  description: DHDTech only once secure password sharing.
+  termsOfService: https://dhdtech.io/terms/
+  title: Only Once Share
+  version: 1.0.1
+servers:
+- description: Local Environment
+  url: http://localhost:6661
+- description: Developer Environment
+  url: https://api.chamaleon-developer.r2d2skf.com.br/ui
+- description: Staging Environment
+  url: https://api.chamaleon-staging.r2d2skf.com.br/ui
+- description: Production Environment
+  url: https://api.chamaleon-production.r2d2skf.com.br/ui
+tags:
+- name: Infrastructure
+- name: oos
+paths:
+  /health:
+    get:
+      description: Indicates if the service is up and ready to serve requests.
+      operationId: get_health
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Redis-OK:
+                  value:
+                    redis: true
+              schema:
+                $ref: '#/components/schemas/get_health_200_response'
+          description: Returns dependant's service status
+        "412":
+          content:
+            application/json:
+              examples:
+                Redis-OK:
+                  value:
+                    redis: true
+              schema:
+                $ref: '#/components/schemas/get_health_200_response'
+          description: Returns dependant's service status
+      summary: Health
+      tags:
+      - Infrastructure
+      x-openapi-router-controller: api.controllers.infrastructure_controller
+  /locale/{locale}:
+    get:
+      description: Return a list of messages acording with the locale provided in
+        path parameter.
+      operationId: get_locale
+      parameters:
+      - explode: false
+        in: path
+        name: locale
+        required: true
+        schema:
+          enum:
+          - pt-br
+          - en-us
+          - es-es
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value: null
+              schema:
+                $ref: '#/components/schemas/get_locale_200_response'
+          description: Example response
+      summary: Internationalization
+      tags:
+      - oos
+      x-openapi-router-controller: api.controllers.oos_controller
+  /secret/:
+    post:
+      operationId: create_secret
+      parameters:
+      - description: Define language to be used.
+        explode: true
+        in: query
+        name: locale
+        required: true
+        schema:
+          enum:
+          - pt-br
+          - es-es
+          - en-us
+          example: pt-br
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/CreateSecretRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/create_secret_200_response'
+          description: Response to a successful created secret.
+      summary: ""
+      tags:
+      - oos
+      x-openapi-router-controller: api.controllers.oos_controller
+  /secret/{secret_id}:
+    get:
+      description: One time retrieval of a secret by id.
+      operationId: get_secret_by_id
+      parameters:
+      - description: Secrete identification
+        explode: false
+        in: path
+        name: secret_id
+        required: true
+        schema:
+          example: 886313e1-3b8a-5372-9b90-0c9aee199e5d
+          format: uuid
+          type: string
+        style: simple
+      - description: Define language to be used.
+        explode: true
+        in: query
+        name: locale
+        required: true
+        schema:
+          enum:
+          - pt-br
+          - es-es
+          - en-us
+          example: pt-br
+          type: string
+        style: form
+      - description: Base64 encoded decrypt key
+        explode: true
+        in: query
+        name: xnxsoss
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    secret_id: string
+                    created_at: 2019-08-24T14:15:22Z
+                    secret_value: Some sensitive data
+              schema:
+                $ref: '#/components/schemas/get_secret_by_id_200_response'
+          description: Will be returned with the secret details.
+        "404":
+          description: Not found.
+      summary: Secret
+      tags:
+      - oos
+      x-openapi-router-controller: api.controllers.oos_controller
+components:
+  parameters:
+    language:
+      description: Define language to be used.
+      explode: true
+      in: query
+      name: locale
+      required: true
+      schema:
+        enum:
+        - pt-br
+        - es-es
+        - en-us
+        example: pt-br
+        type: string
+      style: form
+    xnxsoss:
+      description: Base64 encoded decrypt key
+      explode: true
+      in: query
+      name: xnxsoss
+      required: true
+      schema:
+        type: string
+      style: form
+  requestBodies:
+    CreateSecretRequest:
+      content:
+        application/json:
+          examples:
+            Example 001:
+              value:
+                secret_value: Any string to be shared securely
+          schema:
+            $ref: '#/components/schemas/create_secret_request'
+      description: Body specification to create a secret.
+  responses:
+    HealthResponse:
+      content:
+        application/json:
+          examples:
+            Redis-OK:
+              value:
+                redis: true
+          schema:
+            $ref: '#/components/schemas/get_health_200_response'
+      description: Returns dependant's service status
+    GetSecretSuccessResponse:
+      content:
+        application/json:
+          examples:
+            example-1:
+              value:
+                secret_id: string
+                created_at: 2019-08-24T14:15:22Z
+                secret_value: Some sensitive data
+          schema:
+            $ref: '#/components/schemas/get_secret_by_id_200_response'
+      description: Will be returned with the secret details.
+    CreateSecretResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_secret_200_response'
+      description: Response to a successful created secret.
+    GetLocaleResponse:
+      content:
+        application/json:
+          examples:
+            example-1:
+              value: null
+          schema:
+            $ref: '#/components/schemas/get_locale_200_response'
+      description: Example response
+  schemas:
+    get_health_200_response:
+      example:
+        redis: true
+      properties:
+        redis:
+          description: Indicate if redis is reachable or not
+          title: redis
+          type: boolean
+      required:
+      - redis
+      title: get_health_200_response
+      type: object
+      x-examples:
+        example-1:
+          redis: true
+    get_secret_by_id_200_response:
+      example:
+        secret_value: Some sensitive data
+      properties:
+        secret_value:
+          description: The secret value shared.
+          example: Some sensitive data
+          title: secret_value
+          type: string
+      required:
+      - secret_value
+      title: get_secret_by_id_200_response
+      type: object
+      x-examples:
+        example-1:
+          secret_id: 886313e1-3b8a-5372-9b90-0c9aee199e5d
+          created_at: 2022-01-01 23:00:00
+    create_secret_request:
+      properties:
+        secret_value:
+          description: Represents the value to be shared securely.
+          example: Any string to be shared securely
+          title: secret_value
+          type: string
+      required:
+      - secret_value
+      title: create_secret_request
+      type: object
+    create_secret_200_response:
+      example:
+        secret_id: 00910948-0861-446e-935e-624d03266dfd
+        recovery_key: recovery_key
+        ttl: 24
+      properties:
+        secret_id:
+          description: Secret identification.
+          example: 00910948-0861-446e-935e-624d03266dfd
+          title: secret_id
+          type: string
+        recovery_key:
+          description: Recovery key to decrypt the shared value.
+          title: recovery_key
+          type: string
+        ttl:
+          description: Time to live the secret will be available to decrypt.
+          example: 24
+          format: int32
+          title: ttl
+          type: integer
+      required:
+      - recovery_key
+      - secret_id
+      - ttl
+      title: create_secret_200_response
+      type: object
+    get_locale_200_response:
+      example:
+        MESSAGE_TTL_INFO: MESSAGE_TTL_INFO
+        FLAG_SVG_ICON: FLAG_SVG_ICON
+        MESSAGE_SECRET_NOT_FOUND: MESSAGE_SECRET_NOT_FOUND
+        MESSAGE_SECRET_DELETED: MESSAGE_SECRET_DELETED
+        PAGE_TITLE: PAGE_TITLE
+      properties:
+        MESSAGE_TTL_INFO:
+          title: MESSAGE_TTL_INFO
+          type: string
+        MESSAGE_SECRET_NOT_FOUND:
+          title: MESSAGE_SECRET_NOT_FOUND
+          type: string
+        MESSAGE_SECRET_DELETED:
+          title: MESSAGE_SECRET_DELETED
+          type: string
+        PAGE_TITLE:
+          title: PAGE_TITLE
+          type: string
+        FLAG_SVG_ICON:
+          title: FLAG_SVG_ICON
+          type: string
+      required:
+      - FLAG_SVG_ICON
+      - MESSAGE_SECRET_DELETED
+      - MESSAGE_SECRET_NOT_FOUND
+      - MESSAGE_TTL_INFO
+      - PAGE_TITLE
+      title: get_locale_200_response
+      type: object
+      x-examples:
+        example-1:
+          MESSAGE_TTL_INFO: Shared secrets will exists for 24 hours counting from
+            now
+          MESSAGE_SECRET_NOT_FOUND: The requested secret don't exist. There are multiple
+            reasons for ...
+          MESSAGE_SECRET_DELETED: Secret will be deletes
+          PAGE_TITLE: Only Once Share - Securely share anything
+          FLAG_SVG_ICON: <svg>....</svg>
+  securitySchemes: {}
+x-stoplight:
+  id: 38f716e8b97ef

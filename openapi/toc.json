@@ -1,0 +1,62 @@
+{
+  "items": [
+    {
+      "type": "divider",
+      "title": "APIS"
+    },
+    {
+      "type": "item",
+      "title": "chamaleon",
+      "uri": "chamaleon.yaml"
+    },
+    {
+      "type": "divider",
+      "title": "Schemas"
+    },
+    {
+      "type": "item",
+      "title": "Get random password response",
+      "uri": "schemas/GetRandomPasswordResponse.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Managed system request",
+      "uri": "schemas/ManagedSystemRequest.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Managed system user request",
+      "uri": "schemas/ManagedSystemUserRequest.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Managed user password request",
+      "uri": "schemas/ManagedUserPasswordRequest.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Password Change Request",
+      "uri": "schemas/PasswordChangeRequest.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Password Change Response",
+      "uri": "schemas/PasswordChangeResponse.yaml"
+    },
+    {
+      "type": "item",
+      "title": "managed_system",
+      "uri": "models/ManagedSystem.yaml"
+    },
+    {
+      "type": "item",
+      "title": "managed_system_user",
+      "uri": "models/ManagedSystemUser.yaml"
+    },
+    {
+      "type": "item",
+      "title": "managed_user_password",
+      "uri": "models/ManagedUserPassword.yaml"
+    }
+  ]
+}

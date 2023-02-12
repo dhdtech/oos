@@ -1,0 +1,233 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 38f716e8b97ef
+info:
+  title: Only Once Share
+  version: 1.0.1
+  description: DHDTech only once secure password sharing.
+  contact:
+    name: dhdtech customer support
+    url: 'https://dhdtech.io'
+    email: WeWillHelpYou@dhdtech.io
+  termsOfService: 'https://dhdtech.io/terms/'
+servers:
+  - url: 'http://localhost:6661'
+    description: Local Environment
+  - url: 'https://api.chamaleon-developer.r2d2skf.com.br/ui'
+    description: Developer Environment
+  - description: Staging Environment
+    url: 'https://api.chamaleon-staging.r2d2skf.com.br/ui'
+  - url: 'https://api.chamaleon-production.r2d2skf.com.br/ui'
+    description: Production Environment
+paths:
+  /health:
+    get:
+      summary: Health
+      tags:
+        - Infrastructure
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthResponse'
+        '412':
+          $ref: '#/components/responses/HealthResponse'
+      operationId: get-health
+      description: Indicates if the service is up and ready to serve requests.
+  '/secret/{secret_id}':
+    get:
+      summary: Secret
+      tags:
+        - oos
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSecretSuccessResponse'
+        '404':
+          description: Not found.
+      operationId: get-secret-by-id
+      description: One time retrieval of a secret by id.
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/xnxsoss'
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 886313e1-3b8a-5372-9b90-0c9aee199e5d
+        name: secret_id
+        in: path
+        required: true
+        description: Secrete identification
+  /secret/:
+    post:
+      summary: ''
+      operationId: create-secret
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateSecretResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateSecretRequest'
+      parameters:
+        - $ref: '#/components/parameters/language'
+      tags:
+        - oos
+  '/locale/{locale}':
+    get:
+      summary: Internationalization
+      tags:
+        - oos
+      responses:
+        '200':
+          $ref: '#/components/responses/GetLocaleResponse'
+      operationId: get-locale
+      description: Return a list of messages acording with the locale provided in path parameter.
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - pt-br
+            - en-us
+            - es-es
+        name: locale
+        in: path
+        required: true
+components:
+  schemas: {}
+  securitySchemes: {}
+  responses:
+    HealthResponse:
+      description: Returns dependant's service status
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              example-1:
+                redis: true
+            properties:
+              redis:
+                type: boolean
+                description: Indicate if redis is reachable or not
+            required:
+              - redis
+          examples:
+            Redis-OK:
+              value:
+                redis: true
+    GetSecretSuccessResponse:
+      description: Will be returned with the secret details.
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              example-1:
+                secret_id: 886313e1-3b8a-5372-9b90-0c9aee199e5d
+                created_at: '2022-01-01 23:00:00'
+            properties:
+              secret_value:
+                type: string
+                example: Some sensitive data
+                description: The secret value shared.
+            required:
+              - secret_value
+          examples:
+            example-1:
+              value:
+                secret_id: string
+                created_at: '2019-08-24T14:15:22Z'
+                secret_value: Some sensitive data
+    CreateSecretResponse:
+      description: Response to a successful created secret.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              secret_id:
+                type: string
+                description: Secret identification.
+                example: 00910948-0861-446e-935e-624d03266dfd
+              recovery_key:
+                type: string
+                description: Recovery key to decrypt the shared value.
+              ttl:
+                type: integer
+                format: int32
+                example: 24
+                description: Time to live the secret will be available to decrypt.
+            required:
+              - secret_id
+              - recovery_key
+              - ttl
+    GetLocaleResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              example-1:
+                MESSAGE_TTL_INFO: Shared secrets will exists for 24 hours counting from now
+                MESSAGE_SECRET_NOT_FOUND: The requested secret don't exist. There are multiple reasons for ...
+                MESSAGE_SECRET_DELETED: Secret will be deletes
+                PAGE_TITLE: Only Once Share - Securely share anything
+                FLAG_SVG_ICON: <svg>....</svg>
+            properties:
+              MESSAGE_TTL_INFO:
+                type: string
+              MESSAGE_SECRET_NOT_FOUND:
+                type: string
+              MESSAGE_SECRET_DELETED:
+                type: string
+              PAGE_TITLE:
+                type: string
+              FLAG_SVG_ICON:
+                type: string
+            required:
+              - MESSAGE_TTL_INFO
+              - MESSAGE_SECRET_NOT_FOUND
+              - MESSAGE_SECRET_DELETED
+              - PAGE_TITLE
+              - FLAG_SVG_ICON
+          examples:
+            example-1: {}
+  requestBodies:
+    CreateSecretRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              secret_value:
+                type: string
+                example: Any string to be shared securely
+                description: Represents the value to be shared securely.
+            required:
+              - secret_value
+          examples:
+            Example 001:
+              value:
+                secret_value: Any string to be shared securely
+      description: Body specification to create a secret.
+  parameters:
+    language:
+      name: locale
+      in: query
+      required: true
+      schema:
+        type: string
+        enum:
+          - pt-br
+          - es-es
+          - en-us
+        example: pt-br
+      description: Define language to be used.
+    xnxsoss:
+      name: xnxsoss
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Base64 encoded decrypt key
+tags:
+  - name: Infrastructure
+  - name: oos

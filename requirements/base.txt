@@ -1,0 +1,13 @@
+connexion
+redis
+Flask
+Flask-Caching
+Flask-Testing
+python_dateutil
+retry
+setuptools
+whitenoise
+swagger-ui-bundle
+werkzeug
+cryptography
+flask-cors
