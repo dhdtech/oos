@@ -4,7 +4,6 @@ import { ref } from 'vue'
 defineProps<{
   header: string,
   subheader: string,
-  urls: null
 }>()
 </script>
 
@@ -18,7 +17,7 @@ export default {
       async copyURL(texToBeCopied: string) {
       try {
         await navigator.clipboard.writeText(texToBeCopied);
-        this.$emit("change-message", null, "URL copied!", "Hurry up, the links are valid for 24 hours!")
+        this.$emit("change-message", null, this.$t("main_page.message_header_copied"), this.$t("main_page.message_subheader_copied"))
         this.removeElement('subheaderLinks');
       } catch($e) {
         console.log($e)
@@ -39,14 +38,6 @@ export default {
         {{ subheader }}
       </div>
     </div>
-    <div class="message-subheader-desktop" v-if="urls">
-      <div class="message-subheader-text-desktop" id="subheaderLinks">
-        <div v-for="(key, value) in urls">
-          <a href="#" @click="copyURL(key)" >
-            <country-flag :country='value' size='normal'/> Click here to copy the shareable url!</a> 
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -56,57 +47,109 @@ a {
   text-decoration: none;
 }
 
-
 .message-desktop,
 .message-desktop * {
   box-sizing: border-box;
 }
 
-.message-desktop {
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  overflow: hidden;
+@media only screen and (max-width: 768px) {
+  .message-desktop {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-header-desktop {
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-header-text-desktop {
+    color: var(--lighttext, #ffffff);
+    text-align: center;
+    font: var(--headline, 700 40px/44px "Arial", sans-serif);
+    position: relative;
+  }
+
+  .message-subheader-desktop {
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-subheader-text-desktop {
+    color: var(--lighttext, #ffffff);
+    text-align: center;
+    font: 400 16px/20px "Arial", sans-serif;
+    position: relative;
+  }
 }
 
-.message-header-desktop {
-  padding: 10px 10px 10px 10px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
+@media only screen and (min-width: 769px) {
+  .message-desktop {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-header-desktop {
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-header-text-desktop {
+    color: var(--lighttext, #ffffff);
+    text-align: center;
+    font: var(--headline, 700 80px/88px "Arial", sans-serif);
+    position: relative;
+  }
+
+  .message-subheader-desktop {
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-subheader-text-desktop {
+    color: var(--lighttext, #ffffff);
+    text-align: center;
+    font: 400 20px/30px "Arial", sans-serif;
+    position: relative;
+  }  
 }
 
-.message-header-text-desktop {
-  color: var(--lighttext, #ffffff);
-  text-align: center;
-  font: var(--headline, 700 80px/88px "Arial", sans-serif);
-  position: relative;
-}
-
-.message-subheader-desktop {
-  padding: 10px 10px 10px 10px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.message-subheader-text-desktop {
-  color: var(--lighttext, #ffffff);
-  text-align: center;
-  font: 400 20px/30px "Arial", sans-serif;
-  position: relative;
-}
 </style>

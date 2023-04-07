@@ -1,14 +1,8 @@
 .dockerignore
-.gitignore
 .travis.yml
 Dockerfile
-README.md
 api/__init__.py
-api/__main__.py
 api/controllers/__init__.py
-api/controllers/infrastructure_controller.py
-api/controllers/oos_controller.py
-api/controllers/security_controller_.py
 api/encoder.py
 api/objects/__init__.py
 api/objects/base_model_.py
@@ -16,6 +10,7 @@ api/objects/create_secret200_response.py
 api/objects/create_secret_request.py
 api/objects/get_health200_response.py
 api/objects/get_locale200_response.py
+api/objects/get_locale200_response1.py
 api/objects/get_secret_by_id200_response.py
 api/openapi/openapi.yaml
 api/test/__init__.py

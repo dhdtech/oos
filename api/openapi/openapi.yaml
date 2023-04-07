@@ -62,21 +62,22 @@ paths:
         required: true
         schema:
           enum:
-          - pt-br
-          - en-us
-          - es-es
+          - pt
+          - en
+          - es
           type: string
         style: simple
       responses:
         "200":
           content:
             application/json:
-              examples:
-                example-1:
-                  value: null
+              examples: {}
               schema:
                 $ref: '#/components/schemas/get_locale_200_response'
-          description: Example response
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/get_locale_200_response_1'
+          description: Texts used on UI
       summary: Internationalization
       tags:
       - oos
@@ -92,10 +93,10 @@ paths:
         required: true
         schema:
           enum:
-          - pt-br
-          - es-es
-          - en-us
-          example: pt-br
+          - pt
+          - es
+          - en
+          example: pt
           type: string
         style: form
       requestBody:
@@ -133,10 +134,10 @@ paths:
         required: true
         schema:
           enum:
-          - pt-br
-          - es-es
-          - en-us
-          example: pt-br
+          - pt
+          - es
+          - en
+          example: pt
           type: string
         style: form
       - description: Base64 encoded decrypt key
@@ -176,10 +177,10 @@ components:
       required: true
       schema:
         enum:
-        - pt-br
-        - es-es
-        - en-us
-        example: pt-br
+        - pt
+        - es
+        - en
+        example: pt
         type: string
       style: form
     xnxsoss:
@@ -234,12 +235,13 @@ components:
     GetLocaleResponse:
       content:
         application/json:
-          examples:
-            example-1:
-              value: null
+          examples: {}
           schema:
             $ref: '#/components/schemas/get_locale_200_response'
-      description: Example response
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/get_locale_200_response_1'
+      description: Texts used on UI
   schemas:
     get_health_200_response:
       example:
@@ -313,44 +315,111 @@ components:
       type: object
     get_locale_200_response:
       example:
-        MESSAGE_TTL_INFO: MESSAGE_TTL_INFO
-        FLAG_SVG_ICON: FLAG_SVG_ICON
-        MESSAGE_SECRET_NOT_FOUND: MESSAGE_SECRET_NOT_FOUND
-        MESSAGE_SECRET_DELETED: MESSAGE_SECRET_DELETED
-        PAGE_TITLE: PAGE_TITLE
+        message_click_to_copy_us_us: message_click_to_copy_us_us
+        message_header_shared: message_header_shared
+        message_click_to_copy_es_es: message_click_to_copy_es_es
+        message_header: message_header
+        powered_by: powered_by
+        powered_by_link: powered_by_link
+        message_subheader_shared: message_subheader_shared
+        button_value: button_value
+        message_click_to_copy_pt_br: message_click_to_copy_pt_br
+        message_subheader: message_subheader
       properties:
-        MESSAGE_TTL_INFO:
-          title: MESSAGE_TTL_INFO
+        button_value:
+          title: button_value
           type: string
-        MESSAGE_SECRET_NOT_FOUND:
-          title: MESSAGE_SECRET_NOT_FOUND
+        message_click_to_copy_es_es:
+          title: message_click_to_copy_es_es
           type: string
-        MESSAGE_SECRET_DELETED:
-          title: MESSAGE_SECRET_DELETED
+        message_click_to_copy_pt_br:
+          title: message_click_to_copy_pt_br
           type: string
-        PAGE_TITLE:
-          title: PAGE_TITLE
+        message_click_to_copy_us_us:
+          title: message_click_to_copy_us_us
           type: string
-        FLAG_SVG_ICON:
-          title: FLAG_SVG_ICON
+        message_header:
+          title: message_header
           type: string
-      required:
-      - FLAG_SVG_ICON
-      - MESSAGE_SECRET_DELETED
-      - MESSAGE_SECRET_NOT_FOUND
-      - MESSAGE_TTL_INFO
-      - PAGE_TITLE
+        message_header_shared:
+          title: message_header_shared
+          type: string
+        message_subheader:
+          title: message_subheader
+          type: string
+        message_subheader_shared:
+          title: message_subheader_shared
+          type: string
+        powered_by:
+          title: powered_by
+          type: string
+        powered_by_link:
+          title: powered_by_link
+          type: string
       title: get_locale_200_response
       type: object
       x-examples:
-        example-1:
-          MESSAGE_TTL_INFO: Shared secrets will exists for 24 hours counting from
-            now
-          MESSAGE_SECRET_NOT_FOUND: The requested secret don't exist. There are multiple
-            reasons for ...
-          MESSAGE_SECRET_DELETED: Secret will be deletes
-          PAGE_TITLE: Only Once Share - Securely share anything
-          FLAG_SVG_ICON: <svg>....</svg>
+        Example 1:
+          button_value: Compartilhe!
+          message_click_to_copy_es_es: ¡Haz clic aquí para copiar la URL!
+          message_click_to_copy_pt_br: Clique aqui para copiar o link!
+          message_click_to_copy_us_us: Click here to copy the shareable url!
+          message_header: Compartilhe apenas uma vez!
+          message_header_shared: OK! Já criptografamos tudo para você.
+          message_subheader: "Compartilhe com segurança e apenas com uma pessoa, uma\
+            \ vez."
+          message_subheader_shared: Copie o link no idioma de preferência de quem
+            receberá o valor.
+          powered_by: Desenvolvido por DHD Tech Solutions
+          powered_by_link: https://dhdtech.io
+    get_locale_200_response_1:
+      properties:
+        button_value:
+          title: button_value
+          type: string
+        message_click_to_copy_es_es:
+          title: message_click_to_copy_es_es
+          type: string
+        message_click_to_copy_pt_br:
+          title: message_click_to_copy_pt_br
+          type: string
+        message_click_to_copy_us_us:
+          title: message_click_to_copy_us_us
+          type: string
+        message_header:
+          title: message_header
+          type: string
+        message_header_shared:
+          title: message_header_shared
+          type: string
+        message_subheader:
+          title: message_subheader
+          type: string
+        message_subheader_shared:
+          title: message_subheader_shared
+          type: string
+        powered_by:
+          title: powered_by
+          type: string
+        powered_by_link:
+          title: powered_by_link
+          type: string
+      title: get_locale_200_response_1
+      type: object
+      x-examples:
+        Example 1:
+          button_value: Compartilhe!
+          message_click_to_copy_es_es: ¡Haz clic aquí para copiar la URL!
+          message_click_to_copy_pt_br: Clique aqui para copiar o link!
+          message_click_to_copy_us_us: Click here to copy the shareable url!
+          message_header: Compartilhe apenas uma vez!
+          message_header_shared: OK! Já criptografamos tudo para você.
+          message_subheader: "Compartilhe com segurança e apenas com uma pessoa, uma\
+            \ vez."
+          message_subheader_shared: Copie o link no idioma de preferência de quem  receberá
+            o valor.
+          powered_by: Desenvolvido por DHD Tech Solutions
+          powered_by_link: https://dhdtech.io
   securitySchemes: {}
 x-stoplight:
   id: 38f716e8b97ef

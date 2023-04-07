@@ -1,0 +1,27 @@
+{
+    "main_page": {
+      "message_header": "Only once share!",
+      "message_subheader": "Share securely and only with one person, once.",
+      "message_header_encrypted": "We have it encrypted for you!",
+      "message_subheader_encrypted": "It can be viewed only once. It will self-destruct after 24 hours or when the recipient reads it.",
+      "message_header_copied": "URL copied!",
+      "message_subheader_copied": "Hurry up, the link is valid for 24 hours!",
+      "button_value": "Share It!",
+      "message_click_to_copy": "Click here to copy the shareable url!",
+      "link_copied": "Link copied to clipboard!"
+    },
+    "retrieval_page": {
+      "message_header": "Keep it safe! This is just for you!",
+      "message_subheader": "This message can only be read once.",
+      "message_header_copied": "Did you get it?",
+      "message_subheader_copied": "If you have not copied the message, you will need to ask the person who sent you to share it again.",
+      "button_value": "Copy message to clipboard!",
+      "message_secret_copied": "Secret copied to clipboard!",
+      "message_copied": "Link copied to clipboard!",
+      "secret_expired": "The link for this message is invalid. Messages on OOS can be seen only one time and exists only for 24 hours."
+    },
+    "commom": {
+      "powered_by": "Powered by DHD Tech Solutions",
+      "powered_by_link": "https://dhdtech.io"
+    }
+}

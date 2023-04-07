@@ -1,75 +1,3 @@
-<script lang="ts">
-import axios from 'axios'
-
-export default {
-  data() {
-    return {
-      response: {
-        secret_value: ''
-      },
-      messageHeader: '',
-      messageSubheader: '',
-      urls: null,
-      secret_id: '',
-      recovery_key: '',
-      locale: '',
-      buttonValue: '',
-      buttonBehavior: '',
-      translations: {}
-    }
-  },  
-  mounted() {
-    const urlParams = new URLSearchParams(window.location.search);
-    this.secret_id = urlParams.get('id')!;
-    this.recovery_key = urlParams.get('xnxsoss')!;
-    
-    if (urlParams.get('locale') === null) {
-      this.locale = 'en-us'
-      let current_url = window.location.href
-      current_url = current_url + `?locale=${this.locale}`
-      window.history.pushState({}, '', current_url);
-    }else{
-      this.locale = urlParams.get('locale')!;
-    }
-
-    // Get translations from the server
-    axios
-      .get(`http://localhost:6661/locale/${this.locale}`)
-      .then((response) => {
-        console.log(response.data)
-        this.translations = response.data
-        console.log(this.translations)
-      })
-
-
-
-    if (this.secret_id && this.recovery_key) {
-      axios
-        .get(`http://localhost:6661/secret/${this.secret_id}?locale=${this.locale}&xnxsoss=${this.recovery_key}`)
-        .then((response) => {
-          this.response = response.data
-          this.messageHeader = 'Here is your secret!'
-          this.messageSubheader = 'This is the only time you will see it. Keep it safe!'
-          this.buttonValue = 'Copy Secret!'
-          this.buttonBehavior = 'copyURL'
-        })
-    }else{
-      this.messageHeader = 'Only once share!'
-      this.messageSubheader = 'Share securely and only with one person, once.'
-      this.buttonValue = 'Share It!'
-      this.buttonBehavior = 'shareIt'
-    }
-  },
-  methods: {
-    handleMessageChange(urls: null, messageHeader: string, messageSubheader: string) {
-      this.urls = urls;
-      this.messageHeader = messageHeader;
-      this.messageSubheader = messageSubheader;
-    }
-  }
-}
-</script>
-
 <template>
   <div class="body-desktop" onclick="">
     <div class="body-ct-header-desktop">
@@ -77,25 +5,22 @@ export default {
     </div>
 
     <div class="body-ct-message-desktop">
-      <Message
-      :header="messageHeader"
-      :subheader="messageSubheader"
-      :urls="urls"
-      @change-message="handleMessageChange"
-      />
+      <Message :header="messageHeader" :subheader="messageSubheader"
+        @change-message="handleMessageChange" />
     </div>
 
     <div class="body-ct-input-desktop">
-      <Input 
-      :textboxValue="response.secret_value" 
-      :buttonValue="buttonValue" 
-      :buttonBehavior="buttonBehavior"
-      @change-message="handleMessageChange"
-      />
+      <Input :textboxValue="response.secret_value"
+        :buttonValue="buttonValue"
+        :buttonBehavior="buttonBehavior"
+        :locale="locale"
+        :shareableUrl="shareableUrl"
+        :disableTextBox="disableTextBox"
+        @change-message="handleMessageChange" />
     </div>
 
     <div class="body-ct-footer-desktop">
-      <Footer poweredBy="Powered by DHD Tech Solutions" message="https://dhdtech.io" />
+      <Footer :poweredBy="$t('commom.powered_by')" :message="$t('commom.powered_by_link')" />
     </div>
   </div>
 </template>
@@ -125,6 +50,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 
 .body-ct-header-desktop {
   display: flex;
@@ -176,3 +102,74 @@ body {
   overflow: hidden;
 }
 </style>
+
+
+<script lang="ts">
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      response: {
+        secret_value: ''
+      },
+      messageHeader: '',
+      messageSubheader: '',
+      shareableUrl: null,
+      secret_id: '',
+      recovery_key: '',
+      buttonValue: '',
+      buttonBehavior: '',
+      locale: 'en',
+      disableTextBox: false
+    }
+  },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    this.locale = urlParams.get('locale')!;
+    this.secret_id = urlParams.get('id')!;
+    this.recovery_key = urlParams.get('xnxsoss')!;
+    
+    this.$i18n.locale = this.locale;
+
+    if (this.secret_id && this.recovery_key) {
+      axios
+        .get(`http://localhost:6661/secret/${this.secret_id}?locale=${this.locale}&xnxsoss=${this.recovery_key}`)
+        .then((response) => {
+          this.response = response.data
+          this.messageHeader = this.$t("retrieval_page.message_header");
+          this.messageSubheader = this.$t("retrieval_page.message_subheader");
+          this.buttonValue = this.$t("retrieval_page.button_value");
+          this.buttonBehavior = 'copyURL';
+          this.disableTextBox = true;
+        }).catch((error) => {
+          if (error.response.status === 404) {
+            
+            alert(this.$t('secret_expired'));
+            const currentHost = window.location.host;
+            const currentLocale = urlParams.get('locale')!;
+            window.location.href = `http://${currentHost}/?locale=${currentLocale}`;
+
+            
+          }
+        })
+    } else {
+      this.messageHeader = this.$t("main_page.message_header");
+      this.messageSubheader = this.$t("main_page.message_subheader");
+      this.buttonValue = this.$t("main_page.button_value");
+      this.buttonBehavior = 'shareIt'
+    }
+  },
+  methods: {
+    handleMessageChange(shareableUrl: null, messageHeader: string, messageSubheader: string, buttonValue: string, disableTextBox: boolean) {
+      this.buttonBehavior = 'copyUrl'
+      this.shareableUrl = shareableUrl;
+      this.messageHeader = messageHeader;
+      this.messageSubheader = messageSubheader;
+      this.buttonValue = buttonValue;
+      this.disableTextBox = disableTextBox;
+    },
+  },
+}
+</script>

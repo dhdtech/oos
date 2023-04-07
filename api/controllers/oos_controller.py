@@ -6,12 +6,14 @@ from typing import Union
 
 from api.objects.create_secret200_response import CreateSecret200Response  # noqa: E501
 from api.objects.create_secret_request import CreateSecretRequest  # noqa: E501
-from api.objects.get_secret_by_id200_response import GetSecretById200Response  # noqa: E501
 from api.objects.get_locale200_response import GetLocale200Response  # noqa: E501
-
+from api.objects.get_locale200_response1 import GetLocale200Response1  # noqa: E501
+from api.objects.get_secret_by_id200_response import GetSecretById200Response  # noqa: E501
 from api import util
 from api import services as oos_services
 import uuid
+
+
 
 def create_secret(locale, create_secret_request=None):  # noqa: E501
     """
@@ -75,7 +77,6 @@ def get_secret_by_id(secret_id, locale, xnxsoss):    # noqa: E501
     return GetSecretById200Response(
         secret_value=secret_value,
         )
-
 def get_locale(locale):  # noqa: E501
     """Internationalization
 
@@ -86,15 +87,8 @@ def get_locale(locale):  # noqa: E501
 
     :rtype: Union[GetLocale200Response, Tuple[GetLocale200Response, int], Tuple[GetLocale200Response, int, Dict[str, str]]
     """
-    from api.services import international as oos_international
-
-    oos_services.get_text_by_locale(
+    return GetLocale200Response(
+        **oos_services.get_text_by_locale(
         locale=locale,
     )
-
-    return GetLocale200Response(
-        **oos_international.get_message_by_locale(
-            locale=locale,
-        )
     ).to_dict(), 200
-    return 'done'

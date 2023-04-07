@@ -83,9 +83,9 @@ paths:
       - schema:
           type: string
           enum:
-            - pt-br
-            - en-us
-            - es-es
+            - pt
+            - en
+            - es
         name: locale
         in: path
         required: true
@@ -159,37 +159,81 @@ components:
               - recovery_key
               - ttl
     GetLocaleResponse:
-      description: Example response
+      description: Texts used on UI
       content:
         application/json:
           schema:
             type: object
-            x-examples:
-              example-1:
-                MESSAGE_TTL_INFO: Shared secrets will exists for 24 hours counting from now
-                MESSAGE_SECRET_NOT_FOUND: The requested secret don't exist. There are multiple reasons for ...
-                MESSAGE_SECRET_DELETED: Secret will be deletes
-                PAGE_TITLE: Only Once Share - Securely share anything
-                FLAG_SVG_ICON: <svg>....</svg>
             properties:
-              MESSAGE_TTL_INFO:
+              button_value:
                 type: string
-              MESSAGE_SECRET_NOT_FOUND:
+              message_click_to_copy_es_es:
                 type: string
-              MESSAGE_SECRET_DELETED:
+              message_click_to_copy_pt_br:
                 type: string
-              PAGE_TITLE:
+              message_click_to_copy_us_us:
                 type: string
-              FLAG_SVG_ICON:
+              message_header:
                 type: string
-            required:
-              - MESSAGE_TTL_INFO
-              - MESSAGE_SECRET_NOT_FOUND
-              - MESSAGE_SECRET_DELETED
-              - PAGE_TITLE
-              - FLAG_SVG_ICON
-          examples:
-            example-1: {}
+              message_header_shared:
+                type: string
+              message_subheader:
+                type: string
+              message_subheader_shared:
+                type: string
+              powered_by:
+                type: string
+              powered_by_link:
+                type: string
+            x-examples:
+              Example 1:
+                button_value: Compartilhe!
+                message_click_to_copy_es_es: ¡Haz clic aquí para copiar la URL!
+                message_click_to_copy_pt_br: Clique aqui para copiar o link!
+                message_click_to_copy_us_us: Click here to copy the shareable url!
+                message_header: Compartilhe apenas uma vez!
+                message_header_shared: OK! Já criptografamos tudo para você.
+                message_subheader: 'Compartilhe com segurança e apenas com uma pessoa, uma vez.'
+                message_subheader_shared: Copie o link no idioma de preferência de quem receberá o valor.
+                powered_by: Desenvolvido por DHD Tech Solutions
+                powered_by_link: 'https://dhdtech.io'
+          examples: {}
+        application/xml:
+          schema:
+            type: object
+            properties:
+              button_value:
+                type: string
+              message_click_to_copy_es_es:
+                type: string
+              message_click_to_copy_pt_br:
+                type: string
+              message_click_to_copy_us_us:
+                type: string
+              message_header:
+                type: string
+              message_header_shared:
+                type: string
+              message_subheader:
+                type: string
+              message_subheader_shared:
+                type: string
+              powered_by:
+                type: string
+              powered_by_link:
+                type: string
+            x-examples:
+              Example 1:
+                button_value: Compartilhe!
+                message_click_to_copy_es_es: ¡Haz clic aquí para copiar la URL!
+                message_click_to_copy_pt_br: Clique aqui para copiar o link!
+                message_click_to_copy_us_us: Click here to copy the shareable url!
+                message_header: Compartilhe apenas uma vez!
+                message_header_shared: OK! Já criptografamos tudo para você.
+                message_subheader: 'Compartilhe com segurança e apenas com uma pessoa, uma vez.'
+                message_subheader_shared: Copie o link no idioma de preferência de quem  receberá o valor.
+                powered_by: Desenvolvido por DHD Tech Solutions
+                powered_by_link: 'https://dhdtech.io'
   requestBodies:
     CreateSecretRequest:
       content:
@@ -216,10 +260,10 @@ components:
       schema:
         type: string
         enum:
-          - pt-br
-          - es-es
-          - en-us
-        example: pt-br
+          - pt
+          - es
+          - en
+        example: pt
       description: Define language to be used.
     xnxsoss:
       name: xnxsoss

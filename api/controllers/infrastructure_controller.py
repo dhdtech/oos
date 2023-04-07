@@ -17,4 +17,3 @@ def get_health():  # noqa: E501
     :rtype: Union[GetHealth200Response, Tuple[GetHealth200Response, int], Tuple[GetHealth200Response, int, Dict[str, str]]
     """
     return 'do some magic!'
-

@@ -1,0 +1,27 @@
+{
+  "main_page": {
+    "message_header": "Only once share!",
+    "message_subheader": "Compartilhe apenas com uma pessoa. Uma única vez.",
+    
+    "message_header_encrypted": "Pronto! Sua mensagem está segura!",
+    "message_subheader_encrypted": "Ela pose ser lida apenas uma vez e será destruída após 24 horas ou quando o destinatário lê-la.",
+    
+    "message_header_copied": "URL copiada!",
+    "message_subheader_copied": "Vamos lá! Envie o link para a pessoa que você deseja compartilhar.",
+
+    "button_value": "Criptografar",
+    "message_click_to_copy": "Clique aqui para copiar o link!",
+  },
+  "retrieval_page": {
+    "message_header": "Mantenha em segredo! Esta mensagem é só para você!",
+    "message_subheader": "Esta mensagem pode ser lida apenas uma vez e será destruída após 24 horas ou quando você lê-la.",
+    "message_header_copied": "Não conseguiu copiar a mensagem?",
+    "message_subheader_copied": "Se você não copiou a mensagem, você precisará pedir à pessoa que a enviou para compartilhá-la novamente.",
+    "button_value": "Clique para copiar",
+    "message_secret_copied": "Mensagem copiada!"
+  },
+  "commom": {
+    "powered_by": "Desenvolvido por DHD Tech Solutions",
+    "powered_by_link": "https://dhdtech.io"
+  }
+}

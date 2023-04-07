@@ -1,1 +1,0 @@
-from .translations import get_text_by_locale
