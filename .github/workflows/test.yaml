@@ -16,5 +16,5 @@ jobs:
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::683573524234:role/devpalace-secret-manager-requester-dev20230526201020485200000003
+          role-to-assume: arn:aws:iam::683573524234:oidc-provider/token.actions.githubusercontent.com
           aws-region: us-east-1
