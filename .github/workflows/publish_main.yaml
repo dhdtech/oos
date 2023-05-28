@@ -3,55 +3,26 @@ on:
   push:
     branches: [ main ]
 jobs:
-  connect_aws_vpn:
-    name: Connect to pritunl VPN
-    runs-on: ubuntu-latest
-    steps:
-    - name: Setup Pritunl Profile and Start VPN Connection
-      uses: nathanielvarona/pritunl-client-github-action@v1
-      with:
-        profile-file: ${{ secrets.PRITUNL_PROFILE_FILE }}  
-  build:
-    name: Build docker image and push it to ECR
-    runs-on: ubuntu-latest
-    needs: 
-    - connect_aws_vpn
-    steps:
-    - name: Set environment variables
-      run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-    - uses: actions/checkout@v3
-    - uses: aws-actions/configure-aws-credentials@v2
-      with:
-        role-to-assume: arn:aws:iam::683573524234:role/dhd-tech-github-actions-oidc
-        aws-region: us-east-1    
-    - uses: dhdtech/aws-ecr-action@master
-      with:
-         account_id:  ${{ secrets.DHDTECH_ACCOUNT_ID }}
-         repo: oos-share
-         create_repo: true
-         region: us-east-1
-         tags: ${{ env.BRANCH }}
-  # deploy:
-  #   name: Deploy to K8s
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #   - name: Set environment variables
-  #     run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-  #   - uses: actions/checkout@v3
-  #   - name: Apply  deployment
-  #     uses: ianbelcher/eks-kubectl-action@master
-  #     with:
-  #       aws_access_key_id: ${{ secrets.DHDTECH_ACCESS_KEY_ID }}
-  #       aws_secret_access_key: ${{ secrets.DHDTECH_SECRET_ACCESS_KEY }}
-  #       aws_region: us-east-1
-  #       cluster_name: dhdtech-dev-use1
-  #       args: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
-  #   - name: Restart deployment
-  #     uses: ianbelcher/eks-kubectl-action@master
-  #     with:
-  #       aws_access_key_id: ${{ secrets.DHDTECH_ACCESS_KEY_ID }}
-  #       aws_secret_access_key: ${{ secrets.DHDTECH_SECRET_ACCESS_KEY }}
-  #       aws_region: us-east-1
-  #       cluster_name: dhdtech-dev-use1
-  #       args: rollout restart deployment/oos-share -n oos-share
+    deploy:
+      name: Upload to Amazon S3
+      runs-on: ubuntu-latest
+      # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+      permissions:
+        id-token: write
+        contents: read
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::683573524234:role/dhd-tech-github-actions-oidc
+          aws-region: us-east-1
+      - name: Build and push Docker image
+        uses: dhdtech/aws-ecr-action@master
+        with:
+            account_id:  ${{ secrets.DHDTECH_ACCOUNT_ID }}
+            repo: oos-share
+            create_repo: true
+            region: us-east-1
+            tags: ${{ env.BRANCH }}          

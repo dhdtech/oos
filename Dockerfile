@@ -18,3 +18,8 @@ RUN apt-get update \
   && pip3 install --no-cache-dir -r requirements/develop.txt \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /app
+
+CMD [ "/app/entrypoint.sh" ]
+

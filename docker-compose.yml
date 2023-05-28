@@ -5,9 +5,9 @@ services:
     env_file:
       - .env
     ports:
-      - '6661:8080'
-      - '6662:20005'
-      - '6663:20001'
+      - '6671:8080'
+      - '6672:20005'
+      - '6673:20001'
     build:
       context: .
       dockerfile: Dockerfile.dev
