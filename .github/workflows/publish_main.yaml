@@ -11,27 +11,29 @@ jobs:
         id-token: write
         contents: read
       steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-      # - name: Configure AWS credentials from Test account
-      #   uses: aws-actions/configure-aws-credentials@v2
-      #   with:
-      #     role-to-assume: arn:aws:iam::683573524234:role/dhd-tech-github-actions-oidc
-      #     aws-region: us-east-1
-      # - name: Build and push Docker image
-      #   uses: dhdtech/aws-ecr-action@master
-      #   with:
-      #       account_id:  ${{ secrets.DHDTECH_ACCOUNT_ID }}
-      #       repo: oos-share
-      #       create_repo: true
-      #       region: us-east-1
-      #       tags: ${{ env.BRANCH }}          
-      - name: Apply  deployment
-        uses: dhdtech/eks-kubectl-action@master
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws_region: us-east-1
-          cluster_name: dhdtech-dev-use1
-          args: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
+          role-to-assume: arn:aws:iam::683573524234:role/dhd-tech-github-actions-oidc
+          aws-region: us-east-1
+      - name: Build and push Docker image
+        uses: dhdtech/aws-ecr-action@master
+        with:
+            account_id:  ${{ secrets.DHDTECH_ACCOUNT_ID }}
+            repo: oos-share
+            create_repo: true
+            region: us-east-1
+            tags: ${{ env.BRANCH }}
+            kubectl_run_command: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
+            eks_cluster_name: dhdtech-dev-use1
+      # - name: Apply  deployment
+      #   uses: dhdtech/eks-kubectl-action@master
+      #   with:
+      #     aws_region: us-east-1
+      #     cluster_name: dhdtech-dev-use1
+      #     args: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
       # - name: Restart deployment
       #   uses: ianbelcher/eks-kubectl-action@master
       #   with:
