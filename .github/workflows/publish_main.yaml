@@ -26,3 +26,15 @@ jobs:
             create_repo: true
             region: us-east-1
             tags: ${{ env.BRANCH }}          
+      - name: Apply  deployment
+        uses: ianbelcher/eks-kubectl-action@master
+        with:
+          aws_region: us-east-1
+          cluster_name: dhdtech-dev-use1
+          args: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
+      - name: Restart deployment
+        uses: ianbelcher/eks-kubectl-action@master
+        with:
+          aws_region: us-east-1
+          cluster_name: dhdtech-dev-use1
+          args: rollout restart deployment/oos-share -n oos-share            
