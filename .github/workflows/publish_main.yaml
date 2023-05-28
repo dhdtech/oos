@@ -28,6 +28,6 @@ jobs:
             create_repo: true
             region: us-east-1
             tags: ${{ env.BRANCH }}
-            kubectl_run_command: "['apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml', 'rollout restart deployment/oos-share -n oos-share']"
+            kubectl_run_command: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
             eks_cluster_name: dhdtech-dev-use1
   
