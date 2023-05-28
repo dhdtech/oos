@@ -18,3 +18,11 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::683573524234:role/dhd-tech-github-actions-oidc
           aws-region: us-east-1
+      - name: Build and push Docker image
+        uses: dhdtech/aws-ecr-action@master
+        with:
+            account_id:  ${{ secrets.DHDTECH_ACCOUNT_ID }}
+            repo: oos-share
+            create_repo: true
+            region: us-east-1
+            tags: ${{ env.BRANCH }}          
