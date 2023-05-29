@@ -31,7 +31,8 @@ jobs:
             create_repo: true
             tags: ${{ env.BRANCH }}
     Kubectl_Run_Command:
-      name: Build, Push, and Deploy to EKS
+      needs: Build_Push_Deploy_to_EKS
+      name: Run Kubectl Command(s)
       runs-on: ubuntu-latest
       # These permissions are needed to interact with GitHub's OIDC Token endpoint.
       permissions:
