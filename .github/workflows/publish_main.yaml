@@ -27,7 +27,7 @@ jobs:
             region: us-east-1
             should_build_and_push: true
             should_run_kubectl_command: false            
-            repo: oos-share
+            repo: oos
             create_repo: true
             tags: ${{ env.BRANCH }}
     Kubectl_Run_Command:
