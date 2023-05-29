@@ -19,13 +19,30 @@ spec:
       - image: 683573524234.dkr.ecr.us-east-1.amazonaws.com/oos:main 
         imagePullPolicy: Always
         name: app-oos
-        ports:
-        - containerPort: 80
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"        
         env:
         - name: ENV
           value: "dev"
         - name: DJANGO_SECRET_KEY
           value: "DjaNgo-secure-!@#$%^&*()_+-even_more_secure-!@#$%^&*()_+-"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_DB
+          value: "0"
+      - image: redis:latest
+        imagePullPolicy: Always
+        name: redis
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"        
+        ports:
+        - containerPort: 6379
 ---              
 apiVersion: v1
 kind: Service
