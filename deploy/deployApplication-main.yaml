@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: oos-share
-  name: oos-share
+  namespace: oos
+  name: oos
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: app-oos-share
+      app.kubernetes.io/name: app-oos
   strategy:
     type: RollingUpdate
   replicas: 1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: app-oos-share
+        app.kubernetes.io/name: app-oos
     spec:
       containers:
-      - image: 683573524234.dkr.ecr.us-east-1.amazonaws.com/oos-share:main 
+      - image: 683573524234.dkr.ecr.us-east-1.amazonaws.com/oos:main 
         imagePullPolicy: Always
-        name: app-oos-share
+        name: app-oos
         ports:
         - containerPort: 80
         env:
@@ -30,8 +30,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: oos-share
-  name: service-oos-share
+  namespace: oos
+  name: service-oos
 spec:
   ports:
     - name: http
@@ -40,29 +40,29 @@ spec:
       targetPort: 80
   type: NodePort
   selector:
-    app.kubernetes.io/name: app-oos-share    
+    app.kubernetes.io/name: app-oos    
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-oos-share
-  namespace: oos-share
+  name: ingress-oos
+  namespace: oos
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   tls:
   - hosts:
-    - oos-share.dhdtech.io
+    - oos.dhdtech.io
   rules:
-  - host: oos-share.dhdtech.io
+  - host: oos.dhdtech.io
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: service-oos-share
+            name: service-oos
             port:
               number: 443
   
@@ -70,13 +70,13 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: oos-share
-  namespace: oos-share
+  name: oos
+  namespace: oos
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: oos-share
+    name: oos
   minReplicas: 1
   maxReplicas: 10
   metrics:

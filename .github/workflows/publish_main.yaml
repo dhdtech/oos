@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
 jobs:
-    deploy:
+    Build_Push_Deploy_to_EKS:
       name: Build, Push, and Deploy to EKS
       runs-on: ubuntu-latest
       # These permissions are needed to interact with GitHub's OIDC Token endpoint.
@@ -30,13 +30,30 @@ jobs:
             repo: oos-share
             create_repo: true
             tags: ${{ env.BRANCH }}
+    Kubectl_Run_Command:
+      name: Build, Push, and Deploy to EKS
+      runs-on: ubuntu-latest
+      # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+      permissions:
+        id-token: write
+        contents: read
+      steps:
+      - name: Set environment variables
+        run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV        
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::683573524234:role/dhd-tech-github-actions-oidc
+          aws-region: us-east-1
       - name: Apply K8s deployment
         uses: dhdtech/aws-ecr-action@master
         with:
           account_id:  ${{ secrets.DHDTECH_ACCOUNT_ID }}
           region: us-east-1
           should_build_and_push: false
-          should_run_kubectl_command: true            
+          should_run_kubectl_command: true
           eks_cluster_name: dhdtech-dev-use1
           kubectl_run_command: apply -f deploy/deployApplication-${{ env.BRANCH }}.yaml
       - name: Restart K8s deployment
