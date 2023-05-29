@@ -65,6 +65,6 @@ jobs:
           should_build_and_push: false
           should_run_kubectl_command: true            
           eks_cluster_name: dhdtech-dev-use1
-          kubectl_run_command: rollout restart deployment oos-share-${{ env.BRANCH }}
+          kubectl_run_command: rollout restart deployment oos
           
   
