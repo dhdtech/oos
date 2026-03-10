@@ -132,6 +132,7 @@ def create_secret():
 
     if posthog:
         posthog.capture("server", "secret_created", {"ttl_hours": ttl_hours, "has_alias": alias is not None})
+        posthog.flush()
 
     return jsonify({"id": secret_id, "alias": alias}), 201
 
@@ -174,6 +175,7 @@ def get_secret(secret_id):
 
     if posthog:
         posthog.capture("server", "secret_retrieved", {"via": "alias" if alias_used else "uuid"})
+        posthog.flush()
 
     return jsonify({"ciphertext": ciphertext, "id": actual_id})
 
