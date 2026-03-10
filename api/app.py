@@ -53,7 +53,7 @@ else:
 try:  # pragma: no cover
     r.ping()
     log.info("Redis connection established")
-except redis.ConnectionError as e:
+except redis.ConnectionError as e:  # pragma: no cover
     log.error("Redis connection failed: %s", e)
 
 
