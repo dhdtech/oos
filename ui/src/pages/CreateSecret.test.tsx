@@ -134,13 +134,6 @@ describe("CreateSecret", () => {
   });
 
   it("copy button copies link to clipboard", async () => {
-    const writeText = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(navigator, "clipboard", {
-      value: { writeText },
-      writable: true,
-      configurable: true,
-    });
-
     const user = userEvent.setup();
     renderWithProviders(<CreateSecret />);
 
@@ -151,10 +144,16 @@ describe("CreateSecret", () => {
     await user.click(screen.getByText("Create Secret Link"));
 
     await waitFor(() => screen.getByText("Copy"));
+
+    // Spy on the clipboard mock from setup.ts right before clicking
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator.clipboard, { writeText });
     await user.click(screen.getByLabelText("Copy"));
 
-    expect(writeText).toHaveBeenCalled();
-    expect(screen.getByText("Copied")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(writeText).toHaveBeenCalled();
+      expect(screen.getByText("Copied")).toBeInTheDocument();
+    });
   });
 
   it("create another resets to form", async () => {

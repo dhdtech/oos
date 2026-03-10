@@ -1,3 +1,5 @@
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
 export interface CreateSecretResult {
   id: string;
   alias: string | null;
@@ -8,7 +10,7 @@ export async function createSecret(
   ttlHours: number,
   id: string,
 ): Promise<CreateSecretResult> {
-  const res = await fetch("/api/secrets", {
+  const res = await fetch(`${API_BASE}/api/secrets`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ciphertext, ttl_hours: ttlHours, id }),
@@ -29,7 +31,7 @@ export interface GetSecretResult {
 }
 
 export async function getSecret(id: string): Promise<GetSecretResult> {
-  const res = await fetch(`/api/secrets/${id}`);
+  const res = await fetch(`${API_BASE}/api/secrets/${id}`);
 
   if (res.status === 404) {
     throw new Error("Secret not found or already viewed");

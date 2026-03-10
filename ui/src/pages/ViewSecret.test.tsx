@@ -115,13 +115,6 @@ describe("ViewSecret", () => {
   });
 
   it("copy button copies decrypted secret", async () => {
-    const writeText = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(navigator, "clipboard", {
-      value: { writeText },
-      writable: true,
-      configurable: true,
-    });
-
     vi.mocked(api.getSecret).mockResolvedValue({
       ciphertext: "ct",
       id: "uuid",
@@ -131,10 +124,16 @@ describe("ViewSecret", () => {
     renderWithProviders(<ViewSecret />);
 
     await waitFor(() => screen.getByText("decrypted secret"));
+
+    // Spy on the clipboard mock from setup.ts right before clicking
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator.clipboard, { writeText });
     await user.click(screen.getByLabelText("Copy secret"));
 
-    expect(writeText).toHaveBeenCalledWith("decrypted secret");
-    expect(screen.getByText("Copied to clipboard")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(writeText).toHaveBeenCalledWith("decrypted secret");
+      expect(screen.getByText("Copied to clipboard")).toBeInTheDocument();
+    });
   });
 
   it("shows 'Share a new secret' link when revealed", async () => {
