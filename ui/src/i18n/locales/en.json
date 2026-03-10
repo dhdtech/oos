@@ -1,0 +1,63 @@
+{
+  "header": {
+    "title": "Only Once Share"
+  },
+  "hero": {
+    "title": "Share secrets securely",
+    "subtitle": "End-to-end encrypted in your browser. The server never sees your data. Links self-destruct after one view."
+  },
+  "create": {
+    "label": "Secret content",
+    "placeholder": "Paste your password, API key, or private message...",
+    "charCount": "{{count}} / 50,000",
+    "expiresIn": "Expires in",
+    "encrypting": "Encrypting...",
+    "submit": "Create Secret Link",
+    "linkCreated": "Secret link created",
+    "linkInfo": "Share this link with your recipient. It can only be opened once, then it's permanently destroyed.",
+    "shareVia": "Share via",
+    "copy": "Copy",
+    "copied": "Copied",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "createAnother": "Create Another",
+    "whatsappMsg": "I'm sharing a secret with you. Open this link to view it (one-time only):\n\n{{link}}",
+    "emailSubject": "Here's a secret for you",
+    "emailBody": "I'm sharing a secret with you. Open this link to view it — it can only be opened once:\n\n{{link}}"
+  },
+  "view": {
+    "loading": "Retrieving and decrypting secret...",
+    "destroyed": "This secret has been permanently destroyed. It cannot be viewed again.",
+    "copySecret": "Copy secret",
+    "copiedClipboard": "Copied to clipboard",
+    "notFoundTitle": "Secret Not Available",
+    "notFoundMsg": "This secret has already been viewed or has expired. Secrets can only be accessed once.",
+    "errorTitle": "Something Went Wrong",
+    "errorMsg": "Unable to decrypt the secret. The link may be invalid.",
+    "invalidLink": "Invalid link — missing decryption key",
+    "newSecret": "Share a new secret",
+    "backHome": "Back to home"
+  },
+  "footer": {
+    "encryption": "AES-256-GCM",
+    "zeroKnowledge": "Zero Knowledge",
+    "autoDelete": "Auto-Delete"
+  },
+  "security": {
+    "title": "How It Works",
+    "e2eTitle": "End-to-End Encryption",
+    "e2eDesc": "Your secret is encrypted in your browser using AES-256-GCM with a random 96-bit IV before it ever leaves your device. The encryption key is never sent to our server.",
+    "hkdfTitle": "HKDF Key Derivation",
+    "hkdfDesc": "A unique encryption key is derived for each secret using HKDF-SHA-256 with the secret ID as context. Even with the master key, each secret has its own cryptographically independent key.",
+    "aadTitle": "Authenticated Data Binding",
+    "aadDesc": "The secret ID is bound as Additional Authenticated Data (AAD) during encryption. If anyone tampers with the secret ID or swaps ciphertext between secrets, decryption will fail.",
+    "zkTitle": "Zero Knowledge",
+    "zkDesc": "The server only stores encrypted data. We cannot read, decrypt, or access your secrets in any way. The decryption key exists only in the shared link's URL fragment.",
+    "keyTitle": "Key Never Leaves the Browser",
+    "keyDesc": "The decryption key is placed after the # in the URL. Browser URL fragments are never sent to servers — not in requests, not in logs, not anywhere.",
+    "oneTimeTitle": "One-Time Viewing",
+    "oneTimeDesc": "When a secret is retrieved, it is atomically deleted from storage in the same operation. There is no window where a second read is possible.",
+    "expiryTitle": "Auto-Expiration",
+    "expiryDesc": "Secrets automatically expire after the chosen TTL (1–72 hours), even if never viewed. No data persists beyond the expiration window."
+  }
+}

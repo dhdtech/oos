@@ -1,0 +1,63 @@
+{
+  "header": {
+    "title": "Only Once Share"
+  },
+  "hero": {
+    "title": "安全分享秘密",
+    "subtitle": "在您的浏览器中端到端加密。服务器永远不会看到您的数据。链接在查看一次后自动销毁。"
+  },
+  "create": {
+    "label": "秘密内容",
+    "placeholder": "粘贴您的密码、API密钥或私密信息...",
+    "charCount": "{{count}} / 50,000",
+    "expiresIn": "过期时间",
+    "encrypting": "加密中...",
+    "submit": "创建秘密链接",
+    "linkCreated": "秘密链接已创建",
+    "linkInfo": "将此链接分享给您的收件人。链接只能打开一次，之后将被永久销毁。",
+    "shareVia": "分享方式",
+    "copy": "复制",
+    "copied": "已复制",
+    "whatsapp": "WhatsApp",
+    "email": "邮件",
+    "createAnother": "创建新的",
+    "whatsappMsg": "我正在与您分享一个秘密。打开此链接查看（仅限一次）：\n\n{{link}}",
+    "emailSubject": "这是给你的秘密",
+    "emailBody": "我正在与您分享一个秘密。打开此链接查看 — 仅可打开一次：\n\n{{link}}"
+  },
+  "view": {
+    "loading": "正在检索和解密秘密...",
+    "destroyed": "此秘密已被永久销毁，无法再次查看。",
+    "copySecret": "复制秘密",
+    "copiedClipboard": "已复制到剪贴板",
+    "notFoundTitle": "秘密不可用",
+    "notFoundMsg": "此秘密已被查看或已过期。秘密只能被访问一次。",
+    "errorTitle": "出了点问题",
+    "errorMsg": "无法解密秘密。链接可能无效。",
+    "invalidLink": "无效链接 — 缺少解密密钥",
+    "newSecret": "分享新的秘密",
+    "backHome": "返回首页"
+  },
+  "footer": {
+    "encryption": "AES-256-GCM",
+    "zeroKnowledge": "零知识",
+    "autoDelete": "自动删除"
+  },
+  "security": {
+    "title": "工作原理",
+    "e2eTitle": "端到端加密",
+    "e2eDesc": "您的秘密在浏览器中使用AES-256-GCM和随机96位IV加密，数据离开设备前已完成加密。加密密钥永远不会发送到我们的服务器。",
+    "hkdfTitle": "HKDF密钥派生",
+    "hkdfDesc": "每个秘密都使用HKDF-SHA-256以秘密ID作为上下文派生唯一的加密密钥。即使拥有主密钥，每个秘密也有自己独立的加密密钥。",
+    "aadTitle": "认证数据绑定",
+    "aadDesc": "秘密ID在加密过程中作为附加认证数据（AAD）绑定。如果任何人篡改秘密ID或在秘密之间交换密文，解密将失败。",
+    "zkTitle": "零知识",
+    "zkDesc": "服务器仅存储加密数据。我们无法读取、解密或以任何方式访问您的秘密。解密密钥仅存在于分享链接的URL片段中。",
+    "keyTitle": "密钥不离开浏览器",
+    "keyDesc": "解密密钥放置在URL的#号之后。浏览器URL片段永远不会发送到服务器 — 不在请求中，不在日志中，不在任何地方。",
+    "oneTimeTitle": "一次性查看",
+    "oneTimeDesc": "当秘密被检索时，它会在同一操作中从存储中被原子性删除。不存在第二次读取的可能。",
+    "expiryTitle": "自动过期",
+    "expiryDesc": "秘密在选定的TTL（1-72小时）后自动过期，即使未被查看。没有数据会在过期时间后持续存在。"
+  }
+}

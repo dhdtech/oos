@@ -1,0 +1,7 @@
+{
+  "enabledPlugins": {
+    "ralph-wiggum@claude-code-plugins": true,
+    "ralph-loop@claude-plugins-official": true,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true
+  }
+}

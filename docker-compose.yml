@@ -1,39 +1,34 @@
-version: '3'
 services:
-  oos:
-    container_name: api
-    env_file:
-      - .env
-    ports:
-      - '6671:8080'
-      - '6672:20005'
-      - '6673:20001'
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    command: >
-      bash -c "/bin/bash -c  'python -m debugpy --listen 0.0.0.0:20005 -m api'"
-    image: chamaleon-pass
-    volumes:
-      - './:/app'
+  redis:
+    image: redis:7-alpine
+    networks:
+      - oos
+
+  api:
+    build: ./api
     environment:
-      FLASK_DEBUG: 1
-      FLASK_ENV: development
-      PYTHONUNBUFFERED: 1
-      PYTHONDONTWRITEBYTECODE: 1
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
       - redis
-    restart: always
-  redis:
-    image: redis:alpine
-    container_name: redis
+    networks:
+      - oos
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile.dev
     ports:
-      - '6679:6379'
-    command: redis-server --appendonly yes
-    restart: always
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-  
+      - "8080:5173"
+    volumes:
+      - ./ui/src:/app/src
+      - ./ui/public:/app/public
+      - ./ui/index.html:/app/index.html
+      - ./ui/vite.config.ts:/app/vite.config.ts
+    depends_on:
+      - api
+    networks:
+      - oos
+
+networks:
+  oos:

@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/components/languageselector.tsx","./src/components/layout.tsx","./src/components/securitymodal.tsx","./src/i18n/index.ts","./src/lib/api.ts","./src/lib/crypto.ts","./src/pages/createsecret.tsx","./src/pages/viewsecret.tsx"],"version":"5.9.3"}

@@ -1,0 +1,63 @@
+{
+  "header": {
+    "title": "Only Once Share"
+  },
+  "hero": {
+    "title": "Comparte secretos de forma segura",
+    "subtitle": "Cifrado de extremo a extremo en tu navegador. El servidor nunca ve tus datos. Los enlaces se autodestruyen después de una vista."
+  },
+  "create": {
+    "label": "Contenido secreto",
+    "placeholder": "Pega tu contraseña, clave API o mensaje privado...",
+    "charCount": "{{count}} / 50,000",
+    "expiresIn": "Expira en",
+    "encrypting": "Cifrando...",
+    "submit": "Crear enlace secreto",
+    "linkCreated": "Enlace secreto creado",
+    "linkInfo": "Comparte este enlace con tu destinatario. Solo se puede abrir una vez, luego se destruye permanentemente.",
+    "shareVia": "Compartir vía",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "whatsapp": "WhatsApp",
+    "email": "Correo",
+    "createAnother": "Crear otro",
+    "whatsappMsg": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo (solo una vez):\n\n{{link}}",
+    "emailSubject": "Aquí tienes un secreto",
+    "emailBody": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo — solo se puede abrir una vez:\n\n{{link}}"
+  },
+  "view": {
+    "loading": "Recuperando y descifrando secreto...",
+    "destroyed": "Este secreto ha sido destruido permanentemente. No se puede ver de nuevo.",
+    "copySecret": "Copiar secreto",
+    "copiedClipboard": "Copiado al portapapeles",
+    "notFoundTitle": "Secreto no disponible",
+    "notFoundMsg": "Este secreto ya ha sido visto o ha expirado. Los secretos solo se pueden acceder una vez.",
+    "errorTitle": "Algo salió mal",
+    "errorMsg": "No se pudo descifrar el secreto. El enlace puede ser inválido.",
+    "invalidLink": "Enlace inválido — falta la clave de descifrado",
+    "newSecret": "Compartir un nuevo secreto",
+    "backHome": "Volver al inicio"
+  },
+  "footer": {
+    "encryption": "AES-256-GCM",
+    "zeroKnowledge": "Conocimiento cero",
+    "autoDelete": "Auto-eliminación"
+  },
+  "security": {
+    "title": "Cómo funciona",
+    "e2eTitle": "Cifrado de extremo a extremo",
+    "e2eDesc": "Tu secreto se cifra en tu navegador usando AES-256-GCM con un IV aleatorio de 96 bits antes de salir de tu dispositivo. La clave de cifrado nunca se envía a nuestro servidor.",
+    "hkdfTitle": "Derivación de clave HKDF",
+    "hkdfDesc": "Se deriva una clave de cifrado única para cada secreto usando HKDF-SHA-256 con el ID del secreto como contexto. Incluso con la clave maestra, cada secreto tiene su propia clave criptográficamente independiente.",
+    "aadTitle": "Vinculación de datos autenticados",
+    "aadDesc": "El ID del secreto se vincula como Datos Autenticados Adicionales (AAD) durante el cifrado. Si alguien manipula el ID o intercambia el texto cifrado entre secretos, el descifrado fallará.",
+    "zkTitle": "Conocimiento cero",
+    "zkDesc": "El servidor solo almacena datos cifrados. No podemos leer, descifrar ni acceder a tus secretos de ninguna manera. La clave de descifrado solo existe en el fragmento de URL del enlace compartido.",
+    "keyTitle": "La clave nunca sale del navegador",
+    "keyDesc": "La clave de descifrado se coloca después del # en la URL. Los fragmentos de URL del navegador nunca se envían a los servidores — ni en solicitudes, ni en registros, en ningún lugar.",
+    "oneTimeTitle": "Visualización única",
+    "oneTimeDesc": "Cuando se recupera un secreto, se elimina atómicamente del almacenamiento en la misma operación. No hay posibilidad de una segunda lectura.",
+    "expiryTitle": "Expiración automática",
+    "expiryDesc": "Los secretos expiran automáticamente después del TTL elegido (1-72 horas), incluso si nunca se ven. Ningún dato persiste más allá de la ventana de expiración."
+  }
+}
