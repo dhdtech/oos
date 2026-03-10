@@ -5,7 +5,9 @@ COPY package.json package-lock.json* ./
 RUN npm install
 COPY . .
 ARG VITE_API_URL=https://oos-api.onrender.com
+ARG VITE_POSTHOG_KEY
 ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_POSTHOG_KEY=$VITE_POSTHOG_KEY
 RUN npm run build
 
 # Production stage

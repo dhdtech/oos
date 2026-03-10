@@ -47,7 +47,7 @@ export async function importKey(base64url: string): Promise<CryptoKey> {
   const raw = base64urlDecode(base64url);
   return crypto.subtle.importKey(
     "raw",
-    raw.buffer as ArrayBuffer,
+    new Uint8Array(raw) as unknown as ArrayBuffer,
     { name: "AES-GCM", length: 256 },
     true,
     ["encrypt", "decrypt"],

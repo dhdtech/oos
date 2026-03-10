@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { generateKey, exportKey, encrypt } from "../lib/crypto";
 import { createSecret } from "../lib/api";
+import posthog from "../lib/posthog";
 
 const TTL_OPTIONS = [
   { value: 1, label: "1h" },
@@ -48,8 +49,10 @@ export default function CreateSecret() {
       const keyStr = await exportKey(key);
       const pathId = result.alias ?? result.id;
       setLink(`${window.location.origin}/s/${pathId}?lng=${i18n.language}#${keyStr}`);
+      posthog.capture("secret_created", { ttl_hours: ttlHours });
       setSecret("");
     } catch (err) {
+      posthog.capture("secret_create_failed");
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
@@ -58,6 +61,7 @@ export default function CreateSecret() {
 
   async function handleCopy() {
     await navigator.clipboard.writeText(link);
+    posthog.capture("secret_link_copied");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }

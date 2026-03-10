@@ -11,6 +11,7 @@
 
 <p align="center">
   <a href="#how-it-works">How It Works</a> ·
+  <a href="#deployment">Deployment</a> ·
   <a href="#getting-started">Getting Started</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="#i18n">Internationalization</a> ·
@@ -142,6 +143,32 @@ https://example.com/s/Kx7mP2nQ?lng=en#iZcjqbPIBnrWwHHkv_KDWeDcUr9hi3A0oMaVbgCVLr
 | **Auto-expiry** | Redis TTL (1–72h) ensures secrets expire even if never viewed |
 | **Versioned format** | Ciphertext includes version byte for future algorithm upgrades |
 | **Short aliases** | 8-char base62 IDs (62^8 = 218 trillion), atomic collision-free generation |
+
+## Deployment
+
+Only Once Share can be used in two ways:
+
+### Cloud (Hosted)
+
+Start sharing secrets immediately at **[https://ooshare.io](https://ooshare.io)** — no setup required. The hosted version runs the same open-source code from this repository.
+
+### On-Premise (Self-Hosted)
+
+If your organization requires full control over the infrastructure — for compliance, data residency, or security policies — you can deploy Only Once Share on your own servers.
+
+**What you need:**
+- A container runtime (Docker, Kubernetes, ECS, etc.)
+- A Redis instance (managed or self-hosted)
+- A reverse proxy or load balancer for TLS termination
+
+**Steps:**
+1. Clone this repository
+2. Build the API and UI Docker images (see [Getting Started](#getting-started))
+3. Deploy a Redis instance and set the `REDIS_URL` environment variable on the API
+4. Set `VITE_API_URL` to your API's URL when building the UI (or update the default in `ui/Dockerfile`)
+5. Configure DNS and TLS for your domain
+
+The architecture is stateless (aside from Redis), so it scales horizontally with no changes. All encryption happens client-side — the server never sees plaintext regardless of where it's deployed.
 
 ## Getting Started
 

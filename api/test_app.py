@@ -6,6 +6,14 @@ import pytest
 from app import app, generate_alias, ALIAS_LENGTH
 
 
+@pytest.fixture(autouse=True)
+def mock_posthog():
+    """Mock PostHog so tests don't send real events."""
+    mock = MagicMock()
+    with patch("app.posthog", mock):
+        yield mock
+
+
 @pytest.fixture
 def client():
     app.config["TESTING"] = True
@@ -304,6 +312,48 @@ def test_get_secret_alias_points_to_expired_secret(client, mock_redis):
 
     res = client.get("/api/secrets/AbCdEfGh")
     assert res.status_code == 404
+
+
+# --------------- PostHog events ---------------
+
+
+def test_posthog_secret_created(client, mock_posthog):
+    client.post("/api/secrets", json={"ciphertext": "dGVzdA==", "ttl_hours": 4})
+    mock_posthog.capture.assert_called_with(
+        "server", "secret_created", {"ttl_hours": 4, "has_alias": True}
+    )
+
+
+def test_posthog_secret_retrieved(client, mock_posthog):
+    res = client.post("/api/secrets", json={"ciphertext": "dGVzdA=="})
+    alias = res.get_json()["alias"]
+    mock_posthog.reset_mock()
+
+    client.get(f"/api/secrets/{alias}")
+    mock_posthog.capture.assert_called_with(
+        "server", "secret_retrieved", {"via": "alias"}
+    )
+
+
+def test_posthog_secret_retrieved_by_uuid(client, mock_posthog):
+    res = client.post("/api/secrets", json={"ciphertext": "dGVzdA=="})
+    secret_id = res.get_json()["id"]
+    mock_posthog.reset_mock()
+
+    client.get(f"/api/secrets/{secret_id}")
+    mock_posthog.capture.assert_called_with(
+        "server", "secret_retrieved", {"via": "uuid"}
+    )
+
+
+def test_posthog_disabled(client, mock_redis):
+    """When posthog is None, no errors occur."""
+    with patch("app.posthog", None):
+        res = client.post("/api/secrets", json={"ciphertext": "dGVzdA=="})
+        assert res.status_code == 201
+        secret_id = res.get_json()["id"]
+        res = client.get(f"/api/secrets/{secret_id}")
+        assert res.status_code == 200
 
 
 # --------------- main guard ---------------

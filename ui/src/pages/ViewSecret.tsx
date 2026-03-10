@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { importKey, decrypt } from "../lib/crypto";
 import { getSecret } from "../lib/api";
+import posthog from "../lib/posthog";
 
 type Status = "loading" | "revealed" | "not-found" | "error";
 
@@ -36,12 +37,15 @@ export default function ViewSecret() {
         const key = await importKey(keyStr);
         const decrypted = await decrypt(result.ciphertext, key, result.id);
         setPlaintext(decrypted);
+        posthog.capture("secret_viewed");
         setStatus("revealed");
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Failed to decrypt";
         if (msg.includes("not found") || msg.includes("already viewed")) {
+          posthog.capture("secret_not_found");
           setStatus("not-found");
         } else {
+          posthog.capture("secret_view_failed");
           setError(msg);
           setStatus("error");
         }

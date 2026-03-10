@@ -9,12 +9,21 @@ import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import redis
+from posthog import Posthog
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)
+
+POSTHOG_API_KEY = os.environ.get("POSTHOG_API_KEY")
+if POSTHOG_API_KEY:  # pragma: no cover
+    posthog = Posthog(POSTHOG_API_KEY, host="https://us.i.posthog.com")
+    log.info("PostHog initialized")
+else:
+    posthog = None
+    log.info("PostHog disabled (POSTHOG_API_KEY not set)")
 
 MAX_CIPHERTEXT_SIZE = 100 * 1024  # 100KB
 ALIAS_ALPHABET = string.ascii_letters + string.digits
@@ -27,7 +36,7 @@ def generate_alias():
 
 
 REDIS_URL = os.environ.get("REDIS_URL")
-if REDIS_URL:
+if REDIS_URL:  # pragma: no cover
     log.info("Connecting to Redis via REDIS_URL")
     r = redis.from_url(REDIS_URL, decode_responses=True, socket_timeout=5)
 else:
@@ -41,10 +50,10 @@ else:
         socket_timeout=5,
     )
 
-try:
+try:  # pragma: no cover
     r.ping()
     log.info("Redis connection established")
-except redis.ConnectionError as e:
+except redis.ConnectionError as e:  # pragma: no cover
     log.error("Redis connection failed: %s", e)
 
 
@@ -121,6 +130,9 @@ def create_secret():
     if alias is None:
         log.error("Failed to generate alias after 5 attempts for secret %s", secret_id)
 
+    if posthog:
+        posthog.capture("server", "secret_created", {"ttl_hours": ttl_hours, "has_alias": alias is not None})
+
     return jsonify({"id": secret_id, "alias": alias}), 201
 
 
@@ -159,6 +171,9 @@ def get_secret(secret_id):
     if alias_used:
         r.delete(f"alias:{alias_used}")
         log.info("Alias cleaned up: %s", alias_used)
+
+    if posthog:
+        posthog.capture("server", "secret_retrieved", {"via": "alias" if alias_used else "uuid"})
 
     return jsonify({"ciphertext": ciphertext, "id": actual_id})
 
