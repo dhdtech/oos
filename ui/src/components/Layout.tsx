@@ -1,10 +1,19 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Shield, Lock, Eye, Trash2 } from "lucide-react";
 import SecurityModal from "./SecurityModal";
 import LanguageSelector from "./LanguageSelector";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+    document.title = t("meta.title");
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", t("meta.description"));
+  }, [i18n.language, t]);
 
   return (
     <div className="layout">

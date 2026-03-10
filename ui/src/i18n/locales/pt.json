@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Only Once Share — Compartilhamento seguro de segredos",
+    "description": "Compartilhe senhas, chaves de API e dados sensíveis com criptografia ponta a ponta. Conhecimento zero, links de uso único que se autodestroem após a visualização."
+  },
   "header": {
     "title": "Only Once Share"
   },
