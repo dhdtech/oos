@@ -6,6 +6,8 @@ services:
 
   api:
     build: ./api
+    env_file:
+      - ./api/.env
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379

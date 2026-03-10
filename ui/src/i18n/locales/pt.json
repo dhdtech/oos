@@ -3,61 +3,61 @@
     "title": "Only Once Share"
   },
   "hero": {
-    "title": "Compartilhe segredos com seguranca",
-    "subtitle": "Criptografia ponta a ponta no seu navegador. O servidor nunca ve seus dados. Links se autodestroem apos uma visualizacao."
+    "title": "Compartilhe segredos com segurança",
+    "subtitle": "Criptografia ponta a ponta no seu navegador. O servidor nunca vê seus dados. Links se autodestroem após uma visualização."
   },
   "create": {
-    "label": "Conteudo secreto",
+    "label": "Conteúdo secreto",
     "placeholder": "Cole sua senha, chave de API ou mensagem privada...",
     "charCount": "{{count}} / 50,000",
     "expiresIn": "Expira em",
     "encrypting": "Criptografando...",
     "submit": "Criar link secreto",
     "linkCreated": "Link secreto criado",
-    "linkInfo": "Compartilhe este link com seu destinatario. Ele so pode ser aberto uma vez, depois e permanentemente destruido.",
+    "linkInfo": "Compartilhe este link com seu destinatário. Ele só pode ser aberto uma vez, depois é permanentemente destruído.",
     "shareVia": "Compartilhar via",
     "copy": "Copiar",
     "copied": "Copiado",
     "whatsapp": "WhatsApp",
     "email": "E-mail",
     "createAnother": "Criar outro",
-    "whatsappMsg": "Estou compartilhando um segredo com voce. Abra este link para ve-lo (apenas uma vez):\n\n{{link}}",
-    "emailSubject": "Aqui esta um segredo para voce",
-    "emailBody": "Estou compartilhando um segredo com voce. Abra este link para ve-lo — so pode ser aberto uma vez:\n\n{{link}}"
+    "whatsappMsg": "Estou compartilhando um segredo com você. Abra este link para vê-lo (apenas uma vez):\n\n{{link}}",
+    "emailSubject": "Aqui está um segredo para você",
+    "emailBody": "Estou compartilhando um segredo com você. Abra este link para vê-lo — só pode ser aberto uma vez:\n\n{{link}}"
   },
   "view": {
     "loading": "Recuperando e descriptografando segredo...",
-    "destroyed": "Este segredo foi permanentemente destruido. Nao pode ser visualizado novamente.",
+    "destroyed": "Este segredo foi permanentemente destruído. Não pode ser visualizado novamente.",
     "copySecret": "Copiar segredo",
-    "copiedClipboard": "Copiado para a area de transferencia",
-    "notFoundTitle": "Segredo nao disponivel",
-    "notFoundMsg": "Este segredo ja foi visualizado ou expirou. Segredos so podem ser acessados uma vez.",
+    "copiedClipboard": "Copiado para a área de transferência",
+    "notFoundTitle": "Segredo não disponível",
+    "notFoundMsg": "Este segredo já foi visualizado ou expirou. Segredos só podem ser acessados uma vez.",
     "errorTitle": "Algo deu errado",
-    "errorMsg": "Nao foi possivel descriptografar o segredo. O link pode ser invalido.",
-    "invalidLink": "Link invalido — chave de descriptografia ausente",
+    "errorMsg": "Não foi possível descriptografar o segredo. O link pode ser inválido.",
+    "invalidLink": "Link inválido — chave de descriptografia ausente",
     "newSecret": "Compartilhar novo segredo",
-    "backHome": "Voltar ao inicio"
+    "backHome": "Voltar ao início"
   },
   "footer": {
     "encryption": "AES-256-GCM",
     "zeroKnowledge": "Conhecimento zero",
-    "autoDelete": "Auto-exclusao"
+    "autoDelete": "Auto-exclusão"
   },
   "security": {
     "title": "Como funciona",
     "e2eTitle": "Criptografia ponta a ponta",
-    "e2eDesc": "Seu segredo e criptografado no seu navegador usando AES-256-GCM com um IV aleatorio de 96 bits antes de sair do seu dispositivo. A chave de criptografia nunca e enviada ao nosso servidor.",
-    "hkdfTitle": "Derivacao de chave HKDF",
-    "hkdfDesc": "Uma chave de criptografia unica e derivada para cada segredo usando HKDF-SHA-256 com o ID do segredo como contexto. Mesmo com a chave mestra, cada segredo tem sua propria chave criptograficamente independente.",
-    "aadTitle": "Vinculacao de dados autenticados",
-    "aadDesc": "O ID do segredo e vinculado como Dados Autenticados Adicionais (AAD) durante a criptografia. Se alguem adulterar o ID ou trocar o texto cifrado entre segredos, a descriptografia falhara.",
+    "e2eDesc": "Seu segredo é criptografado no seu navegador usando AES-256-GCM com um IV aleatório de 96 bits antes de sair do seu dispositivo. A chave de criptografia nunca é enviada ao nosso servidor.",
+    "hkdfTitle": "Derivação de chave HKDF",
+    "hkdfDesc": "Uma chave de criptografia única é derivada para cada segredo usando HKDF-SHA-256 com o ID do segredo como contexto. Mesmo com a chave mestra, cada segredo tem sua própria chave criptograficamente independente.",
+    "aadTitle": "Vinculação de dados autenticados",
+    "aadDesc": "O ID do segredo é vinculado como Dados Autenticados Adicionais (AAD) durante a criptografia. Se alguém adulterar o ID ou trocar o texto cifrado entre segredos, a descriptografia falhará.",
     "zkTitle": "Conhecimento zero",
-    "zkDesc": "O servidor armazena apenas dados criptografados. Nao podemos ler, descriptografar ou acessar seus segredos de nenhuma forma.",
+    "zkDesc": "O servidor armazena apenas dados criptografados. Não podemos ler, descriptografar ou acessar seus segredos de nenhuma forma.",
     "keyTitle": "A chave nunca sai do navegador",
-    "keyDesc": "A chave de descriptografia e colocada apos o # na URL. Fragmentos de URL do navegador nunca sao enviados aos servidores.",
-    "oneTimeTitle": "Visualizacao unica",
-    "oneTimeDesc": "Quando um segredo e recuperado, ele e atomicamente excluido do armazenamento na mesma operacao.",
-    "expiryTitle": "Expiracao automatica",
-    "expiryDesc": "Segredos expiram automaticamente apos o TTL escolhido (1-72 horas), mesmo se nunca forem visualizados."
+    "keyDesc": "A chave de descriptografia é colocada após o # na URL. Fragmentos de URL do navegador nunca são enviados aos servidores.",
+    "oneTimeTitle": "Visualização única",
+    "oneTimeDesc": "Quando um segredo é recuperado, ele é atomicamente excluído do armazenamento na mesma operação.",
+    "expiryTitle": "Expiração automática",
+    "expiryDesc": "Segredos expiram automaticamente após o TTL escolhido (1-72 horas), mesmo se nunca forem visualizados."
   }
 }

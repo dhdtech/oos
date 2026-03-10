@@ -52,3 +52,7 @@ api/.coverage
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Environment variables (secrets)
+.env
+!.env.template
