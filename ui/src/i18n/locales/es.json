@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Only Once Share — Compartir secretos de forma segura",
+    "description": "Comparte contraseñas, claves API y datos sensibles con cifrado de extremo a extremo. Conocimiento cero, enlaces de un solo uso que se autodestruyen después de verlos."
+  },
   "header": {
     "title": "Only Once Share"
   },

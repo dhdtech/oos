@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Only Once Share — 安全一次性秘密分享",
+    "description": "通过端到端加密分享密码、API密钥和敏感数据。零知识架构，一次性自毁链接。"
+  },
   "header": {
     "title": "Only Once Share"
   },

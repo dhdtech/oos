@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Only Once Share — Secure One-Time Secret Sharing",
+    "description": "Share passwords, API keys, and sensitive data with end-to-end encryption. Zero-knowledge, single-use links that self-destruct after viewing."
+  },
   "header": {
     "title": "Only Once Share"
   },
