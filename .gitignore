@@ -45,3 +45,14 @@ target/
 
 # Ralph backup directories (created by migration)
 .ralph_backup_*
+
+# Coverage reports
+ui/coverage/
+api/.coverage
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Environment variables (secrets)
+.env
+!.env.template
