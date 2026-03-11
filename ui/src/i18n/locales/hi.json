@@ -45,7 +45,8 @@
   "footer": {
     "encryption": "AES-256-GCM",
     "zeroKnowledge": "शून्य ज्ञान",
-    "autoDelete": "स्वतः-हटाएं"
+    "autoDelete": "स्वतः-हटाएं",
+    "openSource": "ओपन सोर्स"
   },
   "security": {
     "title": "यह कैसे काम करता है",

@@ -45,7 +45,8 @@
   "footer": {
     "encryption": "AES-256-GCM",
     "zeroKnowledge": "Conocimiento cero",
-    "autoDelete": "Auto-eliminación"
+    "autoDelete": "Auto-eliminación",
+    "openSource": "Código Abierto"
   },
   "security": {
     "title": "Cómo funciona",

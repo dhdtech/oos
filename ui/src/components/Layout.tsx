@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Shield, Lock, Eye, Trash2 } from "lucide-react";
+import { Shield, Lock, Eye, Trash2, Github } from "lucide-react";
 import SecurityModal from "./SecurityModal";
 import LanguageSelector from "./LanguageSelector";
 
@@ -47,6 +47,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {t("footer.autoDelete")}
           </span>
         </div>
+        <a
+          href="https://github.com/dhdtech/oos"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-opensource"
+        >
+          <Github size={14} />
+          {t("footer.openSource")}
+        </a>
       </footer>
     </div>
   );
