@@ -1,0 +1,18 @@
+name: Auto Assign PR
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Assign PR to creator
+        run: gh pr edit "$PR_URL" --add-assignee "$PR_AUTHOR"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
