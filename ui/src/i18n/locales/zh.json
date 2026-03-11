@@ -45,7 +45,8 @@
   "footer": {
     "encryption": "AES-256-GCM",
     "zeroKnowledge": "零知识",
-    "autoDelete": "自动删除"
+    "autoDelete": "自动删除",
+    "openSource": "开源项目"
   },
   "security": {
     "title": "工作原理",
