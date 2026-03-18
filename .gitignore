@@ -56,3 +56,7 @@ api/.coverage
 # Environment variables (secrets)
 .env
 !.env.template
+
+
+# UI dist folder
+ui/dist

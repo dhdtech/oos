@@ -2,4 +2,23 @@ User-agent: *
 Allow: /
 Disallow: /s/
 
+# AI Crawlers - Allowed for AI search visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://ooshare.io/sitemap.xml

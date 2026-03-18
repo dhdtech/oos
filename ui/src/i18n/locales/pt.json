@@ -42,6 +42,52 @@
     "newSecret": "Compartilhar novo segredo",
     "backHome": "Voltar ao início"
   },
+  "nav": {
+    "security": "Segurança",
+    "blog": "Blog",
+    "faq": "Perguntas frequentes",
+    "about": "Sobre",
+    "backHome": "Voltar ao início",
+    "allPosts": "Todos os artigos"
+  },
+  "pages": {
+    "security": {
+      "metaTitle": "Como funciona — Segurança e criptografia | Only Once Share",
+      "metaDesc": "Saiba como o Only Once Share protege seus segredos com criptografia AES-256-GCM, arquitetura de conhecimento zero e gerenciamento de chaves do lado do cliente.",
+      "title": "Como o Only Once Share protege seus segredos",
+      "lead": "O Only Once Share utiliza criptografia AES-256-GCM ponta a ponta com uma arquitetura de conhecimento zero. Seus segredos são criptografados no navegador antes de sair do seu dispositivo — nosso servidor nunca vê seus dados em texto puro.",
+      "cta": "Experimente o Only Once Share — Grátis e seguro"
+    },
+    "about": {
+      "metaTitle": "Sobre — Only Once Share | DHD Tech",
+      "metaDesc": "Only Once Share é uma ferramenta gratuita e de código aberto para compartilhamento de segredos, criada pela DHD Tech. Conheça nossa missão de tornar o compartilhamento seguro de credenciais acessível a todos.",
+      "title": "Sobre o Only Once Share",
+      "lead": "Criamos o Only Once Share porque compartilhar senhas e informações sensíveis não deveria exigir confiar em terceiros com seus dados — nem pagar por isso.",
+      "viewOnGithub": "Ver no GitHub"
+    },
+    "faq": {
+      "metaTitle": "FAQ — Perguntas frequentes | Only Once Share",
+      "metaDesc": "Perguntas frequentes sobre o Only Once Share: como funciona a criptografia, arquitetura de segurança, auto-hospedagem, preços e mais.",
+      "title": "Perguntas frequentes",
+      "lead": "Tudo o que você precisa saber sobre a segurança, criptografia e recursos do Only Once Share.",
+      "moreQuestions": "Tem mais perguntas?",
+      "askGithub": "Pergunte no GitHub"
+    },
+    "blog": {
+      "metaTitle": "Blog — Segurança, criptografia e compartilhamento de segredos | Only Once Share",
+      "metaDesc": "Artigos sobre segurança de senhas, criptografia, arquitetura de conhecimento zero e compartilhamento seguro de credenciais.",
+      "title": "Blog",
+      "lead": "Segurança, criptografia e compartilhamento de segredos — guias práticos para desenvolvedores e equipes.",
+      "minRead": "min de leitura",
+      "by": "Por",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "ctaTitle": "Compartilhe segredos com segurança — grátis",
+      "ctaDesc": "Only Once Share usa criptografia AES-256-GCM com arquitetura de conhecimento zero. Sem necessidade de conta.",
+      "ctaButton": "Experimente o Only Once Share",
+      "contentInEnglish": "Este artigo está disponível atualmente em inglês."
+    }
+  },
   "footer": {
     "encryption": "AES-256-GCM",
     "zeroKnowledge": "Conhecimento zero",

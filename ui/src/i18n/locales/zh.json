@@ -42,6 +42,52 @@
     "newSecret": "分享新的秘密",
     "backHome": "返回首页"
   },
+  "nav": {
+    "security": "安全",
+    "blog": "博客",
+    "faq": "常见问题",
+    "about": "关于",
+    "backHome": "返回首页",
+    "allPosts": "所有文章"
+  },
+  "pages": {
+    "security": {
+      "metaTitle": "工作原理 — 安全与加密 | Only Once Share",
+      "metaDesc": "了解Only Once Share如何通过AES-256-GCM加密、零知识架构和客户端密钥管理保护您的秘密。",
+      "title": "Only Once Share如何保护您的秘密",
+      "lead": "Only Once Share使用端到端AES-256-GCM加密和零知识架构。您的秘密在离开设备之前就在浏览器中加密 — 我们的服务器永远不会看到您的明文数据。",
+      "cta": "试用Only Once Share — 免费且安全"
+    },
+    "about": {
+      "metaTitle": "关于 — Only Once Share | DHD Tech",
+      "metaDesc": "Only Once Share是DHD Tech构建的免费开源秘密分享工具。了解我们让安全凭证分享对每个人都可用的使命。",
+      "title": "关于Only Once Share",
+      "lead": "我们构建Only Once Share是因为分享密码和敏感信息不应该需要将数据托付给第三方 — 也不应该为此付费。",
+      "viewOnGithub": "在GitHub上查看"
+    },
+    "faq": {
+      "metaTitle": "常见问题 — FAQ | Only Once Share",
+      "metaDesc": "关于Only Once Share的常见问题：加密工作原理、安全架构、自托管、定价等。",
+      "title": "常见问题",
+      "lead": "您需要了解的关于Only Once Share安全、加密和功能的一切。",
+      "moreQuestions": "还有其他问题？",
+      "askGithub": "在GitHub上提问"
+    },
+    "blog": {
+      "metaTitle": "博客 — 安全、加密与秘密分享 | Only Once Share",
+      "metaDesc": "关于密码安全、加密、零知识架构和安全凭证分享的文章。",
+      "title": "博客",
+      "lead": "安全、加密和秘密分享 — 为开发者和团队提供的实用指南。",
+      "minRead": "分钟阅读",
+      "by": "作者",
+      "previous": "上一篇",
+      "next": "下一篇",
+      "ctaTitle": "安全分享秘密 — 完全免费",
+      "ctaDesc": "Only Once Share使用AES-256-GCM加密和零知识架构。无需注册账户。",
+      "ctaButton": "试用Only Once Share",
+      "contentInEnglish": "本文目前仅提供英文版本。"
+    }
+  },
   "footer": {
     "encryption": "AES-256-GCM",
     "zeroKnowledge": "零知识",
