@@ -1,288 +1,240 @@
-# SEO Strategy — Only Once Share (ooshare.io)
+# SEO Strategy: Only Once Share (ooshare.io)
 
-> Strategic SEO plan for establishing organic visibility in the secret sharing space.
-> Created: March 2026
-
----
-
-## 1. Executive Summary
-
-**Only Once Share** is a free, open-source, end-to-end encrypted secret sharing platform competing in a space dominated by OneTimeSecret (est. 2011), Password.link, scrt.link, Password Pusher, and Yopass.
-
-**Current State:** The site has zero organic visibility — it does not appear in any search results for target keywords. The sitemap contains only 1 URL (homepage), and the React SPA has no content pages for search engines to index.
-
-**Opportunity:** The "free + open source + true zero-knowledge + no account required" positioning is unique. Most competitors either charge for advanced features or don't offer true client-side encryption. This creates a clear differentiation angle.
-
-**Goal:** Achieve page-1 rankings for 15+ target keywords and 5,000+ monthly organic visits within 12 months.
+**Date:** 2026-03-18
+**Goal:** Organic traffic growth
+**Domain:** https://ooshare.io
+**Business Type:** SaaS security tool (freemium, open-source)
 
 ---
 
-## 2. Business Profile
+## Executive Summary
 
-| Attribute | Details |
-|-----------|---------|
-| **Product** | Secure one-time secret sharing via self-destructing links |
-| **Type** | Free SaaS / Open Source Tool |
-| **Domain** | ooshare.io |
-| **Industry** | Cybersecurity / Developer Tools |
-| **Monetization** | None currently (growth-first strategy) |
-| **Languages** | 6 (EN, ZH, ES, HI, AR, PT) |
-| **Deployment** | Cloud (ooshare.io) + Self-hosted (Docker) |
+ooshare.io has strong SEO foundations (clean URLs, good schema markup, comprehensive sitemap, 21 blog posts in 6 languages) but suffers from one critical architectural flaw that undermines everything: **pure client-side rendering**. All content is invisible in the initial HTML response, meaning search engines and AI crawlers see an empty page. Fixing this single issue would unlock the majority of the site's SEO potential.
 
----
+### Current Scores
 
-## 3. Target Audience
-
-### Primary Segments
-
-1. **Developers & DevOps Engineers** — Sharing API keys, tokens, credentials between team members or with clients
-2. **IT Professionals** — Distributing access credentials for onboarding, support, or vendor access
-3. **Security-Conscious Individuals** — Anyone who needs to share passwords without using email/Slack in plaintext
-4. **Compliance-Driven Organizations** — Teams needing GDPR-compliant, zero-knowledge credential sharing
-
-### Search Intent Profiles
-
-| Segment | Typical Query | Intent |
-|---------|--------------|--------|
-| Developer | "share API key securely" | Transactional |
-| IT Admin | "send password to employee safely" | Transactional |
-| Security Researcher | "zero-knowledge secret sharing tool" | Informational → Transactional |
-| Comparison Shopper | "onetimesecret alternatives" | Comparison |
-| Self-Hoster | "open source password sharing self-hosted" | Transactional |
+| Dimension | Score | Target (6mo) | Target (12mo) |
+|-----------|-------|--------------|----------------|
+| Technical SEO | 62/100 | 85/100 | 92/100 |
+| Content Quality | 44/100 | 70/100 | 82/100 |
+| E-E-A-T | 41/100 | 60/100 | 75/100 |
+| GEO (AI Search) | 38/100 | 65/100 | 78/100 |
+| AI Citation Readiness | 62/100 | 75/100 | 85/100 |
 
 ---
 
-## 4. Competitive Positioning
+## 1. Critical Issue: Client-Side Rendering
 
-### Unique Value Proposition
+### The Problem
 
-> **"The only free, open-source secret sharing tool with true zero-knowledge encryption — no accounts, no limits, no compromise."**
+The site is a React 19 SPA (Vite build). Every route serves the same HTML shell:
 
-### Positioning Matrix
+```html
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+```
 
-| | Free | Open Source | Client-Side E2E | No Account | Multi-Language |
-|---|---|---|---|---|---|
-| **ooshare.io** | Unlimited | MIT | AES-256-GCM | Yes | 6 languages |
-| OneTimeSecret | Limited (100KB) | Yes | No (server-side) | Yes (limited) | Yes |
-| password.link | 8/month | No | Yes | No (account) | 8 languages |
-| scrt.link | Unlimited | Yes | Yes | Yes | No |
-| pwpush | Self-host | Yes | No (server-side) | Yes | No |
-| yopass | Unlimited | Yes | OpenPGP | Yes | No |
+**Consequences:**
+- All 21 blog posts, 12 FAQ items, Security page, and About page are invisible in initial HTML
+- Every page shares the same canonical URL (`https://ooshare.io/`), telling Google all pages are duplicates of the homepage
+- OG/Twitter tags are identical on every page (social sharing always shows homepage metadata)
+- AI crawlers (GPTBot, ClaudeBot, PerplexityBot) generally don't execute JavaScript
+- Googlebot renders JS but with days/weeks delay
+- Soft 404s return HTTP 200 for non-existent URLs
 
-**Key differentiators to emphasize in all content:**
-1. **True zero-knowledge** — Key never leaves the browser (vs. OTS/pwpush where server sees plaintext)
-2. **Completely free** — No artificial limits (vs. password.link's 8/month, OTS's 100KB cap)
-3. **6 languages** — Widest free multilingual support
-4. **No account required** — Friction-free sharing
-5. **Open source (MIT)** — Full transparency and self-hosting
+### Recommended Fix
 
----
+**Option A (Recommended): Migrate content pages to Astro or Next.js static export**
+- Keep `/` and `/s/:id` as client-side React (they need crypto + interactivity)
+- Statically generate `/blog/*`, `/faq`, `/security`, `/about` at build time
+- Effort: 2-4 weeks. Highest ROI change possible.
 
-## 5. Keyword Strategy
+**Option B: Add vite-ssg or prerender-spa-plugin**
+- Pre-render content routes at build time within the existing Vite setup
+- Lower migration cost but less flexible long-term
+- Effort: 1-2 weeks
 
-### Tier 1 — Primary Keywords (Target: Top 10)
-
-| Keyword | Est. Monthly Volume | Competition | Current Rank | Target |
-|---------|-------------------|-------------|-------------|--------|
-| one-time secret | 8,000-12,000 | High | Not ranked | Top 10 |
-| share password securely | 2,000-4,000 | Medium | Not ranked | Top 5 |
-| self-destructing link | 1,000-2,000 | Medium | Not ranked | Top 5 |
-| send password safely | 1,000-2,000 | Medium | Not ranked | Top 5 |
-| secure password sharing | 2,000-4,000 | Medium-High | Not ranked | Top 10 |
-| one-time link | 1,500-3,000 | Medium | Not ranked | Top 10 |
-
-### Tier 2 — Secondary Keywords (Target: Top 20)
-
-| Keyword | Est. Monthly Volume | Competition | Strategy |
-|---------|-------------------|-------------|----------|
-| onetimesecret alternative | 500-1,000 | Low-Medium | Comparison page |
-| encrypted password sharing | 500-1,000 | Low | Feature page |
-| zero-knowledge secret sharing | 200-500 | Low | Blog + security page |
-| share API keys securely | 200-500 | Low | Use case page |
-| self-destructing message | 1,000-2,000 | Medium | Blog content |
-| temporary password sharing | 300-600 | Low | Feature page |
-| free secret sharing tool | 300-600 | Low | Homepage + blog |
-
-### Tier 3 — Long-Tail Keywords (Quick Wins)
-
-| Keyword | Competition | Content Type |
-|---------|-------------|-------------|
-| how to share a password securely | Low | Blog/FAQ |
-| best open source password sharing tool | Low | Blog |
-| send credentials without email | Low | Blog/Use case |
-| GDPR compliant secret sharing | Low | Security page |
-| AES-256 encrypted sharing tool | Very Low | Technical blog |
-| share secrets online free no account | Low | Homepage SEO |
-| self-hosted secret sharing docker | Low | Docs/Blog |
-
-### Tier 4 — Competitor Brand Keywords
-
-| Keyword | Strategy |
-|---------|----------|
-| onetimesecret alternative | Comparison page + listings |
-| password.link alternative | Comparison page |
-| password pusher alternative | Comparison page |
-| scrt.link vs onetimesecret | Comparison roundup |
+**Option C (Stopgap): Prerendering service**
+- Configure nginx to detect bot user agents and proxy to Prerender.io/Rendertron
+- Quick fix (~1-2 days) but adds a dependency and doesn't fix social sharing
 
 ---
 
-## 6. E-E-A-T Strategy
+## 2. Target Keywords
 
-### Experience
-- Document real-world use cases (DevOps credential sharing, client onboarding, incident response)
-- Publish "how we use ooshare.io" case studies
-- Show the tool in action with screenshots and workflows
+### Primary Keywords (High Intent)
 
-### Expertise
-- Technical deep-dives on encryption (AES-256-GCM, HKDF, Web Crypto API)
-- Security architecture documentation
-- Comparison of encryption approaches across tools
+| Keyword | Est. Competition | Page |
+|---------|-----------------|------|
+| share password securely | Medium | Homepage |
+| one-time secret sharing | Medium | Homepage |
+| send credentials securely | Medium | Homepage |
+| self-destructing message | Medium | Blog |
+| share API key securely | Low | Blog |
+| zero-knowledge secret sharing | Low | Security |
+| one-time link generator | Medium | Homepage |
 
-### Authoritativeness
-- DHD Tech organization page with team credentials
-- GitHub activity and open-source contributions
-- Submissions to security tool directories and roundups
+### Long-Tail Keywords (Blog Content)
 
-### Trustworthiness
-- Transparent security model (open source, auditable code)
-- Clear privacy policy and data handling documentation
-- Security.txt and responsible disclosure process
-- No tracking of secret content (document analytics privacy measures)
+| Keyword | Page Target |
+|---------|-------------|
+| how to share passwords with employees | Blog: credential-sharing-employee-onboarding |
+| onetimesecret alternative | Blog: best-free-secret-sharing-tools |
+| client-side encryption vs server-side | Blog: server-side-vs-client-side-encryption |
+| GDPR compliant password sharing | Blog: gdpr-compliant-secret-sharing |
+| self-host secret sharing docker | Blog: self-host-secret-sharing-docker |
+| AES-256-GCM encryption explained | Blog: aes-256-gcm-encryption-explained |
+| zero knowledge encryption how it works | Blog: what-is-zero-knowledge-encryption |
+| share secret devops pipeline | Blog: devops-secret-sharing-best-practices |
 
----
+### Competitor Comparison Keywords
 
-## 7. Technical SEO Requirements
-
-### Critical Fixes (Week 1-2)
-
-1. **Server-Side Rendering or Pre-rendering** — The React SPA currently renders an empty `<div id="root">`. Search engines may not index content. Options:
-   - **Pre-rendering** (recommended): Use `vite-plugin-ssr` or a prerender step to generate static HTML for key pages
-   - **SSR**: Migrate to Next.js or Remix (higher effort)
-   - **Dynamic rendering**: Serve pre-rendered HTML to crawlers via middleware
-
-2. **Expand sitemap.xml** — Currently only contains `/`. Must include all new content pages, updated with proper `lastmod`, `changefreq`, and `priority` values.
-
-3. **Add robots.txt directives** for new content sections while keeping `/s/` blocked.
-
-### Schema Markup Plan
-
-| Page Type | Schema Types |
-|-----------|-------------|
-| Homepage | WebApplication + WebSite + Organization + FAQPage |
-| Security Page | TechArticle + WebApplication |
-| Blog Posts | Article + BlogPosting |
-| Comparison Pages | WebPage + FAQPage |
-| About Page | Organization + AboutPage |
-| FAQ Page | FAQPage |
-| How-To Guides | HowTo |
-
-### Core Web Vitals Targets
-
-| Metric | Target | Strategy |
-|--------|--------|----------|
-| LCP | < 2.5s | Optimize hero content, preload critical assets |
-| INP | < 200ms | Minimize JS bundle, defer non-critical scripts |
-| CLS | < 0.1 | Set explicit dimensions on images/embeds |
-
-### AI Search Readiness
-
-- [ ] Add `llms.txt` file at root describing the tool for AI crawlers
-- [ ] Ensure GPTBot, ClaudeBot, PerplexityBot are allowed in robots.txt
-- [ ] Structure content with clear, quotable passages for AI citations
-- [ ] Use definition-style paragraphs that AI can extract and cite
+| Keyword | Page Target |
+|---------|-------------|
+| onetimesecret vs privnote | New comparison page |
+| best free secret sharing tools 2026 | Blog: best-free-secret-sharing-tools |
+| onetimesecret alternative open source | Blog: best-free-secret-sharing-tools |
+| password.link vs onetimesecret | New comparison page |
 
 ---
 
-## 8. KPI Targets
+## 3. On-Page SEO Fixes (Quick Wins)
+
+### A. Per-Page Canonical Tags
+Each page component's `useEffect` must update `<link rel="canonical">`:
+```javascript
+document.querySelector('link[rel="canonical"]')?.setAttribute("href", `https://ooshare.io${location.pathname}`);
+```
+
+### B. Per-Page OG/Twitter Tags
+Add OG tag updates in each page component to fix social sharing. Blog posts especially need unique `og:title`, `og:description`, and `og:url`.
+
+### C. Hreflang Tags
+Add `<link rel="alternate" hreflang="xx">` for each of the 6 supported languages. This tells Google which language version to serve in each market.
+
+### D. Security Headers (nginx.conf)
+Add to nginx.conf:
+```nginx
+add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-Frame-Options "DENY" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+```
+Critical for a security-focused product to practice what it preaches.
+
+### E. Homepage Content Expansion
+Add below the secret creation form:
+- "How It Works" 3-step section
+- Feature grid (Zero Knowledge, Auto-Delete, Open Source, 6 Languages)
+- Trust signals / use case examples
+- Target: 600-800 words of visible content
+
+---
+
+## 4. Content Strategy
+
+### Blog Content Expansion
+Every blog post averages 576 words. Target minimum: 1,500 words.
+
+**Priority posts to expand first** (highest keyword potential):
+1. `how-to-share-password-securely` (beginner guide, high search volume)
+2. `best-free-secret-sharing-tools` (comparison/alternative query)
+3. `complete-guide-one-time-secret-sharing` (pillar content)
+4. `aes-256-gcm-encryption-explained` (technical authority)
+5. `self-host-secret-sharing-docker` (DevOps audience)
+
+**What to add per post:**
+- Real-world case studies or scenarios
+- Data/statistics with cited sources
+- Deeper technical detail where relevant
+- Step-by-step screenshots or diagrams
+- Internal links to related blog posts, Security page, FAQ
+- External citations to build credibility
+
+### E-E-A-T Improvements
+
+| Signal | Current | Action |
+|--------|---------|--------|
+| Experience | Weak | Add first-hand narratives ("we built this because...") |
+| Expertise | Moderate | Add author bios with credentials, link to GitHub contributions |
+| Authoritativeness | Weak | Get listed on AlternativeTo, Product Hunt; seek reviews |
+| Trustworthiness | Moderate | Add privacy policy, terms of service, contact info |
+
+### Internal Linking Strategy
+Currently blog posts almost exclusively link to the homepage. Implement:
+- Blog-to-blog cross-links (e.g., encryption post links to security architecture post)
+- Blog-to-feature-page links (e.g., mentions of zero-knowledge link to `/security`)
+- FAQ answers link to relevant blog posts
+- Security page links to technical blog posts
+
+---
+
+## 5. GEO (Generative Engine Optimization)
+
+### Current State
+- robots.txt allows all AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)
+- llms.txt present with good product documentation
+- Schema markup covers WebApplication, Organization, FAQPage, BlogPosting
+- **But all content is invisible due to CSR** (38/100 GEO score)
+
+### Post-SSR Actions
+Once content is crawlable:
+1. **Restructure passages for citability** - Lead with direct answers in first 40-60 words of each section
+2. **Convert H2s to question format** - "How Email Works" becomes "How does email transmit passwords between servers?"
+3. **Add statistics with sources** - e.g., "According to Verizon's 2025 DBIR, 80% of breaches involve credentials"
+4. **Create per-post OG images** - Currently all pages share one OG image
+5. **Build YouTube presence** - YouTube mentions correlate ~0.737 with AI citations
+
+### llms.txt Enhancement
+Add RSL 1.0 fields:
+```
+License: MIT
+Usage-Policy: Content may be used for AI training and search with attribution
+Preferred-Citation: "Only Once Share (ooshare.io) by DHD Tech"
+```
+
+---
+
+## 6. Technical SEO Priorities
+
+| Priority | Issue | Impact | Effort |
+|----------|-------|--------|--------|
+| P0 | Implement SSR/SSG for content pages | Critical | High |
+| P0 | Fix per-page canonical tags | Critical | Low |
+| P0 | Fix per-page OG/Twitter tags | Critical | Low |
+| P1 | Add security headers to nginx | High | Low |
+| P1 | Add hreflang tags | High | Medium |
+| P1 | Fix soft 404s (return proper HTTP 404) | High | Medium |
+| P2 | Implement code splitting (bundle is 973KB) | Medium | Medium |
+| P2 | Add IndexNow for Bing/Yandex notification | Medium | Low |
+| P2 | Self-host Inter font (avoid CLS from swap) | Low | Low |
+| P3 | Add OAI-SearchBot explicit directive | Low | Low |
+
+---
+
+## 7. KPI Targets
 
 | Metric | Baseline (Mar 2026) | 3 Month | 6 Month | 12 Month |
 |--------|---------------------|---------|---------|----------|
-| Organic Traffic | ~0 | 500/mo | 2,000/mo | 5,000+/mo |
-| Indexed Pages | 1 | 15 | 30 | 50+ |
-| Keywords Top 100 | 0 | 25 | 75 | 150+ |
-| Keywords Top 10 | 0 | 3 | 10 | 20+ |
-| Domain Authority | 0 | 10 | 20 | 30+ |
-| Backlinks | ~0 | 25 | 75 | 200+ |
-| Core Web Vitals | Unknown | All Green | All Green | All Green |
-| AI Citations | 0 | 1-2 | 5+ | 10+ |
+| Organic Traffic | ~0 (CSR blocks indexing) | 200/mo | 1,500/mo | 5,000/mo |
+| Indexed Pages | ~1 (homepage only) | 24 | 30+ | 50+ |
+| Keyword Rankings (top 100) | ~0 | 30 | 80 | 150+ |
+| Blog Posts >1,500 words | 0/21 | 5/21 | 15/21 | 21/21 |
+| Referring Domains | Unknown (low) | +10 | +30 | +60 |
+| GEO Score | 38/100 | 60/100 | 70/100 | 78/100 |
 
 ---
 
-## 9. Link Building Strategy
+## Competitor Landscape
 
-### Phase 1 — Directory Submissions (Months 1-2)
-- AlternativeTo.net (list as OTS alternative)
-- SaaSHub (create product listing)
-- Product Hunt launch
-- GitHub Awesome lists (awesome-selfhosted, awesome-security)
-- DevOps tool directories
+ooshare.io competes against established tools:
+- **OneTimeSecret** (~372K visits/mo, 15% from organic)
+- **Privnote** (~865K visits/mo, 9% from organic)
+- **password.link**, **scrt.link**, **yopass.se**, **1ty.me**
 
-### Phase 2 — Content-Driven Links (Months 3-6)
-- Reach out to "best secret sharing tools" roundup authors for inclusion
-- Guest posts on cybersecurity blogs
-- Technical deep-dives on dev.to, Hashnode, Medium
-- Submit to Hacker News, Reddit r/selfhosted, r/cybersecurity
+**Key differentiator:** ooshare.io is one of the few that offers true **zero-knowledge, client-side encryption** (OneTimeSecret does server-side encryption). This is the primary messaging angle for content and SEO.
 
-### Phase 3 — Authority Building (Months 7-12)
-- Security conference talks/presentations
-- Partnership mentions with complementary tools
-- Open-source community engagement
-- Press coverage for security-focused stories
-
----
-
-## 10. International SEO Strategy
-
-With 6 languages already supported, leverage this competitive advantage:
-
-### Implementation
-- Use `?lng=xx` parameter with `rel="alternate" hreflang` tags
-- Consider subdirectory approach (`/es/`, `/zh/`, etc.) for better crawlability
-- Create localized sitemap entries for each language variant
-- Translate key content pages (not just the app interface)
-
-### Priority Markets
-1. **English** (US, UK, AU, CA) — Primary market, highest competition
-2. **Spanish** (ES, LATAM) — Underserved market, low competition
-3. **Portuguese** (BR, PT) — Growing tech market
-4. **Chinese** (CN, TW) — Large market but unique challenges (GFW)
-5. **Hindi** (IN) — Rapidly growing developer market
-6. **Arabic** (ME, NA) — Niche but zero competition
-
----
-
-## 11. Success Criteria
-
-### 3-Month Milestones
-- [ ] 15+ pages indexed in Google
-- [ ] Appearing in search results for 3+ target keywords
-- [ ] Listed on AlternativeTo, SaaSHub, and Product Hunt
-- [ ] Blog launched with 5+ posts
-- [ ] All Core Web Vitals passing
-
-### 6-Month Milestones
-- [ ] 2,000+ monthly organic visits
-- [ ] Top 10 ranking for 5+ keywords
-- [ ] 3+ comparison pages ranking
-- [ ] Featured in 2+ "best tools" roundups
-- [ ] 50+ referring domains
-
-### 12-Month Milestones
-- [ ] 5,000+ monthly organic visits
-- [ ] Top 5 ranking for primary keywords
-- [ ] DA 30+
-- [ ] Appearing in AI search results (Google AI Overviews, ChatGPT, Perplexity)
-- [ ] Recognized as a top-5 tool in the category
-
----
-
-## 12. Risk Mitigation
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| SPA rendering blocks indexing | Critical | Implement pre-rendering in Phase 1 |
-| OneTimeSecret brand dominance | High | Focus on differentiation (free, zero-knowledge, multilingual) |
-| Low domain authority | High | Aggressive link building + directory submissions |
-| Content quality vs. competitors | Medium | Focus on technical depth and unique data |
-| Algorithm changes | Medium | Diversify traffic sources (direct, referral, social) |
-| Competitor SEO response | Low | First-mover advantage on underserved keywords |
+See [COMPETITOR-ANALYSIS.md](COMPETITOR-ANALYSIS.md) for detailed analysis.

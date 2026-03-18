@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { getBlogPosts } from "../content/blog-posts";
 import NotFound from "./NotFound";
+import useSEO from "../lib/useSEO";
 
 export default function BlogPost() {
   const { t, i18n } = useTranslation();
@@ -11,11 +12,14 @@ export default function BlogPost() {
   const posts = getBlogPosts(i18n.language);
   const post = posts.find((p) => p.slug === slug);
 
+  useSEO({
+    title: post ? `${post.title} | Only Once Share Blog` : "Not Found | Only Once Share",
+    description: post?.description ?? "",
+    path: `/blog/${slug ?? ""}`,
+  });
+
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} | Only Once Share Blog`;
-      document.querySelector('meta[name="description"]')?.setAttribute("content", post.description);
-
       const schema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",

@@ -1,14 +1,15 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Shield, Lock, Key, Eye, Trash2, Hash, Server, ArrowLeft } from "lucide-react";
+import useSEO from "../lib/useSEO";
 
 export default function Security() {
   const { t } = useTranslation();
 
-  useEffect(() => {
-    document.title = t("pages.security.metaTitle");
-    document.querySelector('meta[name="description"]')?.setAttribute("content", t("pages.security.metaDesc"));
-  }, [t]);
+  useSEO({
+    title: t("pages.security.metaTitle"),
+    description: t("pages.security.metaDesc"),
+    path: "/security",
+  });
 
   return (
     <div className="content-page">

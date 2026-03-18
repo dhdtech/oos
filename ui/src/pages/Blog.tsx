@@ -1,16 +1,17 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { getBlogPosts } from "../content/blog-posts";
+import useSEO from "../lib/useSEO";
 
 export default function Blog() {
   const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    document.title = t("pages.blog.metaTitle");
-    document.querySelector('meta[name="description"]')?.setAttribute("content", t("pages.blog.metaDesc"));
-  }, [t]);
+  useSEO({
+    title: t("pages.blog.metaTitle"),
+    description: t("pages.blog.metaDesc"),
+    path: "/blog",
+  });
 
   const posts = getBlogPosts(i18n.language);
   const sorted = [...posts].sort(

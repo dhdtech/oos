@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft } from "lucide-react";
+import useSEO from "../lib/useSEO";
 
 const FAQ_COUNT = 12;
 
@@ -12,10 +13,13 @@ export default function FAQ() {
     a: t(`pages.faq.a${i + 1}`),
   }));
 
-  useEffect(() => {
-    document.title = t("pages.faq.metaTitle");
-    document.querySelector('meta[name="description"]')?.setAttribute("content", t("pages.faq.metaDesc"));
+  useSEO({
+    title: t("pages.faq.metaTitle"),
+    description: t("pages.faq.metaDesc"),
+    path: "/faq",
+  });
 
+  useEffect(() => {
     const schema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",

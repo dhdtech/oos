@@ -14,6 +14,7 @@ import {
 import { generateKey, exportKey, encrypt } from "../lib/crypto";
 import { createSecret } from "../lib/api";
 import posthog from "../lib/posthog";
+import useSEO from "../lib/useSEO";
 
 const TTL_OPTIONS = [
   { value: 1, label: "1h" },
@@ -26,6 +27,13 @@ const TTL_OPTIONS = [
 
 export default function CreateSecret() {
   const { t, i18n } = useTranslation();
+
+  useSEO({
+    title: t("meta.title"),
+    description: t("meta.description"),
+    path: "/",
+  });
+
   const [secret, setSecret] = useState("");
   const [ttlHours, setTtlHours] = useState(24);
   const [link, setLink] = useState("");

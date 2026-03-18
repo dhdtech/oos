@@ -1,375 +1,263 @@
-# Site Structure — Only Once Share (ooshare.io)
+# Site Structure: ooshare.io
 
-> URL hierarchy, information architecture, and internal linking strategy.
-> Created: March 2026
+**Date:** 2026-03-18
+**Architecture:** URL hierarchy, content organization, and internal linking plan.
 
 ---
 
-## 1. Current State
+## Current URL Structure
 
 ```
 ooshare.io/
-├── /                   ← Homepage (create secret form)
-└── /s/:id              ← View secret (dynamic, blocked from indexing)
+├── /                          # Homepage (secret creation tool)
+├── /s/:id                     # Secret viewing (not indexed, blocked in robots.txt)
+├── /security                  # Security architecture page
+├── /about                     # About page
+├── /faq                       # FAQ page (12 Q&A pairs)
+├── /blog                      # Blog index
+│   ├── /blog/why-email-is-not-safe-for-passwords
+│   ├── /blog/what-is-zero-knowledge-encryption
+│   ├── /blog/how-to-share-password-securely
+│   ├── /blog/self-destructing-links-explained
+│   ├── /blog/aes-256-gcm-encryption-explained
+│   ├── /blog/send-api-keys-securely
+│   ├── /blog/best-free-secret-sharing-tools
+│   ├── /blog/server-side-vs-client-side-encryption
+│   ├── /blog/self-host-secret-sharing-docker
+│   ├── /blog/credential-sharing-employee-onboarding
+│   ├── /blog/gdpr-compliant-secret-sharing
+│   ├── /blog/devops-secret-sharing-best-practices
+│   ├── /blog/complete-guide-one-time-secret-sharing
+│   ├── /blog/open-source-security-transparency
+│   ├── /blog/incident-response-credential-sharing
+│   ├── /blog/web-crypto-api-browser-encryption
+│   ├── /blog/zero-knowledge-architecture-deep-dive
+│   ├── /blog/password-sharing-remote-teams
+│   ├── /blog/why-self-host-secret-sharing
+│   └── /blog/state-of-secret-sharing-2026
+└── /*                         # 404 Not Found
 ```
 
-**Problem:** Only 1 indexable page. Zero content for search engines to rank.
+**Total indexed pages:** 24 (5 core + 19 blog posts + blog index page not in sitemap but accessible)
 
 ---
 
-## 2. Proposed Site Architecture
+## Proposed URL Structure (New Pages)
 
 ```
 ooshare.io/
-│
-├── /                           ← Homepage (tool + value proposition)
-│
-├── /security                   ← How encryption works, zero-knowledge architecture
-├── /about                      ← DHD Tech, team, mission, open source commitment
-├── /faq                        ← Common questions (FAQPage schema)
-├── /privacy                    ← Privacy policy
-├── /terms                      ← Terms of service
-│
-├── /blog/                      ← Blog listing page
-│   ├── /how-to-share-password-securely
-│   ├── /what-is-zero-knowledge-encryption
-│   ├── /self-destructing-links-explained
-│   ├── /send-api-keys-securely
-│   ├── /self-host-secret-sharing-docker
-│   ├── /gdpr-compliant-secret-sharing
-│   ├── /aes-256-gcm-encryption-explained
-│   ├── /why-email-is-not-safe-for-passwords
-│   ├── /devops-secret-sharing-best-practices
-│   ├── /employee-onboarding-credential-sharing
-│   └── ... (2-3 new posts per month)
-│
-├── /compare/                   ← Comparison hub page
-│   ├── /best-secret-sharing-tools
-│   ├── /onetimesecret-alternative
-│   ├── /password-link-alternative
-│   ├── /password-pusher-alternative
-│   └── /scrt-link-alternative
-│
-├── /s/:id                      ← View secret (noindex, blocked in robots.txt)
-│
-├── /sitemap.xml                ← Dynamic XML sitemap
-├── /robots.txt                 ← Crawler directives
-├── /llms.txt                   ← AI crawler summary
-└── /.well-known/security.txt   ← Security contact info
+├── /                          # Homepage
+├── /s/:id                     # Secret viewing (blocked)
+├── /security                  # Security architecture
+├── /about                     # About page (expanded with team bios)
+├── /faq                       # FAQ page
+├── /privacy                   # NEW: Privacy Policy
+├── /terms                     # NEW: Terms of Service
+├── /blog                      # Blog index
+│   ├── /blog/[existing-21-posts]
+│   ├── /blog/ooshare-vs-onetimesecret          # NEW: Comparison
+│   ├── /blog/ooshare-vs-privnote               # NEW: Comparison
+│   ├── /blog/ooshare-vs-password-link           # NEW: Comparison
+│   ├── /blog/best-onetimesecret-alternatives    # NEW: Alternatives
+│   ├── /blog/soc2-compliant-secret-sharing      # NEW
+│   ├── /blog/hipaa-secret-sharing               # NEW
+│   ├── /blog/share-api-keys-team                # NEW
+│   ├── /blog/send-documents-securely            # NEW
+│   ├── /blog/msp-credential-sharing             # NEW
+│   ├── /blog/startup-credential-sharing          # NEW
+│   ├── /blog/end-to-end-encryption-guide        # NEW
+│   ├── /blog/slack-password-sharing-security     # NEW
+│   └── /blog/[future posts per content calendar]
+└── /*                         # 404
+
+Static files (not indexed):
+├── /robots.txt
+├── /sitemap.xml
+├── /llms.txt
+├── /og-image.png
+└── /favicon.svg
 ```
 
-### Estimated Page Count
-
-| Section | Pages (EN) | Multilingual (x6) | Total |
-|---------|-----------|-------------------|-------|
-| Core pages | 5 | 30 | 30 |
-| Blog posts (Year 1) | 20-25 | 40-50 (selective) | 60-75 |
-| Comparison pages | 5 | 15 (ES, PT, ZH) | 15-20 |
-| **Total** | **30-35** | | **105-125** |
+**Target indexed pages at 12 months:** 40-50
 
 ---
 
-## 3. Page Specifications
+## Content Pillar Architecture
 
-### Homepage (`/`)
+```
+                    ┌─────────────────────┐
+                    │     HOMEPAGE         │
+                    │  Secret Creation     │
+                    │  "How It Works"      │
+                    └─────────┬───────────┘
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                      │
+   ┌────▼────┐          ┌────▼────┐           ┌─────▼─────┐
+   │ Security │          │   FAQ   │           │   Blog    │
+   │  Page    │          │  Page   │           │   Index   │
+   └────┬────┘          └────┬────┘           └─────┬─────┘
+        │                    │                       │
+        │                    │         ┌─────────────┼─────────────────┐
+        │                    │         │             │                 │
+   ┌────▼────────────┐ ┌────▼───┐ ┌───▼──────┐ ┌───▼──────┐ ┌───────▼──────┐
+   │ Encryption &    │ │ Links  │ │ Pillar 1 │ │ Pillar 2 │ │  Pillar 3    │
+   │ ZK Deep-Dives   │ │ to     │ │ Security │ │ Teams &  │ │  Comparisons │
+   │ (blog posts)    │ │ Blog   │ │ Tech     │ │ Workflow │ │  & Tools     │
+   └─────────────────┘ │ Posts  │ └──────────┘ └──────────┘ └──────────────┘
+                        └────────┘
+```
 
-**Purpose:** Primary landing page + tool interface + SEO authority page
+### Pillar 1: Security & Technology
+Hub: `/blog/complete-guide-one-time-secret-sharing`
 
-| Element | Details |
-|---------|---------|
-| H1 | "Share Secrets Securely with Self-Destructing Links" |
-| Content sections | Hero + value proposition, how it works (3 steps), feature badges, trust signals, FAQ snippet |
-| Schema | WebApplication + WebSite + Organization + FAQPage |
-| Internal links | → /security, → /about, → /faq, → /blog, → /compare |
-| Target keywords | secure secret sharing, one-time link, share password securely |
+| Spoke | URL |
+|-------|-----|
+| Zero-knowledge encryption explained | `/blog/what-is-zero-knowledge-encryption` |
+| AES-256-GCM explained | `/blog/aes-256-gcm-encryption-explained` |
+| Client vs server encryption | `/blog/server-side-vs-client-side-encryption` |
+| Web Crypto API | `/blog/web-crypto-api-browser-encryption` |
+| ZK architecture deep-dive | `/blog/zero-knowledge-architecture-deep-dive` |
+| Self-destructing links | `/blog/self-destructing-links-explained` |
+| Email security risks | `/blog/why-email-is-not-safe-for-passwords` |
+| E2E encryption guide | `/blog/end-to-end-encryption-guide` (NEW) |
 
-### Security Page (`/security`)
+### Pillar 2: Teams & Workflows
+Hub: New pillar (or expand `credential-sharing-employee-onboarding`)
 
-**Purpose:** Technical authority page explaining the encryption architecture
+| Spoke | URL |
+|-------|-----|
+| Employee onboarding | `/blog/credential-sharing-employee-onboarding` |
+| Remote teams | `/blog/password-sharing-remote-teams` |
+| DevOps practices | `/blog/devops-secret-sharing-best-practices` |
+| Incident response | `/blog/incident-response-credential-sharing` |
+| GDPR compliance | `/blog/gdpr-compliant-secret-sharing` |
+| Send API keys | `/blog/send-api-keys-securely` |
+| SOC 2 compliance | `/blog/soc2-compliant-secret-sharing` (NEW) |
+| HIPAA compliance | `/blog/hipaa-secret-sharing` (NEW) |
 
-| Element | Details |
-|---------|---------|
-| H1 | "How Only Once Share Keeps Your Secrets Safe" |
-| Content sections | Encryption overview, AES-256-GCM explanation, zero-knowledge architecture diagram, key derivation (HKDF), client-side flow, what the server never sees, comparison to server-side encryption |
-| Schema | TechArticle + WebApplication |
-| Internal links | → /, → /blog/aes-256-gcm-explained, → /blog/zero-knowledge-encryption, → /compare |
-| Target keywords | zero-knowledge encryption, AES-256-GCM, client-side encryption |
-| Word count | 1,500-2,000 words |
+### Pillar 3: Comparisons & Tools
+Hub: `/blog/best-free-secret-sharing-tools`
 
-### FAQ Page (`/faq`)
+| Spoke | URL |
+|-------|-----|
+| vs OneTimeSecret | `/blog/ooshare-vs-onetimesecret` (NEW) |
+| vs Privnote | `/blog/ooshare-vs-privnote` (NEW) |
+| vs password.link | `/blog/ooshare-vs-password-link` (NEW) |
+| OTS Alternatives | `/blog/best-onetimesecret-alternatives` (NEW) |
+| Open source benefits | `/blog/open-source-security-transparency` |
+| Why self-host | `/blog/why-self-host-secret-sharing` |
+| Self-host Docker guide | `/blog/self-host-secret-sharing-docker` |
 
-**Purpose:** Answer common questions, capture long-tail keywords, enable FAQPage rich results
+### Pillar 4: Self-Hosting (Developer)
+Hub: `/blog/self-host-secret-sharing-docker`
 
-| Element | Details |
-|---------|---------|
-| H1 | "Frequently Asked Questions" |
-| Schema | FAQPage (every Q&A pair as Question + AcceptedAnswer) |
-| Internal links | Each answer links to relevant blog post or page |
-| Target keywords | how to share password securely, is it safe, self-destructing link FAQ |
-
-**Recommended FAQ Questions:**
-1. How does Only Once Share work?
-2. Is my secret truly private? (zero-knowledge explanation)
-3. What encryption does Only Once Share use?
-4. Can the server see my secret?
-5. What happens after someone views my secret?
-6. How long do secrets last?
-7. Is Only Once Share free?
-8. Can I self-host Only Once Share?
-9. Is Only Once Share open source?
-10. How is this different from OneTimeSecret?
-11. Is it safe to share passwords with Only Once Share?
-12. Does Only Once Share work in my language?
-
-### About Page (`/about`)
-
-**Purpose:** E-E-A-T signals — establish organization credibility
-
-| Element | Details |
-|---------|---------|
-| H1 | "About Only Once Share" |
-| Content | DHD Tech story, mission (making secure sharing accessible), team credentials, open source commitment, technology choices |
-| Schema | Organization + AboutPage |
-| Internal links | → /, → /security, → GitHub repo |
-
-### Blog Listing (`/blog`)
-
-**Purpose:** Content hub, internal linking anchor
-
-| Element | Details |
-|---------|---------|
-| H1 | "Blog — Security, Encryption & Secret Sharing" |
-| Content | Paginated list of posts with title, excerpt, date, reading time |
-| Schema | Blog + CollectionPage |
-| Internal links | → Each blog post, → /compare |
-| Features | Category tags, search, pagination |
-
-### Blog Post Template
-
-| Element | Details |
-|---------|---------|
-| Schema | Article + BlogPosting with author, datePublished, dateModified |
-| Must include | Author byline (DHD Tech), publish date, last updated date, reading time, table of contents (for posts > 1,500 words) |
-| Internal links | Minimum 2 links to other ooshare.io pages per post |
-| CTA | "Try Only Once Share — free, secure, no account needed" box at end |
-| Sidebar/footer | Related posts section |
-
-### Comparison Hub (`/compare`)
-
-**Purpose:** Internal linking hub for all comparison content
-
-| Element | Details |
-|---------|---------|
-| H1 | "Compare Secret Sharing Tools" |
-| Content | Overview table comparing all tools, links to individual comparison pages |
-| Schema | WebPage + ItemList |
-| Internal links | → Each /compare/ subpage, → /security, → /blog |
-
-### Individual Comparison Page Template (`/compare/:competitor`)
-
-| Element | Details |
-|---------|---------|
-| Schema | WebPage + FAQPage (for comparison questions) |
-| Sections | Feature comparison table, encryption approach comparison, pricing comparison, pros/cons, use case recommendations, FAQ, verdict |
-| Must include | Factual, verifiable claims only; link to competitor's site; last updated date |
-| Internal links | → /, → /security, → /compare, → relevant blog posts |
+| Spoke | URL |
+|-------|-----|
+| Why self-host | `/blog/why-self-host-secret-sharing` |
+| Open source transparency | `/blog/open-source-security-transparency` |
+| State of secret sharing | `/blog/state-of-secret-sharing-2026` |
 
 ---
 
-## 4. Internal Linking Strategy
+## Internal Linking Map
 
-### Link Architecture Principles
-
-1. **Hub-and-spoke model:** `/compare/` and `/blog/` are hubs; individual pages are spokes
-2. **Every page links to homepage** via navigation
-3. **Every blog post links to 2+ other pages** (related posts or comparison pages)
-4. **Comparison pages link to security page** (to reinforce encryption differentiation)
-5. **FAQ answers link to detailed blog posts** for expanded reading
-
-### Link Flow Diagram
+### Core Pages Cross-Links
 
 ```
-                    ┌─────────┐
-                    │ Homepage │
-                    └────┬────┘
-          ┌──────────────┼──────────────┐
-          │              │              │
-    ┌─────▼─────┐  ┌────▼────┐  ┌─────▼──────┐
-    │ /security │  │  /blog  │  │  /compare  │
-    └─────┬─────┘  └────┬────┘  └─────┬──────┘
-          │              │              │
-          │    ┌─────────┼─────────┐   │
-          │    │         │         │   │
-          ▼    ▼         ▼         ▼   ▼
-       Blog posts    Blog posts    Comparison
-       reference     cross-link    pages link
-       /security     each other    to /security
+Homepage  ──→  Security, FAQ, Blog, About
+Security  ──→  FAQ, Blog (encryption posts), Homepage
+FAQ       ──→  Security, Blog (relevant posts), Homepage
+About     ──→  Security, Blog, Homepage, GitHub
+Blog      ──→  All blog posts, Security, FAQ
 ```
 
-### Anchor Text Strategy
+### Blog Post Linking Rules
 
-| Target Page | Preferred Anchor Text Variations |
-|------------|--------------------------------|
-| Homepage | "Only Once Share", "secure secret sharing", "share secrets securely" |
-| /security | "how our encryption works", "zero-knowledge architecture", "encryption details" |
-| /faq | "frequently asked questions", "common questions" |
-| /compare | "compare secret sharing tools", "see how we compare" |
-| /compare/onetimesecret-alternative | "compared to OneTimeSecret", "OTS alternative" |
-| /blog/[post] | Use target keyword as anchor text |
+1. **Every post links to:** at least 2 other blog posts + 1 core page
+2. **Pillar hubs link to:** all spokes in their cluster
+3. **Spoke posts link to:** their pillar hub + 1-2 sibling spokes
+4. **Comparison posts link to:** Security page + relevant technical posts
+5. **Compliance posts link to:** FAQ + relevant workflow posts
+
+### Recommended Internal Links per Post
+
+| Post | Should Link To |
+|------|---------------|
+| how-to-share-password-securely | Security, complete-guide, email-security, tools comparison |
+| best-free-secret-sharing-tools | vs-OTS, vs-Privnote, Security, why-self-host |
+| complete-guide-one-time-secret-sharing | ALL Pillar 1 spokes, Security, FAQ |
+| aes-256-gcm-encryption-explained | Security, ZK encryption, client-vs-server, Web Crypto |
+| self-host-secret-sharing-docker | why-self-host, Security, open-source, DevOps |
+| what-is-zero-knowledge-encryption | Security, AES-256-GCM, ZK deep-dive, complete-guide |
+| gdpr-compliant-secret-sharing | FAQ, employee-onboarding, Security, remote-teams |
 
 ---
 
-## 5. URL Conventions
+## Sitemap Structure
 
-### Rules
-- All lowercase
-- Hyphens as word separators (never underscores)
-- No trailing slashes
-- No file extensions
-- Maximum 3 directory levels deep
-- Keep URLs under 75 characters where possible
-- English words in URLs (even for translated pages, use `?lng=xx` parameter)
+### Updated sitemap.xml priorities
 
-### Examples
+| URL | Priority | Change Freq |
+|-----|----------|-------------|
+| `/` | 1.0 | weekly |
+| `/security` | 0.9 | monthly |
+| `/blog` | 0.9 | weekly |
+| `/faq` | 0.8 | monthly |
+| `/about` | 0.7 | monthly |
+| `/privacy` | 0.3 | yearly |
+| `/terms` | 0.3 | yearly |
+| Pillar blog posts | 0.8 | monthly |
+| Regular blog posts | 0.6 | yearly |
+| Comparison blog posts | 0.7 | quarterly |
+
+---
+
+## i18n URL Strategy
+
+### Current
+Language is set via `?lng=xx` query parameter or `localStorage`. No URL-based language routing.
+
+### Recommended (Future)
+If traffic warrants, implement language-prefixed URLs:
+
 ```
-✅ /blog/how-to-share-password-securely
-✅ /compare/onetimesecret-alternative
-✅ /security
-✅ /faq?lng=es
+ooshare.io/           # English (default)
+ooshare.io/es/        # Spanish
+ooshare.io/pt/        # Portuguese
+ooshare.io/zh/        # Chinese
+ooshare.io/hi/        # Hindi
+ooshare.io/ar/        # Arabic
+```
 
-❌ /blog/How-To-Share-Password-Securely
-❌ /blog/how_to_share_password_securely
-❌ /compare/onetimesecret-alternative/
-❌ /es/comparar/alternativa-a-onetimesecret
+**For now:** Add hreflang tags pointing to `?lng=xx` variants:
+```html
+<link rel="alternate" hreflang="en" href="https://ooshare.io/" />
+<link rel="alternate" hreflang="es" href="https://ooshare.io/?lng=es" />
+<link rel="alternate" hreflang="pt" href="https://ooshare.io/?lng=pt" />
+<link rel="alternate" hreflang="zh" href="https://ooshare.io/?lng=zh" />
+<link rel="alternate" hreflang="hi" href="https://ooshare.io/?lng=hi" />
+<link rel="alternate" hreflang="ar" href="https://ooshare.io/?lng=ar" />
+<link rel="alternate" hreflang="x-default" href="https://ooshare.io/" />
 ```
 
 ---
 
-## 6. Sitemap Structure
+## Schema Markup Map
 
-### sitemap.xml (Enhanced)
+| Page Type | Schema Types |
+|-----------|-------------|
+| Homepage | WebApplication, Organization, WebSite |
+| Security | WebPage (or TechArticle) |
+| FAQ | FAQPage, WebPage |
+| About | AboutPage, Organization |
+| Blog Index | Blog, CollectionPage |
+| Blog Post | BlogPosting (with author, dates, keywords) |
+| Comparison Posts | BlogPosting + potentially Product schemas |
+| Privacy/Terms | WebPage |
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+### Missing Schemas to Add
 
-  <!-- Core Pages -->
-  <url>
-    <loc>https://ooshare.io/</loc>
-    <lastmod>2026-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ooshare.io/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ooshare.io/?lng=es"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ooshare.io/?lng=zh"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://ooshare.io/?lng=hi"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://ooshare.io/?lng=ar"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://ooshare.io/?lng=pt"/>
-  </url>
-
-  <url>
-    <loc>https://ooshare.io/security</loc>
-    <lastmod>2026-03-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://ooshare.io/faq</loc>
-    <lastmod>2026-03-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://ooshare.io/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Blog -->
-  <url>
-    <loc>https://ooshare.io/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Comparison Hub -->
-  <url>
-    <loc>https://ooshare.io/compare</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Individual pages added dynamically as they are published -->
-</urlset>
-```
-
----
-
-## 7. robots.txt (Updated)
-
-```
-User-agent: *
-Allow: /
-Disallow: /s/
-
-# AI Crawlers - Allowed
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-Sitemap: https://ooshare.io/sitemap.xml
-```
-
----
-
-## 8. Navigation Structure
-
-### Header Navigation
-```
-Logo | Home | Security | Blog | Compare | FAQ | [Language Selector] | [GitHub]
-```
-
-### Footer Navigation
-```
-Product                  Resources              Company
-─────────               ──────────             ────────
-How It Works            Blog                    About
-Security                FAQ                     Privacy Policy
-Self-Hosting            Compare Tools           Terms of Service
-API Docs                                        GitHub
-
-[AES-256-GCM Badge] [Zero Knowledge Badge] [Auto-Delete Badge] [Open Source Badge]
-```
-
-### Mobile Navigation
-- Hamburger menu with all primary links
-- Language selector accessible from menu
-- "Share a Secret" CTA always visible
-
----
-
-## 9. Page Priority for Implementation
-
-| Priority | Page | Reason |
-|----------|------|--------|
-| 1 | Pre-rendering infrastructure | Blocks all other SEO work |
-| 2 | /security | Highest E-E-A-T impact, supports all other content |
-| 3 | /faq | FAQPage schema = rich results, answers common queries |
-| 4 | /about | Organization signals for E-E-A-T |
-| 5 | /blog infrastructure | Enables content publishing pipeline |
-| 6 | First 2 blog posts | Start indexing content |
-| 7 | /compare/onetimesecret-alternative | Highest-intent comparison keyword |
-| 8 | /compare/best-secret-sharing-tools | Roundup captures broader searches |
-| 9 | /privacy + /terms | Trust and compliance signals |
-| 10 | Remaining comparison pages | Incremental traffic from comparison searches |
+- **BreadcrumbList** on all pages: `Home > Blog > Post Title`
+- **SiteNavigationElement** for main nav
+- **VideoObject** when YouTube embeds are added

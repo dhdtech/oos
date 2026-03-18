@@ -1,5 +1,8 @@
-# Build stage
+# Build stage — includes Chromium for pre-rendering
 FROM node:20-alpine AS build
+RUN apk add --no-cache chromium
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm install
@@ -8,7 +11,7 @@ ARG VITE_API_URL=https://oos-api.onrender.com
 ARG VITE_POSTHOG_KEY
 ENV VITE_API_URL=$VITE_API_URL
 ENV VITE_POSTHOG_KEY=$VITE_POSTHOG_KEY
-RUN npm run build
+RUN npm run build:prerender
 
 # Production stage
 FROM nginx:alpine

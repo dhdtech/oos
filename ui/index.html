@@ -7,6 +7,15 @@
     <meta name="theme-color" content="#0a0e1a" />
     <link rel="canonical" href="https://ooshare.io/" />
 
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://ooshare.io/?lng=en" />
+    <link rel="alternate" hreflang="zh" href="https://ooshare.io/?lng=zh" />
+    <link rel="alternate" hreflang="es" href="https://ooshare.io/?lng=es" />
+    <link rel="alternate" hreflang="hi" href="https://ooshare.io/?lng=hi" />
+    <link rel="alternate" hreflang="ar" href="https://ooshare.io/?lng=ar" />
+    <link rel="alternate" hreflang="pt" href="https://ooshare.io/?lng=pt" />
+    <link rel="alternate" hreflang="x-default" href="https://ooshare.io/" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ooshare.io/" />
@@ -28,69 +37,8 @@
     <meta name="author" content="DHD Tech" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <title>Only Once Share — Secure One-Time Secret Sharing</title>
-
-    <!-- Structured Data: WebApplication -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Only Once Share",
-      "url": "https://ooshare.io",
-      "description": "Share and send passwords, secrets, and sensitive information securely with one-time self-destructing links. End-to-end AES-256 encryption with zero-knowledge architecture. Free and open source.",
-      "applicationCategory": "SecurityApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "creator": {
-        "@type": "Organization",
-        "name": "DHD Tech",
-        "url": "https://dhdtech.com"
-      },
-      "featureList": [
-        "End-to-end AES-256-GCM encryption",
-        "Zero-knowledge architecture",
-        "Single-use self-destructing links",
-        "No account required",
-        "Open source",
-        "6-language support",
-        "Self-hosting with Docker"
-      ]
-    }
-    </script>
-    <!-- Structured Data: Organization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "DHD Tech",
-      "url": "https://dhdtech.com",
-      "logo": "https://ooshare.io/favicon.svg",
-      "sameAs": [
-        "https://github.com/dhdtech"
-      ]
-    }
-    </script>
-    <!-- Structured Data: WebSite with search -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Only Once Share",
-      "url": "https://ooshare.io",
-      "description": "Free, open-source, end-to-end encrypted secret sharing tool.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "DHD Tech"
-      }
-    }
-    </script>
   </head>
   <body>
     <div id="root"></div>

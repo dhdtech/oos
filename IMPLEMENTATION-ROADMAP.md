@@ -1,278 +1,217 @@
-# Implementation Roadmap — Only Once Share (ooshare.io)
+# Implementation Roadmap: SEO for ooshare.io
 
-> Phased action plan for SEO growth from zero to 5,000+ monthly organic visits.
-> Created: March 2026
-
----
-
-## Phase 1 — Foundation (Weeks 1-4)
-
-**Goal:** Fix technical blockers, create core pages, establish crawlability.
-
-### Week 1: Technical SEO Fixes (BLOCKING)
-
-| Task | Priority | Effort | Impact |
-|------|----------|--------|--------|
-| Implement pre-rendering or SSG for key pages | Critical | High | Enables all SEO work |
-| Add `llms.txt` for AI crawler accessibility | High | Low | AI search visibility |
-| Allow GPTBot, ClaudeBot, PerplexityBot in robots.txt | High | Low | AI search visibility |
-| Set up Google Search Console and verify domain | Critical | Low | Tracking & indexing |
-| Set up Bing Webmaster Tools | High | Low | Bing + Copilot visibility |
-| Submit sitemap to Google and Bing | Critical | Low | Faster indexing |
-
-### Week 2: Core Content Pages
-
-| Page | URL | Schema | Dependencies |
-|------|-----|--------|-------------|
-| Security & How It Works | /security | TechArticle + WebApplication | Pre-rendering ready |
-| About DHD Tech | /about | Organization + AboutPage | None |
-| FAQ | /faq | FAQPage | None |
-| Privacy Policy | /privacy | WebPage | None |
-
-### Week 3: SEO Infrastructure
-
-| Task | Details |
-|------|---------|
-| Expand sitemap.xml | Add all new pages with proper lastmod/priority |
-| Add hreflang tags | `rel="alternate" hreflang` for all 6 languages on each page |
-| Implement canonical tags | On every page, self-referencing |
-| Add Organization schema | To homepage and about page |
-| Add breadcrumb schema | Site-wide navigation markup |
-| Create `security.txt` | /.well-known/security.txt for responsible disclosure |
-| Audit Core Web Vitals | Baseline measurement with PageSpeed Insights |
-
-### Week 4: Blog Setup & First Posts
-
-| Task | Details |
-|------|---------|
-| Set up /blog route and layout | Blog listing page + individual post pages |
-| Publish: "How to Share a Password Securely in 2026" | Tier 1 keyword target |
-| Publish: "What Is Zero-Knowledge Encryption?" | Tier 2 keyword, builds expertise |
-| Add Article/BlogPosting schema to posts | Structured data for rich results |
-| Update sitemap with blog posts | Include in automated sitemap generation |
-
-### Phase 1 Deliverables
-- [ ] All pages crawlable and indexable by Google
-- [ ] 7+ pages in sitemap (home, security, about, faq, privacy, 2 blog posts)
-- [ ] Google Search Console active with sitemap submitted
-- [ ] Core Web Vitals baseline established
-- [ ] AI crawler accessibility verified
+**Date:** 2026-03-18
+**Duration:** 12 months (4 phases)
 
 ---
 
-## Phase 2 — Expansion (Weeks 5-12)
+## Phase 1: Foundation (Weeks 1-4)
 
-**Goal:** Build comparison content, get listed on directories, start link building.
+**Goal:** Fix critical technical blockers that prevent any SEO progress.
 
-### Weeks 5-6: Comparison Pages
+### Week 1-2: Fix Rendering Architecture
 
-| Page | URL | Target |
-|------|-----|--------|
-| vs OneTimeSecret | /compare/onetimesecret-alternative | "onetimesecret alternative" searches |
-| Best Secret Sharing Tools 2026 | /compare/best-secret-sharing-tools | "best secret sharing tools" roundup |
-| Add comparison hub | /compare/ | Internal linking hub for all comparison content |
+| Task | Priority | Effort | Files |
+|------|----------|--------|-------|
+| Implement SSG/pre-rendering for content pages (`/blog/*`, `/faq`, `/security`, `/about`) | P0 | High | Build config, page components |
+| Ensure pre-rendered HTML includes correct `<title>`, `<meta description>`, `<link canonical>`, OG tags per page | P0 | Medium | Page components |
+| Fix soft 404s - return HTTP 404 for non-existent routes | P1 | Medium | nginx.conf or SSR framework |
+| Implement code splitting - separate blog content from main bundle | P2 | Medium | vite.config.ts |
 
-**Comparison page template includes:**
-- Feature-by-feature comparison table
-- Encryption approach differences (highlight zero-knowledge advantage)
-- Pricing comparison
-- Pros/cons for each tool
-- FAQ section with FAQPage schema
-- Clear CTA to try ooshare.io
+### Week 2-3: Fix Meta Tags & Canonical
 
-### Weeks 7-8: Directory & Listing Submissions
+| Task | Priority | Effort | Files |
+|------|----------|--------|-------|
+| Add per-page canonical tag updates in each page component | P0 | Low | All page components in `ui/src/pages/` |
+| Add per-page OG tag updates (og:title, og:description, og:url) | P0 | Low | All page components |
+| Add per-page Twitter card updates | P0 | Low | All page components |
+| Add hreflang tags for 6 languages | P1 | Medium | Layout component or SSR template |
+| Remove `<meta name="keywords">` tag (ignored by Google since 2009) | P3 | Low | `ui/index.html` |
+| Shorten meta description to <155 chars | P3 | Low | `ui/index.html` |
 
-| Platform | Action | Expected Outcome |
-|----------|--------|-----------------|
-| AlternativeTo | List as OTS/password.link alternative | Backlink + referral traffic |
-| SaaSHub | Create product listing | Backlink + comparison visibility |
-| Product Hunt | Launch product | Backlinks + initial traffic spike |
-| awesome-selfhosted (GitHub) | Submit PR to add ooshare.io | Backlink + developer discovery |
-| awesome-security (GitHub) | Submit PR | Backlink + security community |
-| dev.to | Create organization profile | Content distribution channel |
+### Week 3-4: Security Headers & Technical
 
-### Weeks 9-10: Use Case Content
+| Task | Priority | Effort | Files |
+|------|----------|--------|-------|
+| Add security headers to nginx.conf (HSTS, CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy) | P1 | Low | `ui/nginx.conf` |
+| Add `server_tokens off;` to nginx.conf | P3 | Low | `ui/nginx.conf` |
+| Add `OAI-SearchBot` explicit Allow directive to robots.txt | P3 | Low | `ui/public/robots.txt` |
+| Enhance llms.txt with RSL 1.0 fields | P3 | Low | `ui/public/llms.txt` |
+| Verify llms.txt is served correctly (not SPA shell) | P2 | Low | Test curl |
 
-| Post | Target Audience |
-|------|----------------|
-| "How to Send API Keys Securely to Your Team" | Developers |
-| "Sharing Credentials During Employee Onboarding" | IT/HR |
-| "Self-Destructing Links: How They Work" | General audience |
+### Week 4: Verification
 
-### Weeks 11-12: International SEO
+- [ ] Run Google Rich Results Test on blog posts and FAQ
+- [ ] Verify per-page canonical tags with `curl -s URL | grep canonical`
+- [ ] Test social sharing previews (Twitter card validator, Facebook debugger)
+- [ ] Submit updated sitemap to Google Search Console
+- [ ] Verify security headers with securityheaders.com
 
-| Task | Details |
-|------|---------|
-| Translate security page | All 6 languages |
-| Translate FAQ page | All 6 languages |
-| Translate "How to Share a Password" post | ES, PT, ZH |
-| Create localized sitemap entries | All translated pages |
-| Verify hreflang implementation | Google Search Console international targeting |
-
-### Phase 2 Deliverables
-- [ ] 15+ pages indexed
-- [ ] Listed on 5+ directories
-- [ ] 3+ comparison pages live
-- [ ] First organic rankings appearing in Search Console
-- [ ] 10+ referring domains
+**Phase 1 Success Criteria:**
+- All 24 pages have unique canonical URLs
+- All 24 pages have unique OG tags
+- Blog posts and FAQ have crawlable structured data
+- Security headers score A+ on securityheaders.com
+- Google Search Console shows 24+ indexed pages (may take 2-4 weeks to reflect)
 
 ---
 
-## Phase 3 — Scale (Weeks 13-24)
+## Phase 2: Content Expansion (Weeks 5-12)
 
-**Goal:** Scale content production, optimize for AI search, build authority.
+**Goal:** Transform thin content into comprehensive, authoritative resources.
 
-### Content Production (2-3 posts/month)
+### Weeks 5-8: Expand Top 10 Blog Posts
 
-| Month | Content Focus |
-|-------|--------------|
-| Month 4 | vs Password.link, self-hosting guide, AES-256 explainer |
-| Month 5 | vs Password Pusher, GDPR compliance, email password dangers |
-| Month 6 | Complete guide to secret sharing, DevOps workflows, API documentation |
+Expand each from ~576 words to 1,500-2,500 words:
 
-### AI Search Optimization (GEO)
+| Post | Current Words | Target Words | Priority |
+|------|-------------|-------------|----------|
+| how-to-share-password-securely | ~570 | 1,800 | P0 |
+| best-free-secret-sharing-tools | ~550 | 2,500 | P0 |
+| complete-guide-one-time-secret-sharing | ~590 | 3,000 | P0 |
+| aes-256-gcm-encryption-explained | ~760 | 2,000 | P1 |
+| self-host-secret-sharing-docker | ~530 | 2,000 | P1 |
+| what-is-zero-knowledge-encryption | ~550 | 2,000 | P1 |
+| gdpr-compliant-secret-sharing | ~500 | 2,000 | P1 |
+| devops-secret-sharing-best-practices | ~540 | 2,000 | P2 |
+| server-side-vs-client-side-encryption | ~530 | 2,000 | P2 |
+| web-crypto-api-browser-encryption | ~510 | 2,000 | P2 |
 
-| Task | Details |
-|------|---------|
-| Audit AI citations | Check if ooshare.io appears in Google AI Overviews, ChatGPT, Perplexity |
-| Optimize for citability | Add clear, structured passages that AI can quote |
-| Create llms.txt | Machine-readable site summary for AI crawlers |
-| Monitor AI crawler logs | Track GPTBot, ClaudeBot visits in server logs |
-| Structure FAQ content | Ensure Q&A format is parseable by AI systems |
+### Weeks 5-8: New Pages
 
-### Link Building (Active Outreach)
+| Page | Type | Target |
+|------|------|--------|
+| Privacy Policy (`/privacy`) | Legal | Required for E-E-A-T trust |
+| Terms of Service (`/terms`) | Legal | Required for E-E-A-T trust |
+| Add contact email to About page | Trust signal | Improves E-E-A-T |
+| Add team bios/credentials to About page | E-E-A-T | Author expertise signals |
 
-| Strategy | Action | Target |
-|----------|--------|--------|
-| Roundup outreach | Email authors of "best tools" lists | 5+ roundup inclusions |
-| Cross-posting | Publish on dev.to, Hashnode | 10+ cross-posted articles |
-| Reddit engagement | Share in r/selfhosted, r/cybersecurity | Community awareness |
-| GitHub ecosystem | Star-for-star, issue discussions | Developer discovery |
-| Security blogs | Guest posts on cybersecurity sites | 3+ guest posts |
+### Weeks 9-12: New Blog Content + Comparison Pages
+
+| Content | Type | Target Keyword |
+|---------|------|---------------|
+| "ooshare vs OneTimeSecret" | Comparison | "onetimesecret alternative" |
+| "ooshare vs Privnote" | Comparison | "privnote alternative" |
+| Expand remaining 11 blog posts to 1,500+ words | Expansion | Various |
+| Add architecture diagram (SVG) to Security page | Visual | Technical trust |
+
+### Weeks 9-12: Internal Linking Overhaul
+
+- Add 3+ internal links per blog post
+- FAQ answers link to relevant blog posts
+- Security page links to encryption/ZK blog posts
+- Blog posts cross-reference each other by topic cluster
+
+**Phase 2 Success Criteria:**
+- All 21 blog posts exceed 1,500 words
+- 2 new comparison pages live
+- Privacy policy and terms pages live
+- Internal links: 3+ per blog post
+- About page has team credentials
+
+---
+
+## Phase 3: Scale (Weeks 13-24)
+
+**Goal:** Create new content, build backlinks, optimize for AI search.
+
+### Content Creation (2 new posts/month)
+
+See [CONTENT-CALENDAR.md](CONTENT-CALENDAR.md) for detailed schedule.
+
+### Backlink Building
+
+| Action | Timeline | Expected Links |
+|--------|----------|---------------|
+| Submit to awesome-selfhosted GitHub list | Week 13 | 1 high-quality |
+| Submit to AlternativeTo.net | Week 13 | 1 + user reviews |
+| Submit to SaaSHub | Week 14 | 1 |
+| Post on r/selfhosted, r/privacy (genuine value) | Week 14-16 | Community links |
+| Post on Hacker News (Show HN) | Week 15 | Potential viral |
+| Create Docker Hub listing with proper description | Week 16 | 1 |
+| Submit to Product Hunt | Week 18 | 1 + coverage |
+| Guest post on security blogs | Weeks 16-24 | 2-4 |
+
+### GEO Optimization
+
+| Action | Timeline | Impact |
+|--------|----------|--------|
+| Restructure blog passages for citability (40-60 word leading answers) | Weeks 13-16 | High |
+| Convert H2s to question format where natural | Weeks 13-16 | Medium |
+| Add statistics with cited sources to all posts | Weeks 13-20 | High |
+| Create YouTube walkthrough video | Week 16 | High (0.737 citation correlation) |
+| Per-post OG images | Weeks 18-24 | Medium |
 
 ### Performance Optimization
 
-| Task | Target |
-|------|--------|
-| Optimize LCP | < 2.0s (aim for < 1.5s) |
-| Minimize JS bundle | < 100KB gzipped for initial load |
-| Image optimization | WebP format, lazy loading, explicit dimensions |
-| CDN setup | Edge caching for static assets globally |
+| Action | Timeline | Impact |
+|--------|----------|--------|
+| Implement IndexNow for Bing/Yandex | Week 14 | Medium |
+| Self-host Inter font (eliminate CLS) | Week 15 | Low |
+| Optimize LCP via SSR/SSG (already done in Phase 1) | Verified | N/A |
+| Add resource hints (preconnect, prefetch) | Week 16 | Low |
 
-### Phase 3 Deliverables
-- [ ] 30+ pages indexed
-- [ ] 2,000+ monthly organic visits
-- [ ] Top 10 rankings for 5+ keywords
-- [ ] Appearing in 2+ "best tools" roundups
-- [ ] 50+ referring domains
-- [ ] Core Web Vitals all green
+**Phase 3 Success Criteria:**
+- 6 new blog posts published
+- 5+ new referring domains
+- Listed on AlternativeTo, SaaSHub, awesome-selfhosted
+- YouTube video published
+- Google Search Console: 1,000+ organic impressions/month
+- All blog passages restructured for AI citability
 
 ---
 
-## Phase 4 — Authority (Months 7-12)
+## Phase 4: Authority (Months 7-12)
 
-**Goal:** Establish ooshare.io as a top-5 recognized tool in the category.
+**Goal:** Establish ooshare.io as the go-to resource for secret sharing knowledge.
 
-### Thought Leadership
+### Content
 
-| Content | Purpose |
-|---------|---------|
-| "State of Secret Sharing 2026" report | Original data, attracts links |
-| Encryption benchmark comparisons | Technical authority |
-| Open source security philosophy posts | Community building |
-| Security audit publication | Ultimate trust signal |
+- Continue 2 posts/month cadence
+- Begin publishing annual "State of Secret Sharing" report
+- Develop compliance-specific content (HIPAA, PCI DSS, SOC 2)
+- Create interactive tools (encryption strength calculator, security assessment)
 
-### PR & Media
+### Authority Building
 
-| Channel | Action |
-|---------|--------|
-| Tech press outreach | Pitch "free open-source alternative" angle |
-| Security conference presence | Lightning talks, booth, swag |
-| Podcast appearances | Developer/security podcasts |
-| Case study publications | Real users sharing their experience |
+- Seek security publication features/reviews
+- Engage in security communities (OWASP, security forums)
+- Consider conference talks or webinars on zero-knowledge architecture
+- Build email newsletter from blog readers
 
-### Advanced Schema & Rich Results
+### Advanced Technical SEO
 
-| Schema Type | Page | Purpose |
-|------------|------|---------|
-| SoftwareApplication with reviews | Homepage | Star ratings in SERPs |
-| HowTo | Tutorial pages | How-to rich results |
-| VideoObject | Demo videos | Video carousels |
-| Dataset | Benchmark data | Dataset rich results |
+- Implement video schema for YouTube embeds
+- Add BreadcrumbList schema for navigation
+- Consider AMP or instant loading for blog posts
+- A/B test meta titles and descriptions based on CTR data from Search Console
 
-### Continuous Optimization
-
-| Task | Frequency |
-|------|-----------|
-| Update comparison pages with latest competitor data | Quarterly |
-| Refresh "best tools" roundup content | Monthly |
-| Monitor and recover lost rankings | Weekly |
-| A/B test title tags and meta descriptions | Monthly |
-| Prune underperforming content | Quarterly |
-| Update all translated content | Per English update |
-
-### Phase 4 Deliverables
-- [ ] 5,000+ monthly organic visits
-- [ ] Top 5 rankings for primary keywords
-- [ ] DA 30+
-- [ ] Appearing in AI search results
-- [ ] 200+ referring domains
-- [ ] Recognized in top-5 tool lists
+**Phase 4 Success Criteria:**
+- 5,000+ organic visits/month
+- 50+ referring domains
+- Top 10 ranking for at least 5 target keywords
+- AI search engines citing ooshare.io content
+- GEO score: 78/100
 
 ---
 
 ## Resource Requirements
 
-### Phase 1 (Foundation)
-- **Engineering:** 20-30 hours (pre-rendering, new pages, schema)
-- **Content:** 10-15 hours (3 static pages + 2 blog posts)
-- **Tools:** Google Search Console (free), Bing Webmaster Tools (free)
-
-### Phase 2 (Expansion)
-- **Engineering:** 10-15 hours (comparison page templates, i18n pages)
-- **Content:** 20-25 hours (5 comparison/blog posts + translations)
-- **Outreach:** 5-10 hours (directory submissions)
-
-### Phase 3 (Scale)
-- **Engineering:** 5-10 hours/month (performance, monitoring)
-- **Content:** 15-20 hours/month (2-3 posts + translations)
-- **Outreach:** 10-15 hours/month (link building, cross-posting)
-
-### Phase 4 (Authority)
-- **Engineering:** 5 hours/month (maintenance, optimization)
-- **Content:** 15-20 hours/month (thought leadership, research)
-- **Outreach:** 15-20 hours/month (PR, conferences, community)
+| Phase | Dev Effort | Content Effort | External Cost |
+|-------|-----------|---------------|---------------|
+| Phase 1 | 2-3 weeks full-time | Minimal | $0 |
+| Phase 2 | 1 week | 6-8 weeks writing | $0 (or content writer budget) |
+| Phase 3 | 2-3 days/month | 4-6 weeks writing | Product Hunt launch costs, optional guest post outreach |
+| Phase 4 | 1-2 days/month | 4-6 weeks writing | Optional: conference, video production |
 
 ---
 
-## Dependencies & Blockers
+## Risk Mitigation
 
-| Dependency | Blocks | Resolution |
-|-----------|--------|------------|
-| Pre-rendering implementation | ALL content SEO | Must be Phase 1 Week 1 |
-| Blog routing infrastructure | All blog content | Build in Phase 1 Week 4 |
-| Comparison page template | All comparison pages | Build in Phase 2 Week 5 |
-| Translation workflow | International SEO | Define process in Phase 1 |
-| Analytics baseline | Measuring progress | Set up in Phase 1 Week 1 |
-
----
-
-## Monitoring & Reporting
-
-### Weekly Checks
-- Google Search Console: impressions, clicks, CTR, position changes
-- New pages indexed (Coverage report)
-- Core Web Vitals status
-
-### Monthly Reports
-- Organic traffic trend
-- Keyword ranking changes (top 50 tracked keywords)
-- New backlinks acquired
-- Content published vs. planned
-- Competitor movement
-
-### Quarterly Reviews
-- Full KPI assessment against targets
-- Content audit (what's performing, what's not)
-- Comparison page updates
-- Strategy adjustment based on data
+| Risk | Likelihood | Mitigation |
+|------|-----------|------------|
+| SSR migration breaks existing functionality | Medium | Keep `/` and `/s/:id` as CSR; only SSG content pages |
+| Content expansion doesn't rank | Medium | Focus on long-tail keywords first; build topical authority before targeting head terms |
+| Competitors respond with content | Low | First-mover advantage in zero-knowledge education; multi-language moat |
+| Google algorithm update | Medium | Focus on genuine E-E-A-T rather than gaming; diversify with AI search readiness |
+| Limited dev resources | High | Phase 1 is the only phase requiring significant dev work; rest is content |

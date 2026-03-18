@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
+  useEffect(() => {
+    document.querySelector('meta[name="robots"]')?.setAttribute("content", "noindex");
+    return () => {
+      document.querySelector('meta[name="robots"]')?.setAttribute("content", "index, follow");
+    };
+  }, []);
+
   return (
     <div className="content-page">
       <div className="card">

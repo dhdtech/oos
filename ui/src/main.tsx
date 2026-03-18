@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PostHogProvider } from "posthog-js/react";
 import posthog from "./lib/posthog";
@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 import "./i18n";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(
+const app = (
   <StrictMode>
     <PostHogProvider client={posthog}>
       <BrowserRouter>
@@ -35,3 +35,11 @@ createRoot(document.getElementById("root")!).render(
     </PostHogProvider>
   </StrictMode>
 );
+
+const root = document.getElementById("root")!;
+
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}

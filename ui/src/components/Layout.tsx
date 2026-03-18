@@ -5,19 +5,58 @@ import { Shield, Lock, Eye, Trash2, Github } from "lucide-react";
 import SecurityModal from "./SecurityModal";
 import LanguageSelector from "./LanguageSelector";
 
+const GLOBAL_SCHEMA = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Only Once Share",
+    url: "https://ooshare.io",
+    description:
+      "Share and send passwords, secrets, and sensitive information securely with one-time self-destructing links. End-to-end AES-256 encryption with zero-knowledge architecture. Free and open source.",
+    applicationCategory: "SecurityApplication",
+    operatingSystem: "Any",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    creator: {
+      "@type": "Organization",
+      name: "DHD Tech",
+      url: "https://dhdtech.com",
+    },
+    featureList: [
+      "End-to-end AES-256-GCM encryption",
+      "Zero-knowledge architecture",
+      "Single-use self-destructing links",
+      "No account required",
+      "Open source",
+      "6-language support",
+      "Self-hosting with Docker",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "DHD Tech",
+    url: "https://dhdtech.com",
+    logo: "https://ooshare.io/favicon.svg",
+    sameAs: ["https://github.com/dhdtech"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Only Once Share",
+    url: "https://ooshare.io",
+    description:
+      "Free, open-source, end-to-end encrypted secret sharing tool.",
+    publisher: { "@type": "Organization", name: "DHD Tech" },
+  },
+]);
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { t, i18n } = useTranslation();
   const location = useLocation();
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
-    if (location.pathname === "/") {
-      document.title = t("meta.title");
-      document
-        .querySelector('meta[name="description"]')
-        ?.setAttribute("content", t("meta.description"));
-    }
-  }, [i18n.language, t, location.pathname]);
+  }, [i18n.language]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -25,6 +64,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="layout">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: GLOBAL_SCHEMA }}
+      />
       <header className="layout-header">
         <a href="/">
           <Shield size={22} className="header-icon" />

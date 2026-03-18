@@ -1,14 +1,15 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Shield, Github, Globe, ArrowLeft } from "lucide-react";
+import useSEO from "../lib/useSEO";
 
 export default function About() {
   const { t } = useTranslation();
 
-  useEffect(() => {
-    document.title = t("pages.about.metaTitle");
-    document.querySelector('meta[name="description"]')?.setAttribute("content", t("pages.about.metaDesc"));
-  }, [t]);
+  useSEO({
+    title: t("pages.about.metaTitle"),
+    description: t("pages.about.metaDesc"),
+    path: "/about",
+  });
 
   return (
     <div className="content-page">
