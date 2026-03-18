@@ -1,8 +1,9 @@
 # Build stage — includes Chromium for pre-rendering
 FROM node:20-alpine AS build
-RUN apk add --no-cache chromium
+RUN apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV CHROMIUM_FLAGS="--no-sandbox --disable-dev-shm-usage"
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm install
