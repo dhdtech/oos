@@ -65,10 +65,13 @@
       "metaTitle": "Cómo funciona — Seguridad y cifrado | Only Once Share",
       "metaDesc": "Descubre cómo Only Once Share protege tus secretos con cifrado AES-256-GCM, arquitectura de conocimiento cero y gestión de claves del lado del cliente.",
       "title": "Cómo Only Once Share protege tus secretos",
+      "step3": "Cifrado — AES-256-GCM cifra tu texto e imágenes en un único payload con un IV aleatorio de 96 bits y el ID del secreto como AAD",
+      "step7": "Descifrado — El navegador del destinatario descifra el texto e imágenes usando la clave del fragmento de URL",
       "lead": "Only Once Share utiliza cifrado AES-256-GCM de extremo a extremo con una arquitectura de conocimiento cero. Tu texto e imágenes se cifran en tu navegador antes de salir de tu dispositivo — nuestro servidor nunca ve tus datos en texto plano.",
       "cta": "Prueba Only Once Share — Gratis y seguro",
       "e2eTitle": "Cifrado de extremo a extremo",
-      "e2eContent": "Cuando creas un secreto, tu navegador genera una clave criptográfica aleatoria usando la Web Crypto API. Tu texto y cualquier imagen adjunta se empaquetan en un único payload cifrado mediante <strong>AES-256-GCM</strong> — el mismo estándar de cifrado utilizado por gobiernos e instituciones financieras en todo el mundo. El cifrado ocurre íntegramente en tu navegador. Solo los datos cifrados (texto cifrado) se envían a nuestro servidor."
+      "serverContent": "A diferencia de algunas herramientas competidoras que realizan el cifrado en el servidor (lo que significa que el servidor ve brevemente tus datos en texto plano), Only Once Share cifra íntegramente en el navegador. El servidor nunca recibe: tu texto o imágenes en texto plano, la clave de cifrado, ni ninguna información que pudiera usarse para descifrar tus datos. Ni siquiera puede distinguir si un secreto contiene texto, una imagen, o ambos. Incluso si nuestro servidor fuera comprometido, tus secretos permanecerían cifrados e ilegibles.",
+      "whyP2": "Con cifrado del lado del cliente (como Only Once Share), tu texto e imágenes se cifran antes de salir de tu dispositivo. El servidor solo maneja datos cifrados que no puede leer. Este es el estándar de oro para la privacidad y es el mismo principio detrás de las aplicaciones de mensajería cifrada de extremo a extremo como Signal."
     },
     "about": {
       "metaTitle": "Acerca de — Only Once Share | DHD Tech",
@@ -113,13 +116,13 @@
   "security": {
     "title": "Cómo funciona",
     "e2eTitle": "Cifrado de extremo a extremo",
-    "e2eDesc": "Tu secreto se cifra en tu navegador usando AES-256-GCM con un IV aleatorio de 96 bits antes de salir de tu dispositivo. La clave de cifrado nunca se envía a nuestro servidor.",
+    "e2eDesc": "Tu texto e imágenes se cifran en tu navegador usando AES-256-GCM con un IV aleatorio de 96 bits antes de salir de tu dispositivo. La clave de cifrado nunca se envía a nuestro servidor.",
     "hkdfTitle": "Derivación de clave HKDF",
     "hkdfDesc": "Se deriva una clave de cifrado única para cada secreto usando HKDF-SHA-256 con el ID del secreto como contexto. Incluso con la clave maestra, cada secreto tiene su propia clave criptográficamente independiente.",
     "aadTitle": "Vinculación de datos autenticados",
     "aadDesc": "El ID del secreto se vincula como Datos Autenticados Adicionales (AAD) durante el cifrado. Si alguien manipula el ID o intercambia el texto cifrado entre secretos, el descifrado fallará.",
     "zkTitle": "Conocimiento cero",
-    "zkDesc": "El servidor solo almacena datos cifrados. No podemos leer, descifrar ni acceder a tus secretos de ninguna manera. La clave de descifrado solo existe en el fragmento de URL del enlace compartido.",
+    "zkDesc": "El servidor solo almacena datos cifrados — no puede distinguir entre texto e imágenes. No podemos leer, descifrar ni acceder a tus secretos de ninguna manera. La clave de descifrado solo existe en el fragmento de URL del enlace compartido.",
     "keyTitle": "La clave nunca sale del navegador",
     "keyDesc": "La clave de descifrado se coloca después del # en la URL. Los fragmentos de URL del navegador nunca se envían a los servidores — ni en solicitudes, ni en registros, en ningún lugar.",
     "oneTimeTitle": "Visualización única",

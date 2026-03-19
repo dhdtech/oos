@@ -68,7 +68,11 @@
       "lead": "O Only Once Share utiliza criptografia AES-256-GCM ponta a ponta com uma arquitetura de conhecimento zero. Seus textos e imagens são criptografados no navegador antes de sair do seu dispositivo — nosso servidor nunca vê seus dados em texto puro.",
       "cta": "Experimente o Only Once Share — Grátis e seguro",
       "e2eTitle": "Criptografia ponta a ponta",
-      "e2eContent": "Ao criar um segredo, seu navegador gera uma chave criptográfica aleatória usando a Web Crypto API. O texto e qualquer imagem anexada são empacotados em um único payload criptografado usando <strong>AES-256-GCM</strong> — o mesmo padrão de criptografia utilizado por governos e instituições financeiras no mundo todo. A criptografia acontece inteiramente no seu navegador. Apenas os dados criptografados (texto cifrado) são enviados ao nosso servidor."
+      "e2eContent": "Ao criar um segredo, seu navegador gera uma chave criptográfica aleatória usando a Web Crypto API. O texto e qualquer imagem anexada são empacotados em um único payload criptografado usando <strong>AES-256-GCM</strong> — o mesmo padrão de criptografia utilizado por governos e instituições financeiras no mundo todo. A criptografia acontece inteiramente no seu navegador. Apenas os dados criptografados (texto cifrado) são enviados ao nosso servidor.",
+      "serverContent": "Ao contrário de algumas ferramentas concorrentes que realizam criptografia no servidor (o que significa que o servidor vê brevemente seus dados em texto puro), o Only Once Share criptografa inteiramente no navegador. O servidor nunca recebe: seus textos e imagens em texto puro, a chave de criptografia ou qualquer informação que pudesse ser usada para descriptografar seus dados. Ele nem consegue distinguir se um segredo contém texto, uma imagem ou ambos. Mesmo que nosso servidor fosse comprometido, seus segredos permaneceriam criptografados e ilegíveis.",
+      "step3": "Criptografia — AES-256-GCM criptografa seus textos e imagens em um único payload com um IV aleatório de 96 bits e o ID do segredo como AAD",
+      "step7": "Descriptografia — O navegador do destinatário descriptografa os textos e imagens usando a chave do fragmento da URL",
+      "whyP2": "Com criptografia do lado do cliente (como o Only Once Share), seus textos e imagens são criptografados antes de sair do seu dispositivo. O servidor só processa dados criptografados que não consegue ler. Este é o padrão ouro para privacidade e é o mesmo princípio por trás dos aplicativos de mensagens com criptografia ponta a ponta como o Signal."
     },
     "about": {
       "metaTitle": "Sobre — Only Once Share | DHD Tech",
@@ -117,13 +121,13 @@
   "security": {
     "title": "Como funciona",
     "e2eTitle": "Criptografia ponta a ponta",
-    "e2eDesc": "Seu segredo é criptografado no seu navegador usando AES-256-GCM com um IV aleatório de 96 bits antes de sair do seu dispositivo. A chave de criptografia nunca é enviada ao nosso servidor.",
+    "e2eDesc": "Seus textos e imagens são criptografados no seu navegador usando AES-256-GCM com um IV aleatório de 96 bits antes de sair do seu dispositivo. A chave de criptografia nunca é enviada ao nosso servidor.",
     "hkdfTitle": "Derivação de chave HKDF",
     "hkdfDesc": "Uma chave de criptografia única é derivada para cada segredo usando HKDF-SHA-256 com o ID do segredo como contexto. Mesmo com a chave mestra, cada segredo tem sua própria chave criptograficamente independente.",
     "aadTitle": "Vinculação de dados autenticados",
     "aadDesc": "O ID do segredo é vinculado como Dados Autenticados Adicionais (AAD) durante a criptografia. Se alguém adulterar o ID ou trocar o texto cifrado entre segredos, a descriptografia falhará.",
     "zkTitle": "Conhecimento zero",
-    "zkDesc": "O servidor armazena apenas dados criptografados. Não podemos ler, descriptografar ou acessar seus segredos de nenhuma forma.",
+    "zkDesc": "O servidor armazena apenas dados criptografados — não consegue distinguir textos de imagens. Não podemos ler, descriptografar ou acessar seus segredos de nenhuma forma. A chave de descriptografia existe apenas no fragmento da URL do link compartilhado.",
     "keyTitle": "A chave nunca sai do navegador",
     "keyDesc": "A chave de descriptografia é colocada após o # na URL. Fragmentos de URL do navegador nunca são enviados aos servidores.",
     "oneTimeTitle": "Visualização única",
