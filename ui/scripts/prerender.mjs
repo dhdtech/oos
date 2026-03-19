@@ -97,6 +97,10 @@ async function prerender() {
     ],
   });
 
+  // Collect rendered HTML first, then write all at once.
+  // This prevents overwriting dist/index.html (the SPA fallback) mid-loop.
+  const rendered = new Map();
+
   for (const route of routes) {
     const url = `http://127.0.0.1:${port}${route}`;
     console.log(`  Rendering: ${route}`);
@@ -113,9 +117,11 @@ async function prerender() {
     // Get the full HTML document
     const html = await page.content();
     await page.close();
+    rendered.set(route, html);
+  }
 
-    // Write to dist/{route}/index.html
-    // For root (/), overwrite dist/index.html directly
+  // Write all pre-rendered pages after all routes have been captured
+  for (const [route, html] of rendered) {
     if (route === "/") {
       writeFileSync(join(DIST_DIR, "index.html"), html);
     } else {
