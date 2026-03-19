@@ -42,7 +42,7 @@ export default function ViewSecret() {
         const decoded = decodePayload(decryptedBytes);
         setPlaintext(decoded.text);
         if (decoded.image) {
-          const blob = new Blob([decoded.image.data], { type: decoded.image.mime });
+          const blob = new Blob([decoded.image.data as BlobPart], { type: decoded.image.mime });
           setImageUrl(URL.createObjectURL(blob));
         }
         posthog.capture("secret_viewed");
