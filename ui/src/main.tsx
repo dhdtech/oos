@@ -12,7 +12,7 @@ import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
-import "./i18n";
+import i18n from "./i18n";
 import "./index.css";
 
 const app = (
@@ -39,7 +39,16 @@ const app = (
 const root = document.getElementById("root")!;
 
 if (root.hasChildNodes()) {
+  // Pre-rendered HTML is always English. Hydrate with English to avoid
+  // mismatch, then switch to the user's detected language.
+  const detectedLang = i18n.language;
+  if (detectedLang !== "en") {
+    i18n.changeLanguage("en");
+  }
   hydrateRoot(root, app);
+  if (detectedLang !== "en") {
+    requestAnimationFrame(() => i18n.changeLanguage(detectedLang));
+  }
 } else {
   createRoot(root).render(app);
 }
