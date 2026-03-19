@@ -132,10 +132,21 @@ def test_create_secret_non_string_ciphertext(client):
 
 
 def test_create_secret_too_large(client):
-    big = "A" * (100 * 1024 + 1)
+    big = "A" * (15 * 1024 * 1024 + 1)
     res = client.post("/api/secrets", json={"ciphertext": big})
     assert res.status_code == 413
     assert "too large" in res.get_json()["error"].lower()
+
+
+def test_accepts_large_payload(client):
+    import base64
+    large_data = base64.b64encode(b"x" * (1024 * 1024)).decode()
+    res = client.post("/api/secrets", json={
+        "ciphertext": large_data,
+        "ttl_hours": 1,
+        "id": str(uuid.uuid4()),
+    })
+    assert res.status_code == 201
 
 
 def test_create_secret_invalid_base64(client):
