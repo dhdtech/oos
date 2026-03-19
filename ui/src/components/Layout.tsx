@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Shield, Lock, Eye, Trash2, Github } from "lucide-react";
 import SecurityModal from "./SecurityModal";
 import LanguageSelector from "./LanguageSelector";
@@ -71,15 +71,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         dangerouslySetInnerHTML={{ __html: GLOBAL_SCHEMA }}
       />
       <header className="layout-header">
-        <a href="/">
+        <Link to="/">
           <Shield size={22} className="header-icon" />
           <span className="header-title">{t("header.title")}</span>
-        </a>
+        </Link>
         <div className="header-actions">
           <nav className="header-nav">
-            <a href="/security">{t("nav.security")}</a>
-            <a href="/blog">{t("nav.blog")}</a>
-            <a href="/faq">{t("nav.faq")}</a>
+            <Link to="/security">{t("nav.security")}</Link>
+            <Link to="/blog">{t("nav.blog")}</Link>
+            <Link to="/faq">{t("nav.faq")}</Link>
           </nav>
           <LanguageSelector />
           <SecurityModal />
@@ -106,11 +106,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </span>
         </div>
         <div className="footer-links">
-          <a href="/security">{t("nav.security")}</a>
-          <a href="/blog">{t("nav.blog")}</a>
-          <a href="/faq">{t("nav.faq")}</a>
-          <a href="/about">{t("nav.about")}</a>
-          <a href="/why">{t("nav.why")}</a>
+          <Link to="/security">{t("nav.security")}</Link>
+          <Link to="/blog">{t("nav.blog")}</Link>
+          <Link to="/faq">{t("nav.faq")}</Link>
+          <Link to="/about">{t("nav.about")}</Link>
+          <Link to="/why">{t("nav.why")}</Link>
         </div>
         <a
           href="https://github.com/dhdtech/oos"

@@ -48,10 +48,10 @@ export default function Blog() {
           ))}
         </div>
 
-        <a href="/" className="back-link">
+        <Link to="/" className="back-link">
           <ArrowLeft size={15} />
           {t("nav.backHome")}
-        </a>
+        </Link>
       </article>
     </div>
   );

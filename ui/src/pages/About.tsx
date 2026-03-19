@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Shield, Github, Globe, ArrowLeft } from "lucide-react";
 import useSEO from "../lib/useSEO";
 
@@ -78,10 +79,10 @@ export default function About() {
           </div>
         </section>
 
-        <a href="/" className="back-link">
+        <Link to="/" className="back-link">
           <ArrowLeft size={15} />
           {t("nav.backHome")}
-        </a>
+        </Link>
       </article>
     </div>
   );

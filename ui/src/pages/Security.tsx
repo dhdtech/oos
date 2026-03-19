@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Shield, Lock, Key, Eye, Trash2, Hash, Server, ArrowLeft } from "lucide-react";
 import useSEO from "../lib/useSEO";
 
@@ -83,13 +84,13 @@ export default function Security() {
         </section>
 
         <div className="article-cta">
-          <a href="/" className="btn btn-primary">{t("pages.security.cta")}</a>
+          <Link to="/" className="btn btn-primary">{t("pages.security.cta")}</Link>
         </div>
 
-        <a href="/" className="back-link">
+        <Link to="/" className="back-link">
           <ArrowLeft size={15} />
           {t("nav.backHome")}
-        </a>
+        </Link>
       </article>
     </div>
   );

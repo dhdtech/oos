@@ -68,3 +68,8 @@ Uses i18next with 6 languages: en, zh, es, hi, ar, pt. Translation files in `ui/
 - PostHog analytics is optional (env var `POSTHOG_API_KEY` on API, `VITE_POSTHOG_KEY` on UI)
 - Ciphertext format: `[version 1B][iv 12B][ciphertext+tag]`, base64-encoded
 - API enforces 100KB max payload on secret creation
+
+
+## Rules
+ - Every time you add or remove a page (Example: Blog entry) remember to update sitemap.xml
+ - All the content added to the platform must be translated to all supported languages.

@@ -78,7 +78,7 @@ export default function BlogPost() {
         <div className="blog-cta-box">
           <h3>{t("pages.blog.ctaTitle")}</h3>
           <p>{t("pages.blog.ctaDesc")}</p>
-          <a href="/" className="btn btn-primary">{t("pages.blog.ctaButton")}</a>
+          <Link to="/" className="btn btn-primary">{t("pages.blog.ctaButton")}</Link>
         </div>
 
         <nav className="blog-nav">

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   ShieldOff,
@@ -26,15 +26,20 @@ export default function ViewSecret() {
   const [imageUrl, setImageUrl] = useState("");
   const [showImageModal, setShowImageModal] = useState(false);
 
-  useEffect(() => {
-    async function fetchAndDecrypt() {
-      const keyStr = window.location.hash.slice(1);
-      if (!keyStr || !id) {
-        setError(t("view.invalidLink"));
-        setStatus("error");
-        return;
-      }
+  const hasFetched = useRef(false);
 
+  useEffect(() => {
+    const keyStr = window.location.hash.slice(1);
+    if (!keyStr || !id) {
+      setError(t("view.invalidLink"));
+      setStatus("error");
+      return;
+    }
+
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    async function fetchAndDecrypt() {
       try {
         const result = await getSecret(id);
         const key = await importKey(keyStr);
@@ -168,10 +173,10 @@ export default function ViewSecret() {
         </div>
       )}
 
-      <a href="/" className="back-link">
+      <Link to="/" className="back-link">
         <ArrowLeft size={15} />
         {status === "revealed" ? t("view.newSecret") : t("view.backHome")}
-      </a>
+      </Link>
     </div>
   );
 }

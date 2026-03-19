@@ -1707,4 +1707,92 @@ docker compose up -d</code></pre>
 <p>The secret sharing market in 2026 is healthier and more competitive than ever. The trend toward client-side encryption, open source, and self-hosting reflects a maturing understanding of privacy and security. For users, the key considerations remain: choose tools with client-side encryption, prefer open source for auditability, and set the shortest practical expiration times. The data you protect today is the breach you prevent tomorrow.</p>
 `
   },
+
+  // ──────────────────────────────────────────────
+  // Post 21 — March 2026
+  // ──────────────────────────────────────────────
+  {
+    slug: "why-share-images-securely",
+    title: "Why You Should Share Images Securely (And How to Do It)",
+    date: "2026-03-19",
+    description: "Images carry more sensitive data than you think. Learn why secure image sharing matters for healthcare, legal, HR, and personal privacy — and how encrypted, self-destructing links solve the problem.",
+    readingTime: 6,
+    tags: ["security", "images", "privacy", "encryption"],
+    content: `
+<p>When people think about sharing secrets, they think of passwords and API keys. But some of the most sensitive data we share every day comes in the form of images — ID scans, medical records, signed contracts, private photos. Unlike text, images are harder to redact, easier to forward, and almost impossible to un-share once they leak.</p>
+
+<h2>Images Are High-Value Targets</h2>
+<p>A leaked password can be rotated in minutes. A leaked image of your passport, medical scan, or private photo cannot be undone. Images carry rich, contextual information that text simply does not:</p>
+<ul>
+<li><strong>Identity documents</strong> — passports, driver's licenses, and national IDs contain your full name, date of birth, photo, and document numbers. A single leaked scan is enough for identity theft.</li>
+<li><strong>Medical records</strong> — X-rays, lab results, prescriptions, and diagnostic images are protected under regulations like HIPAA and GDPR. Sharing them over email or chat creates compliance risk.</li>
+<li><strong>Legal documents</strong> — signed contracts, court filings, notarized letters, and power of attorney forms often need to be shared between parties but should never linger in an inbox.</li>
+<li><strong>Financial records</strong> — bank statements, tax forms, and insurance documents contain account numbers and personal financial data.</li>
+</ul>
+
+<h2>Real-World Scenarios</h2>
+<p>Secure image sharing is not a niche need. It comes up constantly in everyday professional and personal contexts.</p>
+
+<h3>Healthcare</h3>
+<p>A doctor needs to share a diagnostic image with a specialist for a second opinion. Emailing the image means it sits in two inboxes indefinitely, potentially accessible to IT staff, backup systems, and anyone who gains access to either account. With an encrypted, self-destructing link, the specialist views the image once, and it is permanently deleted.</p>
+
+<h3>Legal and Compliance</h3>
+<p>A lawyer sends a client a photo of a signed settlement agreement. The client needs to review it, but the document should not persist in email threads that might be subpoenaed or forwarded. A one-time link ensures the document is viewed and then gone.</p>
+
+<h3>HR and Onboarding</h3>
+<p>New employees are routinely asked to submit scans of their ID, work permits, or certifications. HR departments that receive these via email accumulate a treasure trove of identity documents — a prime target for data breaches. Secure image sharing lets the employee send a self-destructing link that HR views once and records the verification, without storing the raw document.</p>
+
+<h3>Real Estate and Finance</h3>
+<p>Mortgage applications, property deeds, and bank statements frequently need to be shared between agents, brokers, and clients. These contain account numbers, property details, and signatures that should not sit in email threads for months.</p>
+
+<h3>Personal Privacy</h3>
+<p>Sometimes you need to send a photo of your insurance card to a family member, share a screenshot of a private conversation, or send a photo that is simply nobody else's business. Regular messaging apps store images on their servers, sync them to cloud backups, and make them searchable. A self-destructing encrypted link puts you back in control.</p>
+
+<h2>Why Traditional Sharing Methods Fail</h2>
+<p>The tools most people use to share images were not designed for sensitive content:</p>
+
+<h3>Email</h3>
+<p>Email stores messages and attachments indefinitely on multiple servers (sender, recipient, and backups). Most email is not end-to-end encrypted. Images sent via email are trivially easy to forward, and they persist in trash folders even after deletion.</p>
+
+<h3>Messaging Apps</h3>
+<p>WhatsApp, Slack, Teams, and similar tools often compress and store images on their servers. Even "disappearing messages" features are unreliable — recipients can screenshot, the app may cache locally, and corporate retention policies can override deletion settings.</p>
+
+<h3>Cloud Storage Links</h3>
+<p>Google Drive, Dropbox, and OneDrive links are persistent by default. Revoking access requires manual action, and the file remains on the provider's servers. Shared links can also be forwarded to unintended recipients without the sender knowing.</p>
+
+<h2>How Encrypted Self-Destructing Links Solve This</h2>
+<p>The core idea is simple: encrypt the image in your browser before it ever leaves your device, upload only the encrypted data, and generate a one-time link. The recipient opens the link, the image is decrypted in their browser, and the encrypted data is permanently deleted from the server.</p>
+
+<p>Here is what makes this approach fundamentally different:</p>
+<ul>
+<li><strong>Zero-knowledge encryption</strong> — The server never sees the original image. Even if the server is compromised, attackers get only encrypted noise.</li>
+<li><strong>One-time retrieval</strong> — The image can only be viewed once. After the first retrieval, the data is atomically deleted. There is no second chance, no forwarding the same link.</li>
+<li><strong>No persistence</strong> — Unlike email attachments or cloud links, there is no copy sitting on a server waiting to be breached. Once viewed, it is gone.</li>
+<li><strong>Client-side encryption</strong> — The encryption key never touches the server. It travels only in the URL fragment (the part after the #), which browsers do not send in HTTP requests.</li>
+</ul>
+
+<h2>How Only Once Share Handles Image Sharing</h2>
+<p><a href="/">Only Once Share</a> supports encrypted image sharing alongside text. Here is how it works:</p>
+<ol>
+<li><strong>Select or drop your image</strong> — Drag and drop or click to select an image file. You can also include a text message alongside the image.</li>
+<li><strong>Client-side encryption</strong> — The image is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server receives only encrypted bytes.</li>
+<li><strong>Share the link</strong> — You get a one-time link. The encryption key is embedded in the URL fragment and never sent to the server.</li>
+<li><strong>Recipient views once</strong> — The recipient opens the link, the image is decrypted in their browser, and the encrypted data is permanently deleted from the server via atomic deletion.</li>
+</ol>
+
+<p>The entire process is free, open source, and requires no account or registration. You can <a href="/security">review the security architecture</a> or <a href="https://github.com/dhdtech/only-once-share">audit the source code</a> yourself.</p>
+
+<h2>Best Practices for Sharing Sensitive Images</h2>
+<ul>
+<li><strong>Use the shortest expiration time practical</strong> — If the recipient will open the link within an hour, set a 1-hour TTL rather than 24 hours.</li>
+<li><strong>Never use email for ID scans</strong> — Passports, driver's licenses, and government IDs should never sit in email. Use encrypted one-time links instead.</li>
+<li><strong>Verify the recipient before sharing</strong> — A self-destructing link is only as secure as the channel you use to deliver it. Send it via a verified phone number or secure messaging.</li>
+<li><strong>Avoid cloud storage for temporary sharing</strong> — If the recipient only needs to see the image once, a persistent cloud link is overkill and a liability.</li>
+<li><strong>Check for compliance requirements</strong> — If you handle medical images (HIPAA), personal data (GDPR), or financial records, self-destructing encrypted links help meet data minimization requirements.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Images carry more sensitive information than most people realize. From medical scans to ID documents to private photos, the consequences of an image leak are often far worse than a leaked password. Traditional sharing methods — email, messaging apps, cloud links — were not designed for sensitive, one-time sharing. Encrypted, self-destructing links close this gap by ensuring images are encrypted before they leave your device and permanently deleted after a single viewing. The next time you need to share a sensitive image, skip the email attachment and <a href="/">create a self-destructing link instead</a>.</p>
+`
+  },
 ];

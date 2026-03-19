@@ -732,5 +732,80 @@ docker compose up -d</code></pre>
 <h2>Conclusão</h2>
 <p>O mercado de compartilhamento de segredos em 2026 é mais saudável e competitivo do que nunca. A tendência em direção à criptografia no cliente, open source e auto-hospedagem reflete um entendimento cada vez mais maduro de privacidade e segurança. Os dados que você protege hoje são a violação que você previne amanhã.</p>
 `
+  },
+  "why-share-images-securely": {
+    title: "Por que você deveria compartilhar imagens com segurança (e como fazer)",
+    description: "Imagens carregam mais dados sensíveis do que você imagina. Saiba por que o compartilhamento seguro de imagens é importante para saúde, jurídico, RH e privacidade pessoal — e como links criptografados e autodestrutivos resolvem o problema.",
+    content: `
+<p>Quando as pessoas pensam em compartilhar segredos, pensam em senhas e chaves de API. Mas alguns dos dados mais sensíveis que compartilhamos diariamente vêm na forma de imagens — digitalizações de documentos de identidade, registros médicos, contratos assinados, fotos privadas. Diferente do texto, imagens são mais difíceis de censurar, mais fáceis de encaminhar e quase impossíveis de desfazer uma vez vazadas.</p>
+
+<h2>Imagens são alvos de alto valor</h2>
+<p>Uma senha vazada pode ser alterada em minutos. Uma imagem vazada do seu passaporte, exame médico ou foto privada não pode ser desfeita. Imagens carregam informações ricas e contextuais:</p>
+<ul>
+<li><strong>Documentos de identidade</strong> — passaportes, carteiras de motorista e documentos nacionais contêm nome completo, data de nascimento, foto e números de documento. Uma única digitalização vazada é suficiente para roubo de identidade.</li>
+<li><strong>Registros médicos</strong> — raios-X, resultados de laboratório, prescrições e imagens diagnósticas são protegidos por regulamentações como HIPAA e LGPD. Compartilhá-los por e-mail ou chat cria risco de conformidade.</li>
+<li><strong>Documentos legais</strong> — contratos assinados, documentos judiciais e cartas notariais frequentemente precisam ser compartilhados entre partes, mas nunca deveriam ficar em uma caixa de entrada.</li>
+<li><strong>Registros financeiros</strong> — extratos bancários, formulários fiscais e documentos de seguros contêm números de conta e dados financeiros pessoais.</li>
+</ul>
+
+<h2>Cenários do mundo real</h2>
+<p>Compartilhamento seguro de imagens não é uma necessidade de nicho. Surge constantemente em contextos profissionais e pessoais.</p>
+
+<h3>Saúde</h3>
+<p>Um médico precisa compartilhar uma imagem diagnóstica com um especialista. Enviar por e-mail significa que ela fica em duas caixas de entrada indefinidamente. Com um link criptografado e autodestrutivo, o especialista visualiza a imagem uma vez e ela é permanentemente excluída.</p>
+
+<h3>Jurídico e conformidade</h3>
+<p>Um advogado envia ao cliente a foto de um acordo assinado. O documento não deveria persistir em threads de e-mail. Um link de uso único garante que seja visualizado e depois desapareça.</p>
+
+<h3>Recursos humanos</h3>
+<p>Novos funcionários enviam digitalizações de documentos de identidade e autorizações de trabalho. Departamentos de RH que recebem esses documentos por e-mail acumulam documentos de identidade — alvo principal para violações de dados. Links autodestrutivos resolvem isso.</p>
+
+<h3>Imobiliário e finanças</h3>
+<p>Solicitações de hipotecas, escrituras e extratos bancários frequentemente precisam ser compartilhados entre corretores e clientes. Contêm números de conta e assinaturas que não deveriam ficar em threads de e-mail.</p>
+
+<h3>Privacidade pessoal</h3>
+<p>Às vezes você precisa enviar uma foto do seu cartão de seguro para um familiar ou compartilhar uma captura de tela de uma conversa privada. Apps de mensagens armazenam imagens em seus servidores e sincronizam com backups na nuvem. Um link criptografado autodestrutivo devolve o controle a você.</p>
+
+<h2>Por que os métodos tradicionais falham</h2>
+
+<h3>E-mail</h3>
+<p>O e-mail armazena mensagens e anexos indefinidamente em múltiplos servidores. A maioria dos e-mails não tem criptografia de ponta a ponta. Imagens enviadas por e-mail são trivialmente fáceis de encaminhar.</p>
+
+<h3>Apps de mensagens</h3>
+<p>WhatsApp, Slack e Teams frequentemente comprimem e armazenam imagens em seus servidores. Mesmo recursos de "mensagens que desaparecem" não são confiáveis — destinatários podem fazer capturas de tela e políticas de retenção corporativa podem anular as configurações de exclusão.</p>
+
+<h3>Links de armazenamento na nuvem</h3>
+<p>Links do Google Drive, Dropbox e OneDrive são persistentes por padrão. Revogar acesso requer ação manual e o arquivo permanece nos servidores do provedor.</p>
+
+<h2>Como links criptografados autodestrutivos resolvem isso</h2>
+<p>A ideia central é simples: criptografar a imagem no seu navegador antes de sair do dispositivo, enviar apenas os dados criptografados e gerar um link de uso único. O destinatário abre o link, a imagem é descriptografada no navegador e os dados criptografados são permanentemente excluídos do servidor.</p>
+<ul>
+<li><strong>Criptografia de conhecimento zero</strong> — O servidor nunca vê a imagem original.</li>
+<li><strong>Recuperação única</strong> — A imagem só pode ser visualizada uma vez. Depois, os dados são excluídos atomicamente.</li>
+<li><strong>Sem persistência</strong> — Diferente de anexos de e-mail ou links na nuvem, não há cópia esperando para ser violada.</li>
+<li><strong>Criptografia no cliente</strong> — A chave de criptografia nunca toca o servidor.</li>
+</ul>
+
+<h2>Como o Only Once Share lida com compartilhamento de imagens</h2>
+<p><a href="/">Only Once Share</a> suporta compartilhamento de imagens criptografadas:</p>
+<ol>
+<li><strong>Selecione ou arraste sua imagem</strong> — Arraste e solte ou clique para selecionar um arquivo.</li>
+<li><strong>Criptografia no cliente</strong> — A imagem é criptografada no seu navegador usando AES-256-GCM com chave derivada via HKDF-SHA-256.</li>
+<li><strong>Compartilhe o link</strong> — Você recebe um link de uso único com a chave incorporada no fragmento da URL.</li>
+<li><strong>Destinatário visualiza uma vez</strong> — O destinatário abre o link, a imagem é descriptografada no navegador e os dados são permanentemente excluídos.</li>
+</ol>
+
+<h2>Melhores práticas para compartilhar imagens sensíveis</h2>
+<ul>
+<li><strong>Use o menor tempo de expiração prático</strong> — Se o destinatário abrirá o link em uma hora, configure um TTL de 1 hora.</li>
+<li><strong>Nunca use e-mail para digitalizações de documentos</strong> — Passaportes e documentos de identidade nunca deveriam estar no e-mail.</li>
+<li><strong>Verifique o destinatário antes de compartilhar</strong> — Um link autodestrutivo é tão seguro quanto o canal que você usa para enviá-lo.</li>
+<li><strong>Evite armazenamento na nuvem para compartilhamento temporário</strong> — Se o destinatário só precisa ver a imagem uma vez, um link persistente na nuvem é excessivo.</li>
+<li><strong>Verifique requisitos de conformidade</strong> — Se você lida com imagens médicas (HIPAA), dados pessoais (LGPD/GDPR) ou registros financeiros, links criptografados autodestrutivos ajudam a cumprir requisitos de minimização de dados.</li>
+</ul>
+
+<h2>Conclusão</h2>
+<p>Imagens carregam mais informações sensíveis do que a maioria das pessoas percebe. De exames médicos a documentos de identidade e fotos privadas, as consequências de um vazamento de imagem são frequentemente muito piores do que uma senha vazada. Métodos tradicionais — e-mail, apps de mensagens, links na nuvem — não foram projetados para compartilhamento seguro e único. Links criptografados e autodestrutivos fecham essa lacuna. Da próxima vez que precisar compartilhar uma imagem sensível, pule o anexo de e-mail e <a href="/">crie um link autodestrutivo</a>.</p>
+`
   }
 };

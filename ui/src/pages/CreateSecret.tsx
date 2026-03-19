@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import {
   Lock,
   Clock,
@@ -353,10 +354,10 @@ export default function CreateSecret() {
       </div>
 
       <div className="why-cta-banner">
-        <a href="/why" className="why-cta-link">
+        <Link to="/why" className="why-cta-link">
           <span>{t("whySection.ctaBanner")}</span>
           <ArrowRight size={16} />
-        </a>
+        </Link>
       </div>
     </>
   );

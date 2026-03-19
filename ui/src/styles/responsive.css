@@ -1,0 +1,66 @@
+/* ─── Breakpoints ───
+ *   600px — Why grid single-column
+ *   480px — Compact mobile layout
+ *   prefers-reduced-motion — Accessibility
+ * ─── */
+
+@media (max-width: 600px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .layout-main {
+    padding: 0.75rem 1rem 1.5rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+  }
+
+  .hero-title {
+    font-size: 1.375rem;
+  }
+
+  .hero {
+    margin-bottom: 1.5rem;
+  }
+
+  .ttl-options {
+    gap: 0.3125rem;
+  }
+
+  .ttl-option {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .link-box {
+    flex-direction: column;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+  }
+
+  .footer-badges {
+    gap: 0.75rem;
+  }
+}
