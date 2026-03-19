@@ -27,7 +27,15 @@
     "createAnother": "إنشاء آخر",
     "whatsappMsg": "أشارك معك سراً. افتح هذا الرابط لمشاهدته (مرة واحدة فقط):\n\n{{link}}",
     "emailSubject": "إليك سر",
-    "emailBody": "أشارك معك سراً. افتح هذا الرابط لمشاهدته — يمكن فتحه مرة واحدة فقط:\n\n{{link}}"
+    "emailBody": "أشارك معك سراً. افتح هذا الرابط لمشاهدته — يمكن فتحه مرة واحدة فقط:\n\n{{link}}",
+    "dropzone.label": "اسحب صورة وأفلتها هنا",
+    "dropzone.hint": "أو انقر للاستعراض",
+    "dropzone.sizeLimit": "الحد الأقصى 10 ميجابايت · JPEG و PNG و GIF و WebP",
+    "dropzone.dragActive": "أفلت صورتك هنا",
+    "image.invalidType": "يُسمح فقط بالصور (JPEG و PNG و GIF و WebP)",
+    "image.tooLarge": "يجب أن تكون الصورة أقل من 10 ميجابايت",
+    "image.remove": "إزالة الصورة",
+    "image.preview": "معاينة الصورة"
   },
   "view": {
     "loading": "جارٍ استرجاع وفك تشفير السر...",
@@ -40,7 +48,9 @@
     "errorMsg": "تعذر فك تشفير السر. قد يكون الرابط غير صالح.",
     "invalidLink": "رابط غير صالح — مفتاح فك التشفير مفقود",
     "newSecret": "مشاركة سر جديد",
-    "backHome": "العودة للرئيسية"
+    "backHome": "العودة للرئيسية",
+    "clickToEnlarge": "انقر على الصورة للتكبير",
+    "imageModal.close": "إغلاق الصورة"
   },
   "nav": {
     "security": "الأمان",

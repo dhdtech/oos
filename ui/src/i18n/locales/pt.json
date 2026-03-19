@@ -27,7 +27,15 @@
     "createAnother": "Criar outro",
     "whatsappMsg": "Estou compartilhando um segredo com você. Abra este link para vê-lo (apenas uma vez):\n\n{{link}}",
     "emailSubject": "Aqui está um segredo para você",
-    "emailBody": "Estou compartilhando um segredo com você. Abra este link para vê-lo — só pode ser aberto uma vez:\n\n{{link}}"
+    "emailBody": "Estou compartilhando um segredo com você. Abra este link para vê-lo — só pode ser aberto uma vez:\n\n{{link}}",
+    "dropzone.label": "Arraste e solte uma imagem aqui",
+    "dropzone.hint": "ou clique para procurar",
+    "dropzone.sizeLimit": "Máx. 10 MB · JPEG, PNG, GIF, WebP",
+    "dropzone.dragActive": "Solte sua imagem aqui",
+    "image.invalidType": "Apenas imagens são permitidas (JPEG, PNG, GIF, WebP)",
+    "image.tooLarge": "A imagem deve ter menos de 10 MB",
+    "image.remove": "Remover imagem",
+    "image.preview": "Visualização da imagem"
   },
   "view": {
     "loading": "Recuperando e descriptografando segredo...",
@@ -40,7 +48,9 @@
     "errorMsg": "Não foi possível descriptografar o segredo. O link pode ser inválido.",
     "invalidLink": "Link inválido — chave de descriptografia ausente",
     "newSecret": "Compartilhar novo segredo",
-    "backHome": "Voltar ao início"
+    "backHome": "Voltar ao início",
+    "clickToEnlarge": "Clique na imagem para ampliar",
+    "imageModal.close": "Fechar imagem"
   },
   "nav": {
     "security": "Segurança",

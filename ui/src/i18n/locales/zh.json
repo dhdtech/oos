@@ -27,7 +27,15 @@
     "createAnother": "创建新的",
     "whatsappMsg": "我正在与您分享一个秘密。打开此链接查看（仅限一次）：\n\n{{link}}",
     "emailSubject": "这是给你的秘密",
-    "emailBody": "我正在与您分享一个秘密。打开此链接查看 — 仅可打开一次：\n\n{{link}}"
+    "emailBody": "我正在与您分享一个秘密。打开此链接查看 — 仅可打开一次：\n\n{{link}}",
+    "dropzone.label": "在此拖放图像",
+    "dropzone.hint": "或点击浏览",
+    "dropzone.sizeLimit": "最大 10 MB · JPEG、PNG、GIF、WebP",
+    "dropzone.dragActive": "在此放下您的图像",
+    "image.invalidType": "仅允许图像（JPEG、PNG、GIF、WebP）",
+    "image.tooLarge": "图像必须小于 10 MB",
+    "image.remove": "删除图像",
+    "image.preview": "图像预览"
   },
   "view": {
     "loading": "正在检索和解密秘密...",
@@ -40,7 +48,9 @@
     "errorMsg": "无法解密秘密。链接可能无效。",
     "invalidLink": "无效链接 — 缺少解密密钥",
     "newSecret": "分享新的秘密",
-    "backHome": "返回首页"
+    "backHome": "返回首页",
+    "clickToEnlarge": "点击图像放大",
+    "imageModal.close": "关闭图像"
   },
   "nav": {
     "security": "安全",

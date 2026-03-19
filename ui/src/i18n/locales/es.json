@@ -27,7 +27,15 @@
     "createAnother": "Crear otro",
     "whatsappMsg": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo (solo una vez):\n\n{{link}}",
     "emailSubject": "Aquí tienes un secreto",
-    "emailBody": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo — solo se puede abrir una vez:\n\n{{link}}"
+    "emailBody": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo — solo se puede abrir una vez:\n\n{{link}}",
+    "dropzone.label": "Arrastra y suelta una imagen aquí",
+    "dropzone.hint": "o haz clic para explorar",
+    "dropzone.sizeLimit": "Máx. 10 MB · JPEG, PNG, GIF, WebP",
+    "dropzone.dragActive": "Suelta tu imagen aquí",
+    "image.invalidType": "Solo se permiten imágenes (JPEG, PNG, GIF, WebP)",
+    "image.tooLarge": "La imagen debe ser menor a 10 MB",
+    "image.remove": "Eliminar imagen",
+    "image.preview": "Vista previa de imagen"
   },
   "view": {
     "loading": "Recuperando y descifrando secreto...",
@@ -40,7 +48,9 @@
     "errorMsg": "No se pudo descifrar el secreto. El enlace puede ser inválido.",
     "invalidLink": "Enlace inválido — falta la clave de descifrado",
     "newSecret": "Compartir un nuevo secreto",
-    "backHome": "Volver al inicio"
+    "backHome": "Volver al inicio",
+    "clickToEnlarge": "Haz clic en la imagen para ampliar",
+    "imageModal.close": "Cerrar imagen"
   },
   "nav": {
     "security": "Seguridad",

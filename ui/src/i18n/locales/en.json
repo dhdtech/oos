@@ -27,7 +27,15 @@
     "createAnother": "Create Another",
     "whatsappMsg": "I'm sharing a secret with you. Open this link to view it (one-time only):\n\n{{link}}",
     "emailSubject": "Here's a secret for you",
-    "emailBody": "I'm sharing a secret with you. Open this link to view it — it can only be opened once:\n\n{{link}}"
+    "emailBody": "I'm sharing a secret with you. Open this link to view it — it can only be opened once:\n\n{{link}}",
+    "dropzone.label": "Drag & drop an image here",
+    "dropzone.hint": "or click to browse",
+    "dropzone.sizeLimit": "Max 10 MB · JPEG, PNG, GIF, WebP",
+    "dropzone.dragActive": "Drop your image here",
+    "image.invalidType": "Only images are allowed (JPEG, PNG, GIF, WebP)",
+    "image.tooLarge": "Image must be under 10 MB",
+    "image.remove": "Remove image",
+    "image.preview": "Image preview"
   },
   "view": {
     "loading": "Retrieving and decrypting secret...",
@@ -40,7 +48,9 @@
     "errorMsg": "Unable to decrypt the secret. The link may be invalid.",
     "invalidLink": "Invalid link — missing decryption key",
     "newSecret": "Share a new secret",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "clickToEnlarge": "Click image to enlarge",
+    "imageModal.close": "Close image"
   },
   "nav": {
     "security": "Security",
