@@ -60,3 +60,6 @@ api/.coverage
 
 # UI dist folder
 ui/dist
+
+# AI Stuff
+.superpowers

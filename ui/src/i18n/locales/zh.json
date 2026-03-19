@@ -65,14 +65,18 @@
       "metaTitle": "工作原理 — 安全与加密 | Only Once Share",
       "metaDesc": "了解Only Once Share如何通过AES-256-GCM加密、零知识架构和客户端密钥管理保护您的秘密。",
       "title": "Only Once Share如何保护您的秘密",
-      "lead": "Only Once Share使用端到端AES-256-GCM加密和零知识架构。您的秘密在离开设备之前就在浏览器中加密 — 我们的服务器永远不会看到您的明文数据。",
-      "cta": "试用Only Once Share — 免费且安全"
+      "lead": "Only Once Share使用端到端AES-256-GCM加密和零知识架构。您的文字和图像在离开设备之前就在浏览器中加密 — 我们的服务器永远不会看到您的明文数据。",
+      "cta": "试用Only Once Share — 免费且安全",
+      "e2eTitle": "端到端加密",
+      "e2eContent": "创建秘密时，您的浏览器会通过Web Crypto API生成一个随机加密密钥。您的文字和附加的图像将被打包成单个加密载荷，使用<strong>AES-256-GCM</strong>加密——这与全球各国政府和金融机构所采用的加密标准相同。加密完全在您的浏览器中完成，发送到我们服务器的只有加密后的密文。"
     },
     "about": {
       "metaTitle": "关于 — Only Once Share | DHD Tech",
       "metaDesc": "Only Once Share是DHD Tech构建的免费开源秘密分享工具。了解我们让安全凭证分享对每个人都可用的使命。",
       "title": "关于Only Once Share",
       "lead": "我们构建Only Once Share是因为分享密码和敏感信息不应该需要将数据托付给第三方 — 也不应该为此付费。",
+      "feature2Title": "免费且无限制",
+      "feature2Desc": "没有人为限制，没有「每月仅限8条秘密」。可分享最多50,000字符的文字和最大10 MB的图像，完全免费，无需注册账户。",
       "viewOnGithub": "在GitHub上查看"
     },
     "faq": {
@@ -81,7 +85,13 @@
       "title": "常见问题",
       "lead": "您需要了解的关于Only Once Share安全、加密和功能的一切。",
       "moreQuestions": "还有其他问题？",
-      "askGithub": "在GitHub上提问"
+      "askGithub": "在GitHub上提问",
+      "q1": "Only Once Share是如何工作的？",
+      "a1": "当您创建秘密时——无论是文字、图像，还是两者皆有——您的浏览器会通过Web Crypto API生成一个随机的AES-256-GCM加密密钥。所有内容均在您的浏览器中完成加密，明文不会离开您的设备。加密数据被发送到我们的服务器并临时存储在Redis中。加密密钥放置在URL片段（#号之后），浏览器永远不会将其发送到服务器。收件人打开链接时，加密数据将被检索并通过单次原子操作永久删除。随后，他们的浏览器使用URL中的密钥解密秘密。",
+      "q7": "Only Once Share是免费的吗？",
+      "a7": "是的，完全免费且无任何限制。与某些对免费用户每月限制少量秘密或设置容量上限的竞品不同，Only Once Share没有任何人为限制。您可以分享最多50,000字符的文字秘密，并附加最大10 MB的图像（JPEG、PNG、GIF、WebP），无需注册账户。本工具同样在MIT许可证下开源。",
+      "q8": "我需要创建账户吗？",
+      "a8": "不需要。Only Once Share无需注册、无需邮箱、无需账户。只需输入您的文字、可选择附加图像、选择过期时间，然后分享生成的链接即可。这种零摩擦的方式意味着没有个人数据需要保护，也没有可能被盗用的凭证。"
     },
     "blog": {
       "metaTitle": "博客 — 安全、加密与秘密分享 | Only Once Share",

@@ -65,14 +65,18 @@
       "metaTitle": "Como funciona — Segurança e criptografia | Only Once Share",
       "metaDesc": "Saiba como o Only Once Share protege seus segredos com criptografia AES-256-GCM, arquitetura de conhecimento zero e gerenciamento de chaves do lado do cliente.",
       "title": "Como o Only Once Share protege seus segredos",
-      "lead": "O Only Once Share utiliza criptografia AES-256-GCM ponta a ponta com uma arquitetura de conhecimento zero. Seus segredos são criptografados no navegador antes de sair do seu dispositivo — nosso servidor nunca vê seus dados em texto puro.",
-      "cta": "Experimente o Only Once Share — Grátis e seguro"
+      "lead": "O Only Once Share utiliza criptografia AES-256-GCM ponta a ponta com uma arquitetura de conhecimento zero. Seus textos e imagens são criptografados no navegador antes de sair do seu dispositivo — nosso servidor nunca vê seus dados em texto puro.",
+      "cta": "Experimente o Only Once Share — Grátis e seguro",
+      "e2eTitle": "Criptografia ponta a ponta",
+      "e2eContent": "Ao criar um segredo, seu navegador gera uma chave criptográfica aleatória usando a Web Crypto API. O texto e qualquer imagem anexada são empacotados em um único payload criptografado usando <strong>AES-256-GCM</strong> — o mesmo padrão de criptografia utilizado por governos e instituições financeiras no mundo todo. A criptografia acontece inteiramente no seu navegador. Apenas os dados criptografados (texto cifrado) são enviados ao nosso servidor."
     },
     "about": {
       "metaTitle": "Sobre — Only Once Share | DHD Tech",
       "metaDesc": "Only Once Share é uma ferramenta gratuita e de código aberto para compartilhamento de segredos, criada pela DHD Tech. Conheça nossa missão de tornar o compartilhamento seguro de credenciais acessível a todos.",
       "title": "Sobre o Only Once Share",
       "lead": "Criamos o Only Once Share porque compartilhar senhas e informações sensíveis não deveria exigir confiar em terceiros com seus dados — nem pagar por isso.",
+      "feature2Title": "Gratuito e ilimitado",
+      "feature2Desc": "Sem limites artificiais. Sem \"8 segredos por mês\". Compartilhe textos com até 50.000 caracteres e imagens de até 10 MB, completamente grátis, sem necessidade de conta.",
       "viewOnGithub": "Ver no GitHub"
     },
     "faq": {
@@ -81,7 +85,13 @@
       "title": "Perguntas frequentes",
       "lead": "Tudo o que você precisa saber sobre a segurança, criptografia e recursos do Only Once Share.",
       "moreQuestions": "Tem mais perguntas?",
-      "askGithub": "Pergunte no GitHub"
+      "askGithub": "Pergunte no GitHub",
+      "q1": "Como o Only Once Share funciona?",
+      "a1": "Ao criar um segredo — seja um texto, uma imagem ou ambos — seu navegador gera uma chave de criptografia AES-256-GCM aleatória usando a Web Crypto API. Tudo é criptografado inteiramente no seu navegador — o conteúdo original nunca sai do seu dispositivo. Os dados criptografados são enviados ao servidor e armazenados temporariamente no Redis. A chave de criptografia fica no fragmento da URL (após o símbolo #), que os navegadores nunca enviam aos servidores. Quando o destinatário abre o link, os dados criptografados são recuperados e excluídos permanentemente em uma única operação atômica. O navegador do destinatário então descriptografa o segredo usando a chave da URL.",
+      "q7": "O Only Once Share é gratuito?",
+      "a7": "Sim, completamente gratuito e sem limites. Ao contrário de alguns concorrentes que restringem usuários gratuitos a poucos segredos por mês ou impõem limites de tamanho, o Only Once Share não tem restrições artificiais. Você pode compartilhar textos com até 50.000 caracteres e imagens de até 10 MB (JPEG, PNG, GIF, WebP), sem necessidade de conta. A ferramenta também é de código aberto sob a licença MIT.",
+      "q8": "Preciso criar uma conta?",
+      "a8": "Não. O Only Once Share não exige cadastro, e-mail nem conta. Basta digitar seu texto, anexar uma imagem opcionalmente, escolher o prazo de expiração e compartilhar o link gerado. Essa abordagem sem fricção significa que não há dados pessoais a proteger nem credenciais que possam ser comprometidas."
     },
     "blog": {
       "metaTitle": "Blog — Segurança, criptografia e compartilhamento de segredos | Only Once Share",

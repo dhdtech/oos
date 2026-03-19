@@ -65,15 +65,18 @@
       "metaTitle": "Cómo funciona — Seguridad y cifrado | Only Once Share",
       "metaDesc": "Descubre cómo Only Once Share protege tus secretos con cifrado AES-256-GCM, arquitectura de conocimiento cero y gestión de claves del lado del cliente.",
       "title": "Cómo Only Once Share protege tus secretos",
-      "lead": "Only Once Share utiliza cifrado AES-256-GCM de extremo a extremo con una arquitectura de conocimiento cero. Tus secretos se cifran en tu navegador antes de salir de tu dispositivo — nuestro servidor nunca ve tus datos en texto plano.",
-      "cta": "Prueba Only Once Share — Gratis y seguro"
+      "lead": "Only Once Share utiliza cifrado AES-256-GCM de extremo a extremo con una arquitectura de conocimiento cero. Tu texto e imágenes se cifran en tu navegador antes de salir de tu dispositivo — nuestro servidor nunca ve tus datos en texto plano.",
+      "cta": "Prueba Only Once Share — Gratis y seguro",
+      "e2eTitle": "Cifrado de extremo a extremo",
+      "e2eContent": "Cuando creas un secreto, tu navegador genera una clave criptográfica aleatoria usando la Web Crypto API. Tu texto y cualquier imagen adjunta se empaquetan en un único payload cifrado mediante <strong>AES-256-GCM</strong> — el mismo estándar de cifrado utilizado por gobiernos e instituciones financieras en todo el mundo. El cifrado ocurre íntegramente en tu navegador. Solo los datos cifrados (texto cifrado) se envían a nuestro servidor."
     },
     "about": {
       "metaTitle": "Acerca de — Only Once Share | DHD Tech",
       "metaDesc": "Only Once Share es una herramienta gratuita y de código abierto para compartir secretos, creada por DHD Tech. Conoce nuestra misión de hacer accesible el intercambio seguro de credenciales.",
       "title": "Acerca de Only Once Share",
       "lead": "Creamos Only Once Share porque compartir contraseñas e información sensible no debería requerir confiar en un tercero con tus datos — ni pagar por el privilegio.",
-      "viewOnGithub": "Ver en GitHub"
+      "viewOnGithub": "Ver en GitHub",
+      "feature2Desc": "Sin límites artificiales. Sin «8 secretos al mes». Comparte texto de hasta 50.000 caracteres e imágenes de hasta 10 MB, completamente gratis y sin necesidad de cuenta."
     },
     "faq": {
       "metaTitle": "FAQ — Preguntas frecuentes | Only Once Share",
@@ -81,7 +84,10 @@
       "title": "Preguntas frecuentes",
       "lead": "Todo lo que necesitas saber sobre la seguridad, cifrado y funciones de Only Once Share.",
       "moreQuestions": "¿Tienes más preguntas?",
-      "askGithub": "Pregunta en GitHub"
+      "askGithub": "Pregunta en GitHub",
+      "a1": "Cuando creas un secreto — ya sea texto, una imagen o ambos — tu navegador genera una clave de cifrado AES-256-GCM aleatoria usando la Web Crypto API. Todo se cifra íntegramente en tu navegador — el texto plano nunca sale de tu dispositivo. Los datos cifrados se envían a nuestro servidor y se almacenan temporalmente en Redis. La clave de cifrado se coloca en el fragmento de la URL (después del símbolo #), que los navegadores nunca envían a los servidores. Cuando el destinatario abre el enlace, los datos cifrados se recuperan y se eliminan permanentemente en una única operación atómica. Su navegador descifra entonces el secreto usando la clave del fragmento de URL.",
+      "a7": "Sí, completamente gratis y sin límites. A diferencia de algunos competidores que restringen a los usuarios gratuitos a un puñado de secretos al mes o imponen límites de tamaño, Only Once Share no tiene restricciones artificiales. Puedes compartir texto de hasta 50.000 caracteres y adjuntar imágenes de hasta 10 MB (JPEG, PNG, GIF, WebP), sin necesidad de cuenta. La herramienta también es de código abierto bajo la licencia MIT.",
+      "a8": "No. Only Once Share no requiere registro, ni correo electrónico, ni cuenta. Solo escribe tu texto, adjunta una imagen opcionalmente, elige un tiempo de expiración y comparte el enlace generado. Este enfoque sin fricciones significa que no hay datos personales que proteger ni credenciales que puedan verse comprometidas."
     },
     "blog": {
       "metaTitle": "Blog — Seguridad, cifrado y compartir secretos | Only Once Share",
