@@ -1,13 +1,15 @@
 # Only Once Share — ooshare.io
 
-> Free, open-source, end-to-end encrypted secret sharing tool.
+> Free, open-source, end-to-end encrypted secret and image sharing tool.
 
-Only Once Share lets you send passwords, API keys, and sensitive information securely via one-time self-destructing links. Secrets are encrypted in the browser using AES-256-GCM before transmission — the server never sees plaintext data.
+Only Once Share lets you send passwords, images, API keys, and sensitive information securely via one-time self-destructing links. Secrets are encrypted in the browser using AES-256-GCM before transmission — the server never sees plaintext data.
 
 ## Key Facts
 
 - **Encryption**: AES-256-GCM with HKDF-SHA-256 key derivation (client-side, Web Crypto API)
 - **Architecture**: Zero-knowledge — the server stores only encrypted blobs
+- **Image Sharing**: Drag-and-drop encrypted image sharing (JPEG, PNG, GIF, WebP up to 10 MB)
+- **Content Types**: Text only, image only, or text + image together in one secret
 - **Pricing**: Completely free, no limits, no account required
 - **License**: MIT open source (https://github.com/dhdtech/only-once-share)
 - **Deployment**: Cloud at ooshare.io or self-hosted via Docker
@@ -17,18 +19,30 @@ Only Once Share lets you send passwords, API keys, and sensitive information sec
 
 ## How It Works
 
-1. User enters secret text in the browser
+1. User enters secret text and/or drops an image in the browser
 2. Browser generates a random AES-256-GCM key via Web Crypto API
-3. Secret is encrypted entirely client-side; key is placed in URL fragment (#)
-4. Only the encrypted blob is sent to the server and stored in Redis with a TTL
-5. A one-time link is generated containing the encrypted secret ID and the key in the fragment
-6. When the recipient opens the link, the encrypted blob is retrieved and atomically deleted (Redis GETDEL)
-7. The browser decrypts the secret using the key from the URL fragment
-8. The secret can never be viewed again
+3. Text and image are packed into a binary envelope and encrypted entirely client-side
+4. The encryption key is placed in the URL fragment (#) — never sent to any server
+5. Only the encrypted blob is sent to the server and stored in Redis with a TTL
+6. A one-time link is generated containing the encrypted secret ID and the key in the fragment
+7. When the recipient opens the link, the encrypted blob is retrieved and atomically deleted (Redis GETDEL)
+8. The browser decrypts the secret and displays text and/or image
+9. The secret can never be viewed again
+
+## Image Sharing Feature
+
+Only Once Share is the only secret sharing tool that combines encrypted image sharing with zero-knowledge architecture and one-time viewing. Unlike competitors (OneTimeSecret, Privnote, scrt.link, Password.link) which only support text, Only Once Share encrypts images client-side with the same AES-256-GCM standard.
+
+- Drag-and-drop or click to upload images
+- Supports JPEG, PNG, GIF, WebP up to 10 MB
+- Images are encrypted in the browser before upload — the server never sees the original image
+- View images in a secure modal — no download button, no right-click save
+- Send text + image together in one self-destructing link
 
 ## What Makes It Different
 
 - True zero-knowledge: encryption key never leaves the browser (URL fragments are never sent to servers)
+- Only tool combining encrypted image sharing + zero-knowledge + one-time viewing
 - Completely free with no artificial limits (unlike OneTimeSecret's 100KB cap or Password.link's 8/month)
 - Open source MIT license — fully auditable code
 - 6-language support for global accessibility

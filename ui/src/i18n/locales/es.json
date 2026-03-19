@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Only Once Share — Compartir secretos de forma segura",
-    "description": "Envía contraseñas, claves API e información sensible de forma segura con enlaces autodestructivos de un solo uso. Cifrado AES-256 de extremo a extremo, arquitectura de conocimiento cero. Gratuito y de código abierto — sin necesidad de cuenta."
+    "title": "Only Once Share — Compartir secretos e imágenes de forma segura",
+    "description": "Envía contraseñas, imágenes, claves API e información sensible de forma segura con enlaces autodestructivos de un solo uso. Cifrado AES-256 de extremo a extremo, arquitectura de conocimiento cero. Gratuito y de código abierto — sin necesidad de cuenta."
   },
   "header": {
     "title": "Only Once Share"
