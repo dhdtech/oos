@@ -21,7 +21,8 @@ beforeEach(() => {
   mockUseParams.mockReturnValue({ id: "test-alias" });
 
   vi.mocked(cryptoLib.importKey).mockResolvedValue("mock-key" as unknown as CryptoKey);
-  vi.mocked(cryptoLib.decrypt).mockResolvedValue("decrypted secret");
+  vi.mocked(cryptoLib.decrypt).mockResolvedValue(new Uint8Array([0]));
+  vi.mocked(cryptoLib.decodePayload).mockReturnValue({ text: "decrypted secret" });
 
   Object.defineProperty(window, "location", {
     writable: true,
@@ -158,6 +159,109 @@ describe("ViewSecret", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Back to home")).toBeInTheDocument();
+    });
+  });
+
+  describe("image display", () => {
+    beforeEach(() => {
+      URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+      URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+    });
+
+    it("renders image when payload contains an image", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "image/png", data: new Uint8Array([1, 2, 3]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByRole("img")).toBeInTheDocument();
+      });
+      expect(screen.getByText(/click image to enlarge/i)).toBeInTheDocument();
+    });
+
+    it("renders both text and image", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "secret text",
+        image: { mime: "image/jpeg", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByText("secret text")).toBeInTheDocument();
+        expect(screen.getByRole("img")).toBeInTheDocument();
+      });
+    });
+
+    it("opens modal when image is clicked", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "image/png", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByRole("img")).toBeInTheDocument();
+      });
+
+      await userEvent.click(screen.getByRole("img"));
+      expect(screen.getByLabelText(/close image/i)).toBeInTheDocument();
+    });
+
+    it("closes modal when X button is clicked", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "image/png", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByRole("img")).toBeInTheDocument();
+      });
+
+      await userEvent.click(screen.getByRole("img"));
+      await userEvent.click(screen.getByLabelText(/close image/i));
+      expect(screen.queryByLabelText(/close image/i)).not.toBeInTheDocument();
+    });
+
+    it("closes modal when overlay is clicked", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "image/png", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByRole("img")).toBeInTheDocument();
+      });
+
+      await userEvent.click(screen.getByRole("img"));
+      // Click the overlay (modal-overlay element)
+      const overlay = document.querySelector(".image-modal-overlay") as HTMLElement;
+      await userEvent.click(overlay);
+      expect(screen.queryByLabelText(/close image/i)).not.toBeInTheDocument();
+    });
+
+    it("revokes blob URL on unmount", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "image/png", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      const { unmount } = renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByRole("img")).toBeInTheDocument();
+      });
+
+      unmount();
+      expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock-url");
     });
   });
 });

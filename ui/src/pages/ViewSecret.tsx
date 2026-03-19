@@ -8,8 +8,9 @@ import {
   AlertCircle,
   Copy,
   Check,
+  X,
 } from "lucide-react";
-import { importKey, decrypt } from "../lib/crypto";
+import { importKey, decrypt, decodePayload } from "../lib/crypto";
 import { getSecret } from "../lib/api";
 import posthog from "../lib/posthog";
 
@@ -22,6 +23,8 @@ export default function ViewSecret() {
   const [plaintext, setPlaintext] = useState("");
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [showImageModal, setShowImageModal] = useState(false);
 
   useEffect(() => {
     async function fetchAndDecrypt() {
@@ -35,8 +38,13 @@ export default function ViewSecret() {
       try {
         const result = await getSecret(id);
         const key = await importKey(keyStr);
-        const decrypted = await decrypt(result.ciphertext, key, result.id);
-        setPlaintext(decrypted);
+        const decryptedBytes = await decrypt(result.ciphertext, key, result.id);
+        const decoded = decodePayload(decryptedBytes);
+        setPlaintext(decoded.text);
+        if (decoded.image) {
+          const blob = new Blob([decoded.image.data], { type: decoded.image.mime });
+          setImageUrl(URL.createObjectURL(blob));
+        }
         posthog.capture("secret_viewed");
         setStatus("revealed");
       } catch (err) {
@@ -54,6 +62,12 @@ export default function ViewSecret() {
 
     fetchAndDecrypt();
   }, [id, t]);
+
+  useEffect(() => {
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+    };
+  }, [imageUrl]);
 
   async function handleCopy() {
     await navigator.clipboard.writeText(plaintext);
@@ -79,15 +93,53 @@ export default function ViewSecret() {
               <ShieldOff size={15} />
               <span>{t("view.destroyed")}</span>
             </div>
-            <div className="secret-content">{plaintext}</div>
+
+            {plaintext && (
+              <>
+                <div className="secret-content">{plaintext}</div>
+                <button
+                  className={`btn btn-sm btn-full ${copied ? "btn-success" : "btn-secondary"}`}
+                  onClick={handleCopy}
+                  aria-label={t("view.copySecret")}
+                >
+                  {copied ? <Check size={15} /> : <Copy size={15} />}
+                  {copied ? t("view.copiedClipboard") : t("view.copySecret")}
+                </button>
+              </>
+            )}
+
+            {imageUrl && (
+              <div className="secret-image-container">
+                <img
+                  src={imageUrl}
+                  alt={t("view.clickToEnlarge")}
+                  className="secret-image-thumb"
+                  onClick={() => setShowImageModal(true)}
+                />
+                <div className="secret-image-hint">{t("view.clickToEnlarge")}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {showImageModal && imageUrl && (
+        <div
+          className="image-modal-overlay"
+          onClick={() => setShowImageModal(false)}
+        >
+          <div
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              className={`btn btn-sm btn-full ${copied ? "btn-success" : "btn-secondary"}`}
-              onClick={handleCopy}
-              aria-label={t("view.copySecret")}
+              className="image-modal-close"
+              onClick={() => setShowImageModal(false)}
+              aria-label={t("view.imageModal.close")}
             >
-              {copied ? <Check size={15} /> : <Copy size={15} />}
-              {copied ? t("view.copiedClipboard") : t("view.copySecret")}
+              <X size={16} />
             </button>
+            <img src={imageUrl} alt={t("view.clickToEnlarge")} />
           </div>
         </div>
       )}
