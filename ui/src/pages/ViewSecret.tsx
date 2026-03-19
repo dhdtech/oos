@@ -41,7 +41,7 @@ export default function ViewSecret() {
 
     async function fetchAndDecrypt() {
       try {
-        const result = await getSecret(id);
+        const result = await getSecret(id!);
         const key = await importKey(keyStr);
         const decryptedBytes = await decrypt(result.ciphertext, key, result.id);
         const decoded = decodePayload(decryptedBytes);
