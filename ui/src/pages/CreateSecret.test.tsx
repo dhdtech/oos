@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "../test/render";
 import CreateSecret from "./CreateSecret";
@@ -8,6 +8,7 @@ vi.mock("../lib/crypto", () => ({
   generateKey: vi.fn().mockResolvedValue("mock-key"),
   exportKey: vi.fn().mockResolvedValue("mock-exported-key"),
   encrypt: vi.fn().mockResolvedValue("mock-ciphertext"),
+  encodePayload: vi.fn().mockReturnValue(new Uint8Array([0])),
 }));
 
 vi.mock("../lib/api", () => ({
@@ -61,7 +62,7 @@ describe("CreateSecret", () => {
     expect(screen.getByText("24h")).toHaveAttribute("aria-pressed", "false");
   });
 
-  it("submit is disabled when textarea is empty", () => {
+  it("submit is disabled when neither text nor image is present", () => {
     renderWithProviders(<CreateSecret />);
     expect(screen.getByText("Create Secret Link").closest("button")).toBeDisabled();
   });
@@ -207,6 +208,128 @@ describe("CreateSecret", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+    });
+  });
+
+  it("renders drop zone", () => {
+    renderWithProviders(<CreateSecret />);
+    expect(screen.getByText("Drag & drop an image here")).toBeInTheDocument();
+    expect(screen.getByText("or click to browse")).toBeInTheDocument();
+    expect(screen.getByText(/Max 10 MB/)).toBeInTheDocument();
+  });
+
+  it("shows drag active state on dragenter", () => {
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+
+    fireEvent.dragEnter(dropzone, { dataTransfer: { files: [] } });
+    expect(screen.getByText("Drop your image here")).toBeInTheDocument();
+  });
+
+  it("shows drag active state on dragover and resets on dragleave", () => {
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+
+    fireEvent.dragOver(dropzone, { dataTransfer: { files: [] } });
+    expect(screen.getByText("Drop your image here")).toBeInTheDocument();
+
+    fireEvent.dragLeave(dropzone, { dataTransfer: { files: [] } });
+    expect(screen.getByText("Drag & drop an image here")).toBeInTheDocument();
+  });
+
+  it("rejects non-image files", async () => {
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const file = new File(["content"], "test.pdf", { type: "application/pdf" });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+    expect(screen.getByText("Only images are allowed (JPEG, PNG, GIF, WebP)")).toBeInTheDocument();
+  });
+
+  it("rejects files over 10MB", async () => {
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const bigFile = new File([new ArrayBuffer(11 * 1024 * 1024)], "large.png", { type: "image/png" });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [bigFile] } });
+    expect(screen.getByText("Image must be under 10 MB")).toBeInTheDocument();
+  });
+
+  it("shows preview for valid image", async () => {
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const file = new File(["image-data"], "photo.png", { type: "image/png" });
+    Object.defineProperty(file, "size", { value: 5000 });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+    expect(screen.getByText("photo.png")).toBeInTheDocument();
+    expect(screen.getByAltText("Image preview")).toBeInTheDocument();
+  });
+
+  it("removes image when X button is clicked", async () => {
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    const user = userEvent.setup();
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const file = new File(["image-data"], "photo.png", { type: "image/png" });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+    expect(screen.getByText("photo.png")).toBeInTheDocument();
+
+    await user.click(screen.getByLabelText("Remove image"));
+    expect(screen.queryByText("photo.png")).not.toBeInTheDocument();
+    expect(screen.getByText("Drag & drop an image here")).toBeInTheDocument();
+    expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock-url");
+  });
+
+  it("submits with image only (no text)", async () => {
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    const user = userEvent.setup();
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const file = new File(["image-data"], "photo.png", { type: "image/png" });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+
+    // Button should be enabled now (image attached, no text needed)
+    const submitBtn = screen.getByText("Create Secret Link").closest("button")!;
+    expect(submitBtn).not.toBeDisabled();
+
+    await user.click(submitBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText("Secret link created")).toBeInTheDocument();
+    });
+  });
+
+  it("submits with text and image", async () => {
+    const { encodePayload } = await import("../lib/crypto");
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    const user = userEvent.setup();
+    renderWithProviders(<CreateSecret />);
+
+    await user.type(screen.getByPlaceholderText(/paste your password/i), "my text");
+    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const file = new File(["image-data"], "photo.png", { type: "image/png" });
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+
+    await user.click(screen.getByText("Create Secret Link").closest("button")!);
+
+    await waitFor(() => {
+      expect(encodePayload).toHaveBeenCalledWith(
+        "my text",
+        expect.objectContaining({ mime: "image/png" }),
+      );
+      expect(screen.getByText("Secret link created")).toBeInTheDocument();
     });
   });
 });

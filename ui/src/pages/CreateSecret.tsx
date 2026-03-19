@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Lock,
@@ -10,8 +10,10 @@ import {
   CheckCircle2,
   Loader2,
   Mail,
+  Image,
+  X,
 } from "lucide-react";
-import { generateKey, exportKey, encrypt } from "../lib/crypto";
+import { generateKey, exportKey, encrypt, encodePayload } from "../lib/crypto";
 import { createSecret } from "../lib/api";
 import posthog from "../lib/posthog";
 import useSEO from "../lib/useSEO";
@@ -40,25 +42,98 @@ export default function CreateSecret() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [imageError, setImageError] = useState("");
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+  const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
+
+  function handleFile(file: File) {
+    setImageError("");
+    if (!ACCEPTED_TYPES.includes(file.type)) {
+      setImageError(t("create.image.invalidType"));
+      return;
+    }
+    if (file.size > MAX_IMAGE_SIZE) {
+      setImageError(t("create.image.tooLarge"));
+      return;
+    }
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    setDragActive(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  }
+
+  function handleDragEnter(e: React.DragEvent) {
+    e.preventDefault();
+    setDragActive(true);
+  }
+
+  function handleDragOver(e: React.DragEvent) {
+    e.preventDefault();
+    setDragActive(true);
+  }
+
+  function handleDragLeave(e: React.DragEvent) {
+    e.preventDefault();
+    setDragActive(false);
+  }
+
+  function handleFileInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) handleFile(file);
+    e.target.value = "";
+  }
+
+  function removeImage() {
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImageFile(null);
+    setImagePreview("");
+    setImageError("");
+  }
+
+  function formatFileSize(bytes: number): string {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!secret.trim()) return;
+    if (!secret.trim() && !imageFile) return;
 
     setLoading(true);
     setError("");
     setLink("");
 
     try {
+      let imageAttachment: { mime: string; data: ArrayBuffer } | undefined;
+      if (imageFile) {
+        imageAttachment = {
+          mime: imageFile.type,
+          data: await imageFile.arrayBuffer(),
+        };
+      }
+
       const id = crypto.randomUUID();
       const key = await generateKey();
-      const ciphertext = await encrypt(secret, key, id);
+      const payload = encodePayload(secret, imageAttachment);
+      const ciphertext = await encrypt(payload, key, id);
       const result = await createSecret(ciphertext, ttlHours, id);
       const keyStr = await exportKey(key);
       const pathId = result.alias ?? result.id;
       setLink(`${window.location.origin}/s/${pathId}?lng=${i18n.language}#${keyStr}`);
-      posthog.capture("secret_created", { ttl_hours: ttlHours });
+      posthog.capture("secret_created", { ttl_hours: ttlHours, has_image: !!imageFile });
       setSecret("");
+      removeImage();
     } catch (err) {
       posthog.capture("secret_create_failed");
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -112,11 +187,66 @@ export default function CreateSecret() {
                 placeholder={t("create.placeholder")}
                 rows={6}
                 maxLength={50000}
-                required
               />
               <span className="char-count">
                 {secret.length.toLocaleString()} / 50,000
               </span>
+            </div>
+
+            <div
+              className={`dropzone ${dragActive ? "dropzone--active" : ""} ${imageFile ? "dropzone--has-file" : ""}`}
+              onDrop={handleDrop}
+              onDragEnter={handleDragEnter}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onClick={() => !imageFile && fileInputRef.current?.click()}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/gif,image/webp"
+                onChange={handleFileInput}
+                style={{ display: "none" }}
+              />
+
+              {imageFile && imagePreview ? (
+                <div className="image-preview">
+                  <img
+                    src={imagePreview}
+                    alt={t("create.image.preview")}
+                    className="image-preview-thumb"
+                  />
+                  <div className="image-preview-info">
+                    <div className="image-preview-name">{imageFile.name}</div>
+                    <div className="image-preview-size">{formatFileSize(imageFile.size)}</div>
+                  </div>
+                  <button
+                    type="button"
+                    className="image-preview-remove"
+                    onClick={(e) => { e.stopPropagation(); removeImage(); }}
+                    aria-label={t("create.image.remove")}
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="dropzone-icon">
+                    <Image size={24} />
+                  </div>
+                  <div className="dropzone-label">
+                    {dragActive ? t("create.dropzone.dragActive") : t("create.dropzone.label")}
+                  </div>
+                  {!dragActive && (
+                    <>
+                      <div className="dropzone-hint">{t("create.dropzone.hint")}</div>
+                      <div className="dropzone-size-limit">{t("create.dropzone.sizeLimit")}</div>
+                    </>
+                  )}
+                </>
+              )}
+
+              {imageError && <div className="dropzone-error">{imageError}</div>}
             </div>
 
             <div className="ttl-group">
@@ -149,7 +279,7 @@ export default function CreateSecret() {
             <button
               type="submit"
               className="btn btn-primary btn-full"
-              disabled={loading || !secret.trim()}
+              disabled={loading || (!secret.trim() && !imageFile)}
             >
               {loading ? (
                 <>
