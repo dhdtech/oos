@@ -37,6 +37,9 @@
     "image.remove": "Remove image",
     "image.preview": "Image preview"
   },
+  "whySection": {
+    "ctaBanner": "See why OOShare is the most secure secret sharing tool"
+  },
   "view": {
     "loading": "Retrieving and decrypting secret...",
     "destroyed": "This secret has been permanently destroyed. It cannot be viewed again.",
@@ -58,7 +61,8 @@
     "faq": "FAQ",
     "about": "About",
     "backHome": "Back to home",
-    "allPosts": "All posts"
+    "allPosts": "All posts",
+    "why": "Why OOShare?"
   },
   "pages": {
     "security": {
@@ -118,6 +122,39 @@
       "involvedTitle": "Get Involved",
       "involvedP1": "Only Once Share is an open-source project and we welcome contributions. Whether it's reporting bugs, suggesting features, improving translations, or contributing code — every contribution makes secret sharing more secure and accessible for everyone.",
       "viewOnGithub": "View on GitHub"
+    },
+    "why": {
+      "metaTitle": "Why Only Once Share? — Secure Secret & Image Sharing Compared",
+      "metaDesc": "Compare Only Once Share vs OneTimeSecret, Privnote, Scrt.link, and Password.link. The only tool with encrypted image sharing, true zero-knowledge, and no limits — free and open source.",
+      "title": "Why Only Once Share?",
+      "lead": "The only secret sharing tool with encrypted image support, truly zero-knowledge architecture, and no limits — completely free and open source.",
+      "benefit1Title": "True Zero-Knowledge",
+      "benefit1Desc": "Encryption happens entirely in your browser. The server never sees your data — not even briefly. The decryption key lives only in the URL fragment, which browsers never send to servers.",
+      "benefit2Title": "Text & Image Sharing",
+      "benefit2Desc": "Share passwords, API keys, screenshots, and sensitive images in one encrypted link. No other secret sharing tool offers encrypted image support.",
+      "benefit3Title": "Free & Unlimited",
+      "benefit3Desc": "No artificial limits, no paid plans, no account required. Share up to 50,000 characters of text and 10 MB images — as many secrets as you need.",
+      "benefit4Title": "Open Source & Self-Hostable",
+      "benefit4Desc": "Every line of code is public on GitHub under MIT license. Audit the encryption yourself or deploy on your own infrastructure with Docker.",
+      "tableTitle": "How We Compare",
+      "feature": "Feature",
+      "e2e": "Client-side encryption",
+      "imageSharing": "Encrypted image sharing",
+      "free": "Free & unlimited",
+      "openSource": "Open source",
+      "noAccount": "No account required",
+      "selfHost": "Self-hostable",
+      "zeroKnowledge": "Zero-knowledge",
+      "autoExpiry": "Auto-expiry (TTL)",
+      "detailTitle": "What Sets Us Apart",
+      "detail1Title": "Client-Side Encryption vs Server-Side",
+      "detail1Desc": "Most secret sharing tools — including OneTimeSecret and Privnote — encrypt your data on the server. This means your plaintext secret travels over the network and is briefly visible to the server before encryption. Only Once Share encrypts everything in your browser using AES-256-GCM via the Web Crypto API. The server only ever handles encrypted blobs it cannot read.",
+      "detail2Title": "Encrypted Image Sharing — A First",
+      "detail2Desc": "No other secret sharing tool supports encrypted image sharing. With Only Once Share, you can securely share screenshots, photos of documents, sensitive diagrams, and any image up to 10 MB. Images and text are packed into a single encrypted payload — the server cannot even tell whether a secret contains text, an image, or both.",
+      "detail3Title": "No Paywalls, No Limits, No Lock-In",
+      "detail3Desc": "Many competitors restrict free users to a handful of secrets per month, limited expiration times, or reduced payload sizes. Only Once Share is completely free with no artificial limits. And because it's open source under the MIT license, you can self-host it on your own infrastructure — your data, your rules.",
+      "ctaText": "Ready to share secrets securely?",
+      "ctaButton": "Create a Secret"
     },
     "faq": {
       "metaTitle": "FAQ — Frequently Asked Questions | Only Once Share",

@@ -37,6 +37,9 @@
     "image.remove": "删除图像",
     "image.preview": "图像预览"
   },
+  "whySection": {
+    "ctaBanner": "了解为什么 OOShare 是最安全的密钥分享工具"
+  },
   "view": {
     "loading": "正在检索和解密秘密...",
     "destroyed": "此秘密已被永久销毁，无法再次查看。",
@@ -58,7 +61,8 @@
     "faq": "常见问题",
     "about": "关于",
     "backHome": "返回首页",
-    "allPosts": "所有文章"
+    "allPosts": "所有文章",
+    "why": "为什么选择 OOShare？"
   },
   "pages": {
     "security": {
@@ -81,6 +85,39 @@
       "feature2Title": "免费且无限制",
       "feature2Desc": "没有人为限制，没有「每月仅限8条秘密」。可分享最多50,000字符的文字和最大10 MB的图像，完全免费，无需注册账户。",
       "viewOnGithub": "在GitHub上查看"
+    },
+    "why": {
+      "metaTitle": "为什么选择 Only Once Share？— 安全密钥和图片分享对比",
+      "metaDesc": "对比 Only Once Share 与 OneTimeSecret、Privnote、Scrt.link 和 Password.link。唯一支持加密图片分享、真正零知识架构且无限制的工具——免费开源。",
+      "title": "为什么选择 Only Once Share？",
+      "lead": "唯一支持加密图片分享的密钥分享工具，真正的零知识架构，无任何限制——完全免费且开源。",
+      "benefit1Title": "真正的零知识",
+      "benefit1Desc": "加密完全在浏览器中完成。服务器永远看不到您的数据——甚至连短暂接触都不会。解密密钥仅存在于 URL 片段中，浏览器永远不会将其发送到服务器。",
+      "benefit2Title": "文本和图片分享",
+      "benefit2Desc": "通过一个加密链接分享密码、API 密钥、截图和敏感图片。没有其他密钥分享工具提供加密图片支持。",
+      "benefit3Title": "免费且无限制",
+      "benefit3Desc": "没有人为限制，没有付费计划，无需注册帐户。分享最多 50,000 个字符的文本和 10 MB 的图片——无限次数。",
+      "benefit4Title": "开源且可自托管",
+      "benefit4Desc": "所有代码在 GitHub 上以 MIT 许可证公开。您可以自行审计加密实现，或使用 Docker 部署到自己的基础设施。",
+      "tableTitle": "功能对比",
+      "feature": "功能",
+      "e2e": "客户端加密",
+      "imageSharing": "加密图片分享",
+      "free": "免费且无限制",
+      "openSource": "开源",
+      "noAccount": "无需注册",
+      "selfHost": "可自托管",
+      "zeroKnowledge": "零知识",
+      "autoExpiry": "自动过期 (TTL)",
+      "detailTitle": "我们的独特之处",
+      "detail1Title": "客户端加密 vs 服务器端加密",
+      "detail1Desc": "大多数密钥分享工具（包括 OneTimeSecret 和 Privnote）在服务器上加密您的数据。这意味着您的明文在加密前会短暂地对服务器可见。Only Once Share 使用 Web Crypto API 的 AES-256-GCM 在浏览器中加密所有内容。服务器只处理它无法读取的加密数据。",
+      "detail2Title": "加密图片分享——业界首创",
+      "detail2Desc": "没有其他密钥分享工具支持加密图片分享。使用 Only Once Share，您可以安全地分享截图、文档照片、敏感图表等任何不超过 10 MB 的图片。图片和文本被打包成单个加密载荷——服务器甚至无法区分密钥包含的是文本、图片还是两者都有。",
+      "detail3Title": "无付费墙，无限制，无锁定",
+      "detail3Desc": "许多竞争对手限制免费用户每月只能分享少量密钥、有限的过期时间或缩小的载荷大小。Only Once Share 完全免费，没有人为限制。而且因为它以 MIT 许可证开源，您可以在自己的基础设施上自托管——您的数据，您做主。",
+      "ctaText": "准备好安全分享秘密了吗？",
+      "ctaButton": "创建密钥"
     },
     "faq": {
       "metaTitle": "常见问题 — FAQ | Only Once Share",

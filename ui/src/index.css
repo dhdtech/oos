@@ -1719,6 +1719,128 @@ textarea:focus {
   background: rgba(255, 255, 255, 0.15);
 }
 
+/* ─── Why CTA Banner (Homepage) ─── */
+.why-cta-banner {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.why-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-hover);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.why-cta-link:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+/* ─── Why Page ─── */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.why-grid .info-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.why-grid .info-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.compare-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.compare-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  min-width: 580px;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.compare-table th {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.compare-table td {
+  color: var(--text-secondary);
+}
+
+.compare-highlight {
+  background: rgba(99, 102, 241, 0.06);
+}
+
+th.compare-highlight {
+  color: var(--primary-hover) !important;
+}
+
+.compare-yes {
+  color: #34d399 !important;
+  font-weight: 600;
+}
+
+.compare-no {
+  color: var(--text-muted) !important;
+}
+
+.compare-partial {
+  color: #fbbf24 !important;
+}
+
+@media (max-width: 600px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PostHogProvider } from "posthog-js/react";
 import posthog from "./lib/posthog";
@@ -8,11 +8,12 @@ import CreateSecret from "./pages/CreateSecret";
 import ViewSecret from "./pages/ViewSecret";
 import Security from "./pages/Security";
 import About from "./pages/About";
+import WhyOOShare from "./pages/WhyOOShare";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
-import i18n from "./i18n";
+import "./i18n";
 import "./index.css";
 
 const app = (
@@ -25,6 +26,7 @@ const app = (
             <Route path="/s/:id" element={<ViewSecret />} />
             <Route path="/security" element={<Security />} />
             <Route path="/about" element={<About />} />
+            <Route path="/why" element={<WhyOOShare />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
@@ -38,17 +40,9 @@ const app = (
 
 const root = document.getElementById("root")!;
 
-if (root.hasChildNodes()) {
-  // Pre-rendered HTML is always English. Hydrate with English to avoid
-  // mismatch, then switch to the user's detected language.
-  const detectedLang = i18n.language;
-  if (detectedLang !== "en") {
-    i18n.changeLanguage("en");
-  }
-  hydrateRoot(root, app);
-  if (detectedLang !== "en") {
-    requestAnimationFrame(() => i18n.changeLanguage(detectedLang));
-  }
-} else {
-  createRoot(root).render(app);
-}
+// Always use createRoot (not hydrateRoot). Pre-rendered HTML is for SEO
+// crawlers only — they parse the static HTML directly. Interactive users
+// get the full React app. This avoids all hydration mismatch errors (#418)
+// caused by i18n language differences, Puppeteer serialization quirks,
+// or analytics scripts modifying the DOM.
+createRoot(root).render(app);

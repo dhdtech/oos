@@ -37,6 +37,9 @@
     "image.remove": "Remover imagem",
     "image.preview": "Visualização da imagem"
   },
+  "whySection": {
+    "ctaBanner": "Descubra por que o OOShare é a ferramenta mais segura para compartilhar segredos"
+  },
   "view": {
     "loading": "Recuperando e descriptografando segredo...",
     "destroyed": "Este segredo foi permanentemente destruído. Não pode ser visualizado novamente.",
@@ -58,7 +61,8 @@
     "faq": "Perguntas frequentes",
     "about": "Sobre",
     "backHome": "Voltar ao início",
-    "allPosts": "Todos os artigos"
+    "allPosts": "Todos os artigos",
+    "why": "Por que OOShare?"
   },
   "pages": {
     "security": {
@@ -82,6 +86,39 @@
       "feature2Title": "Gratuito e ilimitado",
       "feature2Desc": "Sem limites artificiais. Sem \"8 segredos por mês\". Compartilhe textos com até 50.000 caracteres e imagens de até 10 MB, completamente grátis, sem necessidade de conta.",
       "viewOnGithub": "Ver no GitHub"
+    },
+    "why": {
+      "metaTitle": "Por que o Only Once Share? — Comparação de ferramentas seguras",
+      "metaDesc": "Compare o Only Once Share com OneTimeSecret, Privnote, Scrt.link e Password.link. A única ferramenta com imagens criptografadas, verdadeiro zero-knowledge e sem limites — gratuita e de código aberto.",
+      "title": "Por que o Only Once Share?",
+      "lead": "A única ferramenta de compartilhamento de segredos com suporte a imagens criptografadas, arquitetura verdadeiramente zero-knowledge e sem limites — totalmente gratuita e de código aberto.",
+      "benefit1Title": "Verdadeiro zero-knowledge",
+      "benefit1Desc": "A criptografia acontece inteiramente no seu navegador. O servidor nunca vê seus dados — nem mesmo brevemente. A chave de descriptografia fica apenas no fragmento da URL, que os navegadores nunca enviam aos servidores.",
+      "benefit2Title": "Texto e imagens",
+      "benefit2Desc": "Compartilhe senhas, chaves de API, capturas de tela e imagens sensíveis em um único link criptografado. Nenhuma outra ferramenta oferece compartilhamento de imagens criptografadas.",
+      "benefit3Title": "Gratuito e ilimitado",
+      "benefit3Desc": "Sem limites artificiais, sem planos pagos, sem necessidade de conta. Compartilhe até 50.000 caracteres de texto e imagens de 10 MB — quantos segredos precisar.",
+      "benefit4Title": "Código aberto e auto-hospedável",
+      "benefit4Desc": "Todo o código é público no GitHub sob licença MIT. Audite a criptografia você mesmo ou implante na sua própria infraestrutura com Docker.",
+      "tableTitle": "Comparação",
+      "feature": "Recurso",
+      "e2e": "Criptografia no cliente",
+      "imageSharing": "Imagens criptografadas",
+      "free": "Gratuito e ilimitado",
+      "openSource": "Código aberto",
+      "noAccount": "Sem conta necessária",
+      "selfHost": "Auto-hospedável",
+      "zeroKnowledge": "Zero-knowledge",
+      "autoExpiry": "Expiração automática (TTL)",
+      "detailTitle": "O que nos diferencia",
+      "detail1Title": "Criptografia no cliente vs no servidor",
+      "detail1Desc": "A maioria das ferramentas — incluindo OneTimeSecret e Privnote — criptografa seus dados no servidor. Isso significa que seu texto simples fica brevemente visível para o servidor antes da criptografia. O Only Once Share criptografa tudo no seu navegador usando AES-256-GCM via Web Crypto API.",
+      "detail2Title": "Imagens criptografadas — Uma novidade",
+      "detail2Desc": "Nenhuma outra ferramenta de compartilhamento de segredos suporta imagens criptografadas. Com o Only Once Share, você pode compartilhar capturas de tela, fotos de documentos, diagramas sensíveis e qualquer imagem de até 10 MB com segurança.",
+      "detail3Title": "Sem paywalls, sem limites, sem lock-in",
+      "detail3Desc": "Muitos concorrentes restringem usuários gratuitos com poucos segredos por mês, tempos de expiração limitados ou tamanhos de payload reduzidos. O Only Once Share é completamente gratuito sem limites artificiais. E como é código aberto sob a licença MIT, você pode auto-hospedá-lo na sua própria infraestrutura.",
+      "ctaText": "Pronto para compartilhar segredos com segurança?",
+      "ctaButton": "Criar um segredo"
     },
     "faq": {
       "metaTitle": "FAQ — Perguntas frequentes | Only Once Share",

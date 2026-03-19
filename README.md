@@ -5,7 +5,7 @@
 <h1 align="center">Only Once Share</h1>
 
 <p align="center">
-  Secure one-time secret sharing with end-to-end encryption.<br/>
+  Secure one-time secret &amp; image sharing with end-to-end encryption.<br/>
   Your data never touches the server unencrypted.
 </p>
 
@@ -22,11 +22,12 @@
 
 ## How It Works
 
-Only Once Share uses **client-side AES-256-GCM encryption** via the Web Crypto API. The server never sees plaintext — it only stores encrypted blobs.
+Only Once Share uses **client-side AES-256-GCM encryption** via the Web Crypto API. The server never sees plaintext — it only stores encrypted blobs. Secrets can contain text, an image, or both.
 
 ```
 CREATE:
   Browser  →  generate master key (AES-256) + secret ID (UUID)
+  Browser  →  pack text + optional image into binary envelope
   Browser  →  derive per-secret key: HKDF-SHA-256(masterKey, secretId)
   Browser  →  encrypt: AES-256-GCM(derivedKey, iv=random96bit, aad=secretId)
   Browser  →  POST /api/secrets { ciphertext, ttl, id }
@@ -41,7 +42,8 @@ RETRIEVE:
   Server   →  resolve alias → UUID, fetch ciphertext with GETDEL (atomic delete)
   Server   →  return { ciphertext, id: uuid }
   Browser  →  derive key: HKDF-SHA-256(masterKey, uuid)
-  Browser  →  decrypt: AES-256-GCM(derivedKey, iv, aad=uuid) → plaintext
+  Browser  →  decrypt: AES-256-GCM(derivedKey, iv, aad=uuid) → binary envelope
+  Browser  →  unpack envelope → text and/or image
 ```
 
 The encryption key lives in the **URL fragment** (`#key`), which browsers never send to the server. After one retrieval, the secret is permanently deleted.
@@ -82,7 +84,7 @@ ciphertext = AES-256-GCM.encrypt(
     key:  derivedKey
     iv:   random 96-bit
     aad:  secretId (UUID)
-    data: plaintext
+    data: binary envelope (text + optional image)
 )
 ```
 
@@ -104,6 +106,29 @@ The encrypted payload is a single binary blob encoded as base64:
 - **Version** (`0x01`): Enables future algorithm upgrades without breaking existing secrets.
 - **IV**: 96-bit initialization vector (NIST recommended size for AES-GCM).
 - **Ciphertext + Tag**: AES-GCM output including the 128-bit authentication tag.
+
+### Plaintext Payload Format (Binary Envelope)
+
+Before encryption, the plaintext is packed into a binary envelope that supports text, images, or both:
+
+```
+Text-only (type 0x00):
+┌──────┬────────────────────┐
+│ 0x00 │  text (UTF-8)      │
+└──────┴────────────────────┘
+
+Text + Image (type 0x01):
+┌──────┬──────────────┬──────────────┬──────────┬──────────────┬─────────────────┐
+│ 0x01 │ text_len (4B)│ text (UTF-8) │ mime_len │ mime (ASCII) │ image (raw)     │
+│      │  uint32 BE   │              │  uint8   │              │                 │
+└──────┴──────────────┴──────────────┴──────────┴──────────────┴─────────────────┘
+```
+
+- **Type `0x00`**: Text-only secret. Everything after the type byte is UTF-8 text.
+- **Type `0x01`**: Text + image. Text length is encoded as a 4-byte big-endian uint32 (text can be empty). Image bytes follow the MIME type string.
+- **Legacy**: Secrets created before the image feature have no type byte — decoded as raw UTF-8 text. Fully backwards compatible.
+- **Accepted image types**: JPEG, PNG, GIF, WebP (max 10 MB). SVG is excluded to prevent XSS.
+- The outer ciphertext format is unchanged — the server cannot distinguish text secrets from image secrets.
 
 ### URL Structure
 
@@ -128,7 +153,8 @@ https://example.com/s/Kx7mP2nQ?lng=en#iZcjqbPIBnrWwHHkv_KDWeDcUr9hi3A0oMaVbgCVLr
 | TTL | Yes | Expiration time |
 | Master key | **No** | Lives in URL fragment, never transmitted |
 | Derived key | **No** | Computed client-side from master key + UUID |
-| Plaintext | **No** | Only exists in the sender's and recipient's browser |
+| Plaintext (text/images) | **No** | Only exists in the sender's and recipient's browser |
+| Content type | **No** | Cannot distinguish text secrets from image secrets |
 
 ## Security Model
 
@@ -138,7 +164,8 @@ https://example.com/s/Kx7mP2nQ?lng=en#iZcjqbPIBnrWwHHkv_KDWeDcUr9hi3A0oMaVbgCVLr
 | **Key derivation** | HKDF-SHA-256 derives a unique key per secret from master key + secret ID |
 | **Authenticated data** | Secret ID bound as AES-GCM AAD — ciphertext cannot be swapped between secrets |
 | **Key delivery** | URL fragment — never reaches the server |
-| **Zero knowledge** | Server stores only ciphertext, cannot decrypt |
+| **Image sharing** | JPEG, PNG, GIF, WebP up to 10 MB — encrypted identically to text |
+| **Zero knowledge** | Server stores only ciphertext, cannot distinguish text from images |
 | **One-time view** | Secret is atomically deleted on first retrieval (`GETDEL`) |
 | **Auto-expiry** | Redis TTL (1–72h) ensures secrets expire even if never viewed |
 | **Versioned format** | Ciphertext includes version byte for future algorithm upgrades |
@@ -236,7 +263,7 @@ docker compose -f docker-compose.yml up --build
 
 | Method | Path | Description |
 |--------|------|-------------|
-| `POST` | `/api/secrets` | Store encrypted secret, returns `{ id, alias }` |
+| `POST` | `/api/secrets` | Store encrypted secret (max 15 MB), returns `{ id, alias }` |
 | `GET` | `/api/secrets/:id` | Retrieve and delete encrypted secret (accepts UUID or alias), returns `{ ciphertext, id }` |
 | `GET` | `/api/health` | Health check |
 
@@ -267,9 +294,9 @@ only-once-share/
 │   └── Dockerfile          # Production container
 ├── ui/
 │   ├── src/
-│   │   ├── pages/          # CreateSecret, ViewSecret
-│   │   ├── components/     # Layout, SecurityModal, LanguageSelector
-│   │   ├── lib/            # crypto.ts (AES-GCM), api.ts (fetch client)
+│   │   ├── pages/          # CreateSecret, ViewSecret, Security, About, FAQ, Blog
+│   │   ├── components/     # Layout, SecurityModal, LanguageSelector, ImageModal
+│   │   ├── lib/            # crypto.ts (AES-GCM + binary envelope), api.ts (fetch client)
 │   │   └── i18n/           # i18next config + 6 locale files
 │   ├── public/favicon.svg  # Shield favicon
 │   ├── Dockerfile          # Production (nginx)

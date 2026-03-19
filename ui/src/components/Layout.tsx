@@ -110,6 +110,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <a href="/blog">{t("nav.blog")}</a>
           <a href="/faq">{t("nav.faq")}</a>
           <a href="/about">{t("nav.about")}</a>
+          <a href="/why">{t("nav.why")}</a>
         </div>
         <a
           href="https://github.com/dhdtech/oos"

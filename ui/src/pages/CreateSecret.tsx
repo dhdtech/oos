@@ -12,6 +12,7 @@ import {
   Mail,
   Image,
   X,
+  ArrowRight,
 } from "lucide-react";
 import { generateKey, exportKey, encrypt, encodePayload } from "../lib/crypto";
 import { createSecret } from "../lib/api";
@@ -349,6 +350,13 @@ export default function CreateSecret() {
             </button>
           </div>
         )}
+      </div>
+
+      <div className="why-cta-banner">
+        <a href="/why" className="why-cta-link">
+          <span>{t("whySection.ctaBanner")}</span>
+          <ArrowRight size={16} />
+        </a>
       </div>
     </>
   );

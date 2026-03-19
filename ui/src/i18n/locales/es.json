@@ -37,6 +37,9 @@
     "image.remove": "Eliminar imagen",
     "image.preview": "Vista previa de imagen"
   },
+  "whySection": {
+    "ctaBanner": "Descubre por qué OOShare es la herramienta más segura para compartir secretos"
+  },
   "view": {
     "loading": "Recuperando y descifrando secreto...",
     "destroyed": "Este secreto ha sido destruido permanentemente. No se puede ver de nuevo.",
@@ -58,7 +61,8 @@
     "faq": "Preguntas frecuentes",
     "about": "Acerca de",
     "backHome": "Volver al inicio",
-    "allPosts": "Todos los artículos"
+    "allPosts": "Todos los artículos",
+    "why": "¿Por qué OOShare?"
   },
   "pages": {
     "security": {
@@ -80,6 +84,39 @@
       "lead": "Creamos Only Once Share porque compartir contraseñas e información sensible no debería requerir confiar en un tercero con tus datos — ni pagar por el privilegio.",
       "viewOnGithub": "Ver en GitHub",
       "feature2Desc": "Sin límites artificiales. Sin «8 secretos al mes». Comparte texto de hasta 50.000 caracteres e imágenes de hasta 10 MB, completamente gratis y sin necesidad de cuenta."
+    },
+    "why": {
+      "metaTitle": "¿Por qué Only Once Share? — Comparación de herramientas seguras",
+      "metaDesc": "Compara Only Once Share con OneTimeSecret, Privnote, Scrt.link y Password.link. La única herramienta con imágenes cifradas, verdadero conocimiento cero y sin límites — gratis y de código abierto.",
+      "title": "¿Por qué Only Once Share?",
+      "lead": "La única herramienta para compartir secretos con soporte de imágenes cifradas, arquitectura verdaderamente de conocimiento cero y sin límites — completamente gratis y de código abierto.",
+      "benefit1Title": "Verdadero conocimiento cero",
+      "benefit1Desc": "El cifrado ocurre completamente en tu navegador. El servidor nunca ve tus datos — ni siquiera brevemente. La clave de descifrado solo existe en el fragmento de la URL, que los navegadores nunca envían a los servidores.",
+      "benefit2Title": "Texto e imágenes",
+      "benefit2Desc": "Comparte contraseñas, claves API, capturas de pantalla e imágenes sensibles en un solo enlace cifrado. Ninguna otra herramienta ofrece compartir imágenes cifradas.",
+      "benefit3Title": "Gratis e ilimitado",
+      "benefit3Desc": "Sin límites artificiales, sin planes de pago, sin necesidad de cuenta. Comparte hasta 50,000 caracteres de texto e imágenes de 10 MB — todos los secretos que necesites.",
+      "benefit4Title": "Código abierto y auto-alojable",
+      "benefit4Desc": "Todo el código es público en GitHub bajo licencia MIT. Audita el cifrado tú mismo o despliega en tu propia infraestructura con Docker.",
+      "tableTitle": "Comparación",
+      "feature": "Característica",
+      "e2e": "Cifrado en el cliente",
+      "imageSharing": "Imágenes cifradas",
+      "free": "Gratis e ilimitado",
+      "openSource": "Código abierto",
+      "noAccount": "Sin cuenta requerida",
+      "selfHost": "Auto-alojable",
+      "zeroKnowledge": "Conocimiento cero",
+      "autoExpiry": "Auto-expiración (TTL)",
+      "detailTitle": "Lo que nos diferencia",
+      "detail1Title": "Cifrado en el cliente vs en el servidor",
+      "detail1Desc": "La mayoría de herramientas — incluyendo OneTimeSecret y Privnote — cifran tus datos en el servidor. Esto significa que tu texto plano es brevemente visible para el servidor antes del cifrado. Only Once Share cifra todo en tu navegador usando AES-256-GCM a través de la Web Crypto API. El servidor solo maneja datos cifrados que no puede leer.",
+      "detail2Title": "Imágenes cifradas — Una primicia",
+      "detail2Desc": "Ninguna otra herramienta de compartir secretos soporta imágenes cifradas. Con Only Once Share, puedes compartir capturas de pantalla, fotos de documentos, diagramas sensibles y cualquier imagen de hasta 10 MB. Las imágenes y el texto se empaquetan en un solo payload cifrado — el servidor ni siquiera puede saber si un secreto contiene texto, una imagen o ambos.",
+      "detail3Title": "Sin muros de pago, sin límites, sin dependencia",
+      "detail3Desc": "Muchos competidores restringen a los usuarios gratuitos con un puñado de secretos al mes, tiempos de expiración limitados o tamaños de payload reducidos. Only Once Share es completamente gratis sin límites artificiales. Y como es código abierto bajo la licencia MIT, puedes auto-alojarlo en tu propia infraestructura — tus datos, tus reglas.",
+      "ctaText": "¿Listo para compartir secretos de forma segura?",
+      "ctaButton": "Crear un secreto"
     },
     "faq": {
       "metaTitle": "FAQ — Preguntas frecuentes | Only Once Share",
