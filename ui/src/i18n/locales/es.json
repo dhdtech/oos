@@ -1,14 +1,14 @@
 {
   "meta": {
-    "title": "Only Once Share — Compartir secretos e imágenes de forma segura",
-    "description": "Envía contraseñas, imágenes, claves API e información sensible de forma segura con enlaces autodestructivos de un solo uso. Cifrado AES-256 de extremo a extremo, arquitectura de conocimiento cero. Gratuito y de código abierto — sin necesidad de cuenta."
+    "title": "Only Once Share — Compartir secretos, imágenes y PDFs de forma segura",
+    "description": "Envía contraseñas, imágenes, PDFs, claves API y documentos sensibles de forma segura con enlaces autodestructivos de un solo uso. Cifrado AES-256 de extremo a extremo, arquitectura de conocimiento cero. Gratuito y de código abierto — sin necesidad de cuenta."
   },
   "header": {
     "title": "Only Once Share"
   },
   "hero": {
     "title": "Comparte secretos de forma segura",
-    "subtitle": "Cifrado de extremo a extremo en tu navegador. El servidor nunca ve tus datos. Los enlaces se autodestruyen después de una vista."
+    "subtitle": "Cifrado de extremo a extremo en tu navegador. Comparte texto, imágenes y PDFs. El servidor nunca ve tus datos. Los enlaces se autodestruyen después de una vista."
   },
   "create": {
     "label": "Contenido secreto",
@@ -28,14 +28,14 @@
     "whatsappMsg": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo (solo una vez):\n\n{{link}}",
     "emailSubject": "Aquí tienes un secreto",
     "emailBody": "Estoy compartiendo un secreto contigo. Abre este enlace para verlo — solo se puede abrir una vez:\n\n{{link}}",
-    "dropzone.label": "Arrastra y suelta una imagen aquí",
+    "dropzone.label": "Arrastra y suelta un archivo aquí",
     "dropzone.hint": "o haz clic para explorar",
-    "dropzone.sizeLimit": "Máx. 10 MB · JPEG, PNG, GIF, WebP",
-    "dropzone.dragActive": "Suelta tu imagen aquí",
-    "image.invalidType": "Solo se permiten imágenes (JPEG, PNG, GIF, WebP)",
-    "image.tooLarge": "La imagen debe ser menor a 10 MB",
-    "image.remove": "Eliminar imagen",
-    "image.preview": "Vista previa de imagen"
+    "dropzone.sizeLimit": "Máx. 10 MB · Imágenes (JPEG, PNG, GIF, WebP) o PDF",
+    "dropzone.dragActive": "Suelta tu archivo aquí",
+    "file.invalidType": "Solo se permiten imágenes (JPEG, PNG, GIF, WebP) y PDFs",
+    "file.tooLarge": "El archivo debe ser menor a 10 MB",
+    "file.remove": "Eliminar archivo",
+    "file.preview": "Vista previa del archivo"
   },
   "whySection": {
     "ctaBanner": "Descubre por qué OOShare es la herramienta más segura para compartir secretos"
@@ -53,7 +53,10 @@
     "newSecret": "Compartir un nuevo secreto",
     "backHome": "Volver al inicio",
     "clickToEnlarge": "Haz clic en la imagen para ampliar",
-    "imageModal.close": "Cerrar imagen"
+    "imageModal.close": "Cerrar imagen",
+    "pdfAttached": "Un archivo PDF está adjunto a este secreto",
+    "downloadPdf": "Descargar PDF",
+    "viewPdf": "Abrir en nueva pestaña"
   },
   "nav": {
     "security": "Seguridad",
@@ -71,10 +74,10 @@
       "title": "Cómo Only Once Share protege tus secretos",
       "step3": "Cifrado — AES-256-GCM cifra tu texto e imágenes en un único payload con un IV aleatorio de 96 bits y el ID del secreto como AAD",
       "step7": "Descifrado — El navegador del destinatario descifra el texto e imágenes usando la clave del fragmento de URL",
-      "lead": "Only Once Share utiliza cifrado AES-256-GCM de extremo a extremo con una arquitectura de conocimiento cero. Tu texto e imágenes se cifran en tu navegador antes de salir de tu dispositivo — nuestro servidor nunca ve tus datos en texto plano.",
+      "lead": "Only Once Share utiliza cifrado AES-256-GCM de extremo a extremo con una arquitectura de conocimiento cero. Tu texto, imágenes y PDFs se cifran en tu navegador antes de salir de tu dispositivo — nuestro servidor nunca ve tus datos en texto plano.",
       "cta": "Prueba Only Once Share — Gratis y seguro",
       "e2eTitle": "Cifrado de extremo a extremo",
-      "serverContent": "A diferencia de algunas herramientas competidoras que realizan el cifrado en el servidor (lo que significa que el servidor ve brevemente tus datos en texto plano), Only Once Share cifra íntegramente en el navegador. El servidor nunca recibe: tu texto o imágenes en texto plano, la clave de cifrado, ni ninguna información que pudiera usarse para descifrar tus datos. Ni siquiera puede distinguir si un secreto contiene texto, una imagen, o ambos. Incluso si nuestro servidor fuera comprometido, tus secretos permanecerían cifrados e ilegibles.",
+      "serverContent": "A diferencia de algunas herramientas competidoras que realizan el cifrado en el servidor (lo que significa que el servidor ve brevemente tus datos en texto plano), Only Once Share cifra íntegramente en el navegador. El servidor nunca recibe: tu texto, imágenes o PDFs en texto plano, la clave de cifrado, ni ninguna información que pudiera usarse para descifrar tus datos. Ni siquiera puede distinguir si un secreto contiene texto, una imagen, un PDF o cualquier combinación. Incluso si nuestro servidor fuera comprometido, tus secretos permanecerían cifrados e ilegibles.",
       "whyP2": "Con cifrado del lado del cliente (como Only Once Share), tu texto e imágenes se cifran antes de salir de tu dispositivo. El servidor solo maneja datos cifrados que no puede leer. Este es el estándar de oro para la privacidad y es el mismo principio detrás de las aplicaciones de mensajería cifrada de extremo a extremo como Signal."
     },
     "about": {
@@ -83,17 +86,17 @@
       "title": "Acerca de Only Once Share",
       "lead": "Creamos Only Once Share porque compartir contraseñas e información sensible no debería requerir confiar en un tercero con tus datos — ni pagar por el privilegio.",
       "viewOnGithub": "Ver en GitHub",
-      "feature2Desc": "Sin límites artificiales. Sin «8 secretos al mes». Comparte texto de hasta 50.000 caracteres e imágenes de hasta 10 MB, completamente gratis y sin necesidad de cuenta."
+      "feature2Desc": "Sin límites artificiales. Sin «8 secretos al mes». Comparte texto de hasta 50.000 caracteres y archivos (imágenes o PDFs) de hasta 10 MB, completamente gratis y sin necesidad de cuenta."
     },
     "why": {
-      "metaTitle": "¿Por qué Only Once Share? — Comparación de herramientas seguras",
-      "metaDesc": "Compara Only Once Share con OneTimeSecret, Privnote, Scrt.link y Password.link. La única herramienta con imágenes cifradas, verdadero conocimiento cero y sin límites — gratis y de código abierto.",
+      "metaTitle": "¿Por qué Only Once Share? — Comparación de herramientas seguras para secretos, imágenes y PDFs",
+      "metaDesc": "Compara Only Once Share con OneTimeSecret, Privnote, Scrt.link y Password.link. La única herramienta con imágenes y PDFs cifrados, verdadero conocimiento cero y sin límites — gratis y de código abierto.",
       "title": "¿Por qué Only Once Share?",
-      "lead": "La única herramienta para compartir secretos con soporte de imágenes cifradas, arquitectura verdaderamente de conocimiento cero y sin límites — completamente gratis y de código abierto.",
+      "lead": "La única herramienta para compartir secretos con soporte de imágenes y PDFs cifrados, arquitectura verdaderamente de conocimiento cero y sin límites — completamente gratis y de código abierto.",
       "benefit1Title": "Verdadero conocimiento cero",
       "benefit1Desc": "El cifrado ocurre completamente en tu navegador. El servidor nunca ve tus datos — ni siquiera brevemente. La clave de descifrado solo existe en el fragmento de la URL, que los navegadores nunca envían a los servidores.",
-      "benefit2Title": "Texto e imágenes",
-      "benefit2Desc": "Comparte contraseñas, claves API, capturas de pantalla e imágenes sensibles en un solo enlace cifrado. Ninguna otra herramienta ofrece compartir imágenes cifradas.",
+      "benefit2Title": "Texto, imágenes y PDFs",
+      "benefit2Desc": "Comparte contraseñas, claves API, capturas de pantalla, documentos y PDFs sensibles en un solo enlace cifrado. Ninguna otra herramienta ofrece compartir archivos cifrados.",
       "benefit3Title": "Gratis e ilimitado",
       "benefit3Desc": "Sin límites artificiales, sin planes de pago, sin necesidad de cuenta. Comparte hasta 50,000 caracteres de texto e imágenes de 10 MB — todos los secretos que necesites.",
       "benefit4Title": "Código abierto y auto-alojable",
@@ -101,7 +104,7 @@
       "tableTitle": "Comparación",
       "feature": "Característica",
       "e2e": "Cifrado en el cliente",
-      "imageSharing": "Imágenes cifradas",
+      "imageSharing": "Archivos cifrados (imágenes + PDF)",
       "free": "Gratis e ilimitado",
       "openSource": "Código abierto",
       "noAccount": "Sin cuenta requerida",
@@ -111,8 +114,8 @@
       "detailTitle": "Lo que nos diferencia",
       "detail1Title": "Cifrado en el cliente vs en el servidor",
       "detail1Desc": "La mayoría de herramientas — incluyendo OneTimeSecret y Privnote — cifran tus datos en el servidor. Esto significa que tu texto plano es brevemente visible para el servidor antes del cifrado. Only Once Share cifra todo en tu navegador usando AES-256-GCM a través de la Web Crypto API. El servidor solo maneja datos cifrados que no puede leer.",
-      "detail2Title": "Imágenes cifradas — Una primicia",
-      "detail2Desc": "Ninguna otra herramienta de compartir secretos soporta imágenes cifradas. Con Only Once Share, puedes compartir capturas de pantalla, fotos de documentos, diagramas sensibles y cualquier imagen de hasta 10 MB. Las imágenes y el texto se empaquetan en un solo payload cifrado — el servidor ni siquiera puede saber si un secreto contiene texto, una imagen o ambos.",
+      "detail2Title": "Archivos cifrados — Una primicia",
+      "detail2Desc": "Ninguna otra herramienta de compartir secretos soporta imágenes y PDFs cifrados. Con Only Once Share, puedes compartir capturas de pantalla, fotos de documentos, contratos firmados, diagramas sensibles y cualquier archivo de hasta 10 MB. Los archivos y el texto se empaquetan en un solo payload cifrado — el servidor ni siquiera puede saber qué tipo de contenido contiene un secreto.",
       "detail3Title": "Sin muros de pago, sin límites, sin dependencia",
       "detail3Desc": "Muchos competidores restringen a los usuarios gratuitos con un puñado de secretos al mes, tiempos de expiración limitados o tamaños de payload reducidos. Only Once Share es completamente gratis sin límites artificiales. Y como es código abierto bajo la licencia MIT, puedes auto-alojarlo en tu propia infraestructura — tus datos, tus reglas.",
       "ctaText": "¿Listo para compartir secretos de forma segura?",
@@ -125,9 +128,9 @@
       "lead": "Todo lo que necesitas saber sobre la seguridad, cifrado y funciones de Only Once Share.",
       "moreQuestions": "¿Tienes más preguntas?",
       "askGithub": "Pregunta en GitHub",
-      "a1": "Cuando creas un secreto — ya sea texto, una imagen o ambos — tu navegador genera una clave de cifrado AES-256-GCM aleatoria usando la Web Crypto API. Todo se cifra íntegramente en tu navegador — el texto plano nunca sale de tu dispositivo. Los datos cifrados se envían a nuestro servidor y se almacenan temporalmente en Redis. La clave de cifrado se coloca en el fragmento de la URL (después del símbolo #), que los navegadores nunca envían a los servidores. Cuando el destinatario abre el enlace, los datos cifrados se recuperan y se eliminan permanentemente en una única operación atómica. Su navegador descifra entonces el secreto usando la clave del fragmento de URL.",
-      "a7": "Sí, completamente gratis y sin límites. A diferencia de algunos competidores que restringen a los usuarios gratuitos a un puñado de secretos al mes o imponen límites de tamaño, Only Once Share no tiene restricciones artificiales. Puedes compartir texto de hasta 50.000 caracteres y adjuntar imágenes de hasta 10 MB (JPEG, PNG, GIF, WebP), sin necesidad de cuenta. La herramienta también es de código abierto bajo la licencia MIT.",
-      "a8": "No. Only Once Share no requiere registro, ni correo electrónico, ni cuenta. Solo escribe tu texto, adjunta una imagen opcionalmente, elige un tiempo de expiración y comparte el enlace generado. Este enfoque sin fricciones significa que no hay datos personales que proteger ni credenciales que puedan verse comprometidas."
+      "a1": "Cuando creas un secreto — ya sea texto, una imagen, un PDF o una combinación — tu navegador genera una clave de cifrado AES-256-GCM aleatoria usando la Web Crypto API. Todo se cifra íntegramente en tu navegador — el texto plano nunca sale de tu dispositivo. Los datos cifrados se envían a nuestro servidor y se almacenan temporalmente en Redis. La clave de cifrado se coloca en el fragmento de la URL (después del símbolo #), que los navegadores nunca envían a los servidores. Cuando el destinatario abre el enlace, los datos cifrados se recuperan y se eliminan permanentemente en una única operación atómica. Su navegador descifra entonces el secreto usando la clave del fragmento de URL.",
+      "a7": "Sí, completamente gratis y sin límites. A diferencia de algunos competidores que restringen a los usuarios gratuitos a un puñado de secretos al mes o imponen límites de tamaño, Only Once Share no tiene restricciones artificiales. Puedes compartir texto de hasta 50.000 caracteres y adjuntar imágenes o PDFs de hasta 10 MB (JPEG, PNG, GIF, WebP, PDF), sin necesidad de cuenta. La herramienta también es de código abierto bajo la licencia MIT.",
+      "a8": "No. Only Once Share no requiere registro, ni correo electrónico, ni cuenta. Solo escribe tu texto, adjunta una imagen o PDF opcionalmente, elige un tiempo de expiración y comparte el enlace generado. Este enfoque sin fricciones significa que no hay datos personales que proteger ni credenciales que puedan verse comprometidas."
     },
     "blog": {
       "metaTitle": "Blog — Seguridad, cifrado y compartir secretos | Only Once Share",
@@ -153,13 +156,13 @@
   "security": {
     "title": "Cómo funciona",
     "e2eTitle": "Cifrado de extremo a extremo",
-    "e2eDesc": "Tu texto e imágenes se cifran en tu navegador usando AES-256-GCM con un IV aleatorio de 96 bits antes de salir de tu dispositivo. La clave de cifrado nunca se envía a nuestro servidor.",
+    "e2eDesc": "Tu texto y archivos se cifran en tu navegador usando AES-256-GCM con un IV aleatorio de 96 bits antes de salir de tu dispositivo. La clave de cifrado nunca se envía a nuestro servidor.",
     "hkdfTitle": "Derivación de clave HKDF",
     "hkdfDesc": "Se deriva una clave de cifrado única para cada secreto usando HKDF-SHA-256 con el ID del secreto como contexto. Incluso con la clave maestra, cada secreto tiene su propia clave criptográficamente independiente.",
     "aadTitle": "Vinculación de datos autenticados",
     "aadDesc": "El ID del secreto se vincula como Datos Autenticados Adicionales (AAD) durante el cifrado. Si alguien manipula el ID o intercambia el texto cifrado entre secretos, el descifrado fallará.",
     "zkTitle": "Conocimiento cero",
-    "zkDesc": "El servidor solo almacena datos cifrados — no puede distinguir entre texto e imágenes. No podemos leer, descifrar ni acceder a tus secretos de ninguna manera. La clave de descifrado solo existe en el fragmento de URL del enlace compartido.",
+    "zkDesc": "El servidor solo almacena datos cifrados — no puede distinguir entre texto, imágenes o PDFs. No podemos leer, descifrar ni acceder a tus secretos de ninguna manera. La clave de descifrado solo existe en el fragmento de URL del enlace compartido.",
     "keyTitle": "La clave nunca sale del navegador",
     "keyDesc": "La clave de descifrado se coloca después del # en la URL. Los fragmentos de URL del navegador nunca se envían a los servidores — ni en solicitudes, ni en registros, en ningún lugar.",
     "oneTimeTitle": "Visualización única",

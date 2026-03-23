@@ -825,3 +825,108 @@ textarea:focus {
   background: var(--surface-hover);
   border-color: var(--primary);
 }
+
+/* ─── File Preview (Images & PDFs) ─── */
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.file-preview-thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.file-preview-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-preview-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-preview-size {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.file-preview-remove {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.file-preview-remove:hover {
+  background: var(--error-glow);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--error);
+}
+
+/* ─── PDF Preview (Create Form) ─── */
+.file-preview-pdf {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-sm);
+  color: var(--primary);
+}
+
+/* ─── Secret PDF Container (View Page) ─── */
+.secret-pdf-container {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.pdf-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.pdf-preview svg {
+  color: var(--primary);
+}
+
+.pdf-preview p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.pdf-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.pdf-actions .btn {
+  min-width: 140px;
+}

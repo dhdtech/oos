@@ -9,6 +9,9 @@ import {
   Copy,
   Check,
   X,
+  FileText,
+  Download,
+  ExternalLink,
 } from "lucide-react";
 import { importKey, decrypt, decodePayload } from "../lib/crypto";
 import { getSecret } from "../lib/api";
@@ -24,6 +27,7 @@ export default function ViewSecret() {
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [pdfUrl, setPdfUrl] = useState("");
   const [showImageModal, setShowImageModal] = useState(false);
 
   const hasFetched = useRef(false);
@@ -48,7 +52,12 @@ export default function ViewSecret() {
         setPlaintext(decoded.text);
         if (decoded.image) {
           const blob = new Blob([decoded.image.data as BlobPart], { type: decoded.image.mime });
-          setImageUrl(URL.createObjectURL(blob));
+          const url = URL.createObjectURL(blob);
+          if (decoded.image.mime === "application/pdf") {
+            setPdfUrl(url);
+          } else {
+            setImageUrl(url);
+          }
         }
         posthog.capture("secret_viewed");
         setStatus("revealed");
@@ -71,8 +80,9 @@ export default function ViewSecret() {
   useEffect(() => {
     return () => {
       if (imageUrl) URL.revokeObjectURL(imageUrl);
+      if (pdfUrl) URL.revokeObjectURL(pdfUrl);
     };
-  }, [imageUrl]);
+  }, [imageUrl, pdfUrl]);
 
   async function handleCopy() {
     await navigator.clipboard.writeText(plaintext);
@@ -122,6 +132,34 @@ export default function ViewSecret() {
                   onClick={() => setShowImageModal(true)}
                 />
                 <div className="secret-image-hint">{t("view.clickToEnlarge")}</div>
+              </div>
+            )}
+
+            {pdfUrl && (
+              <div className="secret-pdf-container">
+                <div className="pdf-preview">
+                  <FileText size={48} />
+                  <p>{t("view.pdfAttached")}</p>
+                </div>
+                <div className="pdf-actions">
+                  <a
+                    href={pdfUrl}
+                    download="secret.pdf"
+                    className="btn btn-secondary"
+                  >
+                    <Download size={16} />
+                    {t("view.downloadPdf")}
+                  </a>
+                  <a
+                    href={pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                  >
+                    <ExternalLink size={16} />
+                    {t("view.viewPdf")}
+                  </a>
+                </div>
               </div>
             )}
           </div>

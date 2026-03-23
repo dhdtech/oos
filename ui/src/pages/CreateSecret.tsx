@@ -14,6 +14,7 @@ import {
   Image,
   X,
   ArrowRight,
+  FileText,
 } from "lucide-react";
 import { generateKey, exportKey, encrypt, encodePayload } from "../lib/crypto";
 import { createSecret } from "../lib/api";
@@ -44,27 +45,42 @@ export default function CreateSecret() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string>("");
-  const [imageError, setImageError] = useState("");
+  const [attachedFile, setAttachedFile] = useState<File | null>(null);
+  const [filePreview, setFilePreview] = useState<string>("");
+  const [fileError, setFileError] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-  const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
+  const ACCEPTED_TYPES = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+    "application/pdf",
+  ];
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+  function isPdf(file: File | null): boolean {
+    return file?.type === "application/pdf";
+  }
 
   function handleFile(file: File) {
-    setImageError("");
+    setFileError("");
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      setImageError(t("create.image.invalidType"));
+      setFileError(t("create.file.invalidType"));
       return;
     }
-    if (file.size > MAX_IMAGE_SIZE) {
-      setImageError(t("create.image.tooLarge"));
+    if (file.size > MAX_FILE_SIZE) {
+      setFileError(t("create.file.tooLarge"));
       return;
     }
-    setImageFile(file);
-    setImagePreview(URL.createObjectURL(file));
+    setAttachedFile(file);
+    // Only create object URL preview for images, not PDFs
+    if (!file.type.startsWith("application/pdf")) {
+      setFilePreview(URL.createObjectURL(file));
+    } else {
+      setFilePreview(""); // No visual preview for PDFs
+    }
   }
 
   function handleDrop(e: React.DragEvent) {
@@ -95,11 +111,11 @@ export default function CreateSecret() {
     e.target.value = "";
   }
 
-  function removeImage() {
-    if (imagePreview) URL.revokeObjectURL(imagePreview);
-    setImageFile(null);
-    setImagePreview("");
-    setImageError("");
+  function removeFile() {
+    if (filePreview) URL.revokeObjectURL(filePreview);
+    setAttachedFile(null);
+    setFilePreview("");
+    setFileError("");
   }
 
   function formatFileSize(bytes: number): string {
@@ -110,18 +126,18 @@ export default function CreateSecret() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!secret.trim() && !imageFile) return;
+    if (!secret.trim() && !attachedFile) return;
 
     setLoading(true);
     setError("");
     setLink("");
 
     try {
-      let imageAttachment: { mime: string; data: ArrayBuffer } | undefined;
-      if (imageFile) {
-        imageAttachment = {
-          mime: imageFile.type,
-          data: await imageFile.arrayBuffer(),
+      let fileAttachment: { mime: string; data: ArrayBuffer } | undefined;
+      if (attachedFile) {
+        fileAttachment = {
+          mime: attachedFile.type,
+          data: await attachedFile.arrayBuffer(),
         };
       }
 
@@ -129,15 +145,19 @@ export default function CreateSecret() {
         (+c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))).toString(16),
       );
       const key = await generateKey();
-      const payload = encodePayload(secret, imageAttachment);
+      const payload = encodePayload(secret, fileAttachment);
       const ciphertext = await encrypt(payload, key, id);
       const result = await createSecret(ciphertext, ttlHours, id);
       const keyStr = await exportKey(key);
       const pathId = result.alias ?? result.id;
       setLink(`${window.location.origin}/s/${pathId}?lng=${i18n.language}#${keyStr}`);
-      posthog.capture("secret_created", { ttl_hours: ttlHours, has_image: !!imageFile });
+      posthog.capture("secret_created", {
+        ttl_hours: ttlHours,
+        has_attachment: !!attachedFile,
+        attachment_type: attachedFile ? (isPdf(attachedFile) ? "pdf" : "image") : null,
+      });
       setSecret("");
-      removeImage();
+      removeFile();
     } catch (err) {
       posthog.capture("secret_create_failed");
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -198,37 +218,49 @@ export default function CreateSecret() {
             </div>
 
             <div
-              className={`dropzone ${dragActive ? "dropzone--active" : ""} ${imageFile ? "dropzone--has-file" : ""}`}
+              className={`dropzone ${dragActive ? "dropzone--active" : ""} ${attachedFile ? "dropzone--has-file" : ""}`}
               onDrop={handleDrop}
               onDragEnter={handleDragEnter}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
-              onClick={() => !imageFile && fileInputRef.current?.click()}
+              onClick={() => !attachedFile && fileInputRef.current?.click()}
             >
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/jpeg,image/png,image/gif,image/webp"
+                accept="image/jpeg,image/png,image/gif,image/webp,application/pdf"
                 onChange={handleFileInput}
                 style={{ display: "none" }}
               />
 
-              {imageFile && imagePreview ? (
-                <div className="image-preview">
-                  <img
-                    src={imagePreview}
-                    alt={t("create.image.preview")}
-                    className="image-preview-thumb"
-                  />
-                  <div className="image-preview-info">
-                    <div className="image-preview-name">{imageFile.name}</div>
-                    <div className="image-preview-size">{formatFileSize(imageFile.size)}</div>
-                  </div>
+              {attachedFile ? (
+                <div className="file-preview">
+                  {isPdf(attachedFile) ? (
+                    <div className="file-preview-pdf">
+                      <FileText size={32} />
+                      <div className="file-preview-info">
+                        <div className="file-preview-name">{attachedFile.name}</div>
+                        <div className="file-preview-size">{formatFileSize(attachedFile.size)}</div>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        src={filePreview}
+                        alt={t("create.file.preview")}
+                        className="file-preview-thumb"
+                      />
+                      <div className="file-preview-info">
+                        <div className="file-preview-name">{attachedFile.name}</div>
+                        <div className="file-preview-size">{formatFileSize(attachedFile.size)}</div>
+                      </div>
+                    </>
+                  )}
                   <button
                     type="button"
-                    className="image-preview-remove"
-                    onClick={(e) => { e.stopPropagation(); removeImage(); }}
-                    aria-label={t("create.image.remove")}
+                    className="file-preview-remove"
+                    onClick={(e) => { e.stopPropagation(); removeFile(); }}
+                    aria-label={t("create.file.remove")}
                   >
                     <X size={14} />
                   </button>
@@ -250,7 +282,7 @@ export default function CreateSecret() {
                 </>
               )}
 
-              {imageError && <div className="dropzone-error">{imageError}</div>}
+              {fileError && <div className="dropzone-error">{fileError}</div>}
             </div>
 
             <div className="ttl-group">
@@ -283,7 +315,7 @@ export default function CreateSecret() {
             <button
               type="submit"
               className="btn btn-primary btn-full"
-              disabled={loading || (!secret.trim() && !imageFile)}
+              disabled={loading || (!secret.trim() && !attachedFile)}
             >
               {loading ? (
                 <>
