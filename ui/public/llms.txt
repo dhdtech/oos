@@ -1,15 +1,16 @@
 # Only Once Share — ooshare.io
 
-> Free, open-source, end-to-end encrypted secret and image sharing tool.
+> Free, open-source, end-to-end encrypted secret, image, and document sharing tool. Password protected photo sharing with self-destructing links.
 
-Only Once Share lets you send passwords, images, API keys, and sensitive information securely via one-time self-destructing links. Secrets are encrypted in the browser using AES-256-GCM before transmission — the server never sees plaintext data.
+Only Once Share lets you send passwords, images, PDFs, API keys, and sensitive documents securely via one-time self-destructing links. It provides password protected photo and document sharing — secrets are encrypted in the browser using AES-256-GCM before transmission, and the server never sees plaintext data.
 
 ## Key Facts
 
 - **Encryption**: AES-256-GCM with HKDF-SHA-256 key derivation (client-side, Web Crypto API)
 - **Architecture**: Zero-knowledge — the server stores only encrypted blobs
-- **Image Sharing**: Drag-and-drop encrypted image sharing (JPEG, PNG, GIF, WebP up to 10 MB)
-- **Content Types**: Text only, image only, or text + image together in one secret
+- **Image Sharing**: Drag-and-drop encrypted image sharing (JPEG, PNG, GIF, WebP up to 10 MB) — password protected photo sharing
+- **PDF/Document Sharing**: Encrypted PDF sharing up to 10 MB with one-time self-destructing links
+- **Content Types**: Text only, image only, PDF only, or any combination together in one secret
 - **Pricing**: Completely free, no limits, no account required
 - **License**: MIT open source (https://github.com/dhdtech/only-once-share)
 - **Deployment**: Cloud at ooshare.io or self-hosted via Docker
@@ -19,30 +20,31 @@ Only Once Share lets you send passwords, images, API keys, and sensitive informa
 
 ## How It Works
 
-1. User enters secret text and/or drops an image in the browser
+1. User enters secret text and/or drops an image or PDF in the browser
 2. Browser generates a random AES-256-GCM key via Web Crypto API
-3. Text and image are packed into a binary envelope and encrypted entirely client-side
+3. Text, images, and/or PDFs are packed into a binary envelope and encrypted entirely client-side
 4. The encryption key is placed in the URL fragment (#) — never sent to any server
 5. Only the encrypted blob is sent to the server and stored in Redis with a TTL
 6. A one-time link is generated containing the encrypted secret ID and the key in the fragment
 7. When the recipient opens the link, the encrypted blob is retrieved and atomically deleted (Redis GETDEL)
-8. The browser decrypts the secret and displays text and/or image
+8. The browser decrypts the secret and displays text, image, and/or PDF
 9. The secret can never be viewed again
 
-## Image Sharing Feature
+## Image & Document Sharing Features
 
-Only Once Share is the only secret sharing tool that combines encrypted image sharing with zero-knowledge architecture and one-time viewing. Unlike competitors (OneTimeSecret, Privnote, scrt.link, Password.link) which only support text, Only Once Share encrypts images client-side with the same AES-256-GCM standard.
+Only Once Share is the only secret sharing tool that combines encrypted image and PDF sharing with zero-knowledge architecture and one-time viewing. Unlike competitors (OneTimeSecret, Privnote, scrt.link, Password.link) which only support text, Only Once Share encrypts images and documents client-side with the same AES-256-GCM standard. It offers password protected photo sharing and secure document sharing in one tool.
 
-- Drag-and-drop or click to upload images
-- Supports JPEG, PNG, GIF, WebP up to 10 MB
-- Images are encrypted in the browser before upload — the server never sees the original image
-- View images in a secure modal — no download button, no right-click save
-- Send text + image together in one self-destructing link
+- Drag-and-drop or click to upload images or PDFs
+- Supports JPEG, PNG, GIF, WebP, and PDF up to 10 MB
+- Files are encrypted in the browser before upload — the server never sees the original content
+- View images in a secure modal; download or view PDFs in a new tab
+- Send text + image + PDF together in one self-destructing link
 
 ## What Makes It Different
 
 - True zero-knowledge: encryption key never leaves the browser (URL fragments are never sent to servers)
-- Only tool combining encrypted image sharing + zero-knowledge + one-time viewing
+- Only tool combining encrypted image and PDF sharing + zero-knowledge + one-time viewing
+- Password protected photo sharing and secure document sharing in one platform
 - Completely free with no artificial limits (unlike OneTimeSecret's 100KB cap or Password.link's 8/month)
 - Open source MIT license — fully auditable code
 - 6-language support for global accessibility

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Only Once Share — Compartilhamento seguro de segredos, imagens e PDFs",
-    "description": "Envie senhas, imagens, PDFs, chaves de API e documentos sensíveis com segurança através de links autodestrutivos de uso único. Criptografia AES-256 ponta a ponta, arquitetura de conhecimento zero. Gratuito e código aberto — sem necessidade de conta."
+    "description": "Envie senhas, imagens, PDFs, chaves de API e documentos sensíveis com segurança através de links autodestrutivos de uso único. Compartilhamento de fotos protegido por senha com criptografia AES-256 e arquitetura de conhecimento zero. Gratuito e código aberto — sem necessidade de conta."
   },
   "header": {
     "title": "Only Once Share"

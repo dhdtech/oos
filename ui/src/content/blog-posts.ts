@@ -1795,4 +1795,103 @@ docker compose up -d</code></pre>
 <p>Images carry more sensitive information than most people realize. From medical scans to ID documents to private photos, the consequences of an image leak are often far worse than a leaked password. Traditional sharing methods — email, messaging apps, cloud links — were not designed for sensitive, one-time sharing. Encrypted, self-destructing links close this gap by ensuring images are encrypted before they leave your device and permanently deleted after a single viewing. The next time you need to share a sensitive image, skip the email attachment and <a href="/">create a self-destructing link instead</a>.</p>
 `
   },
+
+  // ──────────────────────────────────────────────
+  // Post 22 — March 2026
+  // ──────────────────────────────────────────────
+  {
+    slug: "password-protected-photo-sharing",
+    title: "Password Protected Photo Sharing: How to Send Private Photos Securely",
+    date: "2026-03-26",
+    description: "Learn how to share photos securely with password protection and end-to-end encryption. Discover why traditional methods fail and how self-destructing encrypted links keep your private images safe.",
+    readingTime: 7,
+    tags: ["security", "photos", "privacy", "encryption", "images"],
+    content: `
+<p>Sharing photos privately should not mean trusting a third party with your unencrypted images. Whether you are sending ID scans to a bank, medical images to a doctor, private family photos to a relative, or confidential screenshots to a colleague, you need a method that keeps your photos protected from the moment they leave your device until the recipient views them — and then destroys them permanently.</p>
+
+<h2>What Is Password Protected Photo Sharing?</h2>
+<p>Password protected photo sharing means encrypting a photo before sending it so that only someone with the correct key or password can view it. The goal is to ensure that no one — not the server, not the network, not a hacker — can see the photo without authorization. The strongest form of this is <strong>end-to-end encryption</strong>, where the photo is encrypted on the sender's device and decrypted only on the recipient's device.</p>
+
+<p>Traditional "password protected" sharing — like password-protecting a ZIP file or a Google Drive link — still uploads the unencrypted file to a server. The server can see your photo. The password only gates access, it does not encrypt the content. True password protected photo sharing means the server never sees the original image at all.</p>
+
+<h2>Why Traditional Photo Sharing Methods Are Insecure</h2>
+
+<h3>Email Attachments</h3>
+<p>Email stores photos indefinitely on multiple servers (sender, recipient, backups). Most email is not end-to-end encrypted. A compromised email account exposes every photo ever sent through it. Attachments are trivially easy to forward, and "deleting" an email does not remove it from server backups.</p>
+
+<h3>Messaging Apps</h3>
+<p>WhatsApp, Telegram, Slack, and Teams all store images on their servers. Even apps with "disappearing messages" are unreliable — recipients can screenshot, the app may cache images locally, and corporate retention policies can override deletion settings. Cloud syncing (iCloud, Google Photos) means deleted images may persist in backups.</p>
+
+<h3>Cloud Storage Links</h3>
+<p>Google Drive, Dropbox, and OneDrive links are persistent by default. The file sits on the provider's servers indefinitely. Revoking access requires manual action, and shared links can be forwarded without the sender knowing. The provider itself can access your unencrypted files.</p>
+
+<h3>Password-Protected ZIP Files</h3>
+<p>While better than plaintext, ZIP password protection has serious weaknesses. The file must still be transmitted through an insecure channel. The password itself needs a separate secure channel. The encrypted ZIP persists wherever it was sent. And common ZIP encryption (ZipCrypto) is known to be cryptographically weak.</p>
+
+<h2>How Encrypted Self-Destructing Links Work</h2>
+<p>The most secure approach to password protected photo sharing combines three principles: <strong>client-side encryption</strong>, <strong>zero-knowledge architecture</strong>, and <strong>one-time retrieval</strong>.</p>
+
+<ol>
+<li><strong>Client-side encryption</strong> — Your photo is encrypted in your browser using AES-256-GCM before it ever leaves your device. The server receives only encrypted bytes that it cannot read.</li>
+<li><strong>Zero-knowledge architecture</strong> — The encryption key is placed in the URL fragment (the part after the #). Browsers never send URL fragments to servers. The server literally cannot decrypt your photo even if it wanted to.</li>
+<li><strong>One-time retrieval</strong> — When the recipient opens the link, the encrypted photo is fetched and atomically deleted from the server in the same operation. The photo can only be viewed once, and then it is permanently gone.</li>
+</ol>
+
+<p>This is fundamentally different from "password protecting" a file on a cloud service. There is no unencrypted copy on any server, no persistent link that could be shared further, and no window where the data can be intercepted.</p>
+
+<h2>Real-World Use Cases</h2>
+
+<h3>Identity Verification</h3>
+<p>Banks, landlords, and employers routinely ask for photos of your ID, passport, or driver's license. Emailing these creates a permanent record of your identity documents in multiple email accounts and server backups. With encrypted self-destructing links, the verifier sees your ID once, confirms the information, and the image is permanently destroyed.</p>
+
+<h3>Medical Images</h3>
+<p>Doctors sharing X-rays, MRI scans, or lab results with specialists need a method that complies with HIPAA and GDPR. Email does not meet these requirements. An encrypted, self-destructing link ensures the image is viewed once by the intended recipient and then permanently deleted — satisfying data minimization principles.</p>
+
+<h3>Legal Documents</h3>
+<p>Photos of signed contracts, court filings, or notarized documents often need to be shared between parties. These should not persist in email threads that might be forwarded, subpoenaed, or breached. A one-time encrypted link ensures the document is viewed and then gone.</p>
+
+<h3>Private Personal Photos</h3>
+<p>Family photos, private moments, or sensitive personal images deserve the same level of protection. Regular messaging apps store these images on their servers, sync them to cloud backups, and make them searchable. An encrypted self-destructing link puts you back in control of your private photos.</p>
+
+<h3>Business and Confidential Screenshots</h3>
+<p>Screenshots of internal dashboards, financial reports, or unreleased product designs are frequently shared between team members. These should never linger in Slack channels or email threads where they could be accessed by unauthorized people months later.</p>
+
+<h2>How Only Once Share Handles Password Protected Photo Sharing</h2>
+<p><a href="/">Only Once Share</a> provides password protected photo sharing with military-grade encryption:</p>
+
+<ol>
+<li><strong>Drop your photo</strong> — Drag and drop or click to select an image (JPEG, PNG, GIF, WebP up to 10 MB). You can also include a text message or a PDF alongside the photo.</li>
+<li><strong>Automatic encryption</strong> — Your photo is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server receives only encrypted bytes.</li>
+<li><strong>Get a one-time link</strong> — The encryption key is embedded in the URL fragment (after the #) and never sent to any server.</li>
+<li><strong>Share the link</strong> — Send the link via any channel (WhatsApp, email, SMS). Even if the channel is compromised, the encrypted photo cannot be read without the full URL.</li>
+<li><strong>Recipient views once</strong> — The recipient opens the link, the photo is decrypted in their browser, and the encrypted data is permanently deleted from the server via atomic deletion.</li>
+</ol>
+
+<p>The entire process is free, open source, and requires no account or registration. You can <a href="/security">review the security architecture</a> or <a href="https://github.com/dhdtech/only-once-share">audit the source code</a> yourself.</p>
+
+<h2>What to Look for in a Secure Photo Sharing Tool</h2>
+<p>When choosing a tool for password protected photo sharing, verify these criteria:</p>
+
+<ul>
+<li><strong>Client-side encryption</strong> — The photo must be encrypted in your browser, not on the server. If the server handles your plaintext photo even briefly, it is not truly secure.</li>
+<li><strong>Zero-knowledge architecture</strong> — The server should never have access to the encryption key. Look for tools that use URL fragments to carry the key.</li>
+<li><strong>One-time retrieval</strong> — The photo should be permanently deleted after the first viewing. Persistent links are a liability.</li>
+<li><strong>Open source</strong> — You should be able to audit the encryption code. Proprietary tools require you to trust their claims without verification.</li>
+<li><strong>No account required</strong> — Creating accounts introduces another attack surface. The best tools work without registration.</li>
+<li><strong>Auto-expiration</strong> — Even if the recipient never opens the link, the encrypted data should be automatically deleted after a set time.</li>
+</ul>
+
+<h2>Best Practices for Sharing Photos Securely</h2>
+<ul>
+<li><strong>Never email ID documents or medical images</strong> — Use encrypted one-time links instead.</li>
+<li><strong>Set the shortest practical expiration</strong> — If the recipient will view it within an hour, set a 1-hour TTL.</li>
+<li><strong>Verify the recipient</strong> — A self-destructing link is only as secure as the channel you use to deliver it. Send it to a verified phone number or secure messaging contact.</li>
+<li><strong>Do not use cloud storage for one-time sharing</strong> — Google Drive and Dropbox links persist. If the recipient only needs to see the photo once, use a self-destructing link.</li>
+<li><strong>Check compliance requirements</strong> — If you handle medical images (HIPAA), personal data (GDPR), or financial records, encrypted self-destructing links help meet data minimization requirements.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Password protected photo sharing is not just about adding a password to a file — it is about ensuring your photos are encrypted before they leave your device, transmitted through a zero-knowledge server, and permanently destroyed after viewing. Traditional methods like email, messaging apps, and cloud links fail all three of these criteria. Encrypted, self-destructing links provide the strongest form of photo protection available today. The next time you need to share a sensitive photo, skip the email attachment and <a href="/">create a self-destructing encrypted link instead</a>.</p>
+`
+  },
 ];

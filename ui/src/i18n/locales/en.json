@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Only Once Share — Secure One-Time Secret, Image & PDF Sharing",
-    "description": "Send passwords, images, PDFs, API keys, and sensitive documents securely with one-time self-destructing links. End-to-end AES-256 encryption, zero-knowledge architecture. Free and open source — no account required."
+    "description": "Send passwords, images, PDFs, API keys, and sensitive documents securely with one-time self-destructing links. Password protected photo and document sharing with AES-256 encryption and zero-knowledge architecture. Free and open source — no account required."
   },
   "header": {
     "title": "Only Once Share"

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Only Once Share — 安全一次性秘密、图像和PDF分享",
-    "description": "通过一次性自毁链接安全发送密码、图像、PDF、API密钥和敏感文档。端到端AES-256加密，零知识架构。免费开源，无需注册账户。"
+    "description": "通过一次性自毁链接安全发送密码、图像、PDF、API密钥和敏感文档。密码保护照片分享，采用AES-256加密和零知识架构。免费开源，无需注册账户。"
   },
   "header": {
     "title": "Only Once Share"

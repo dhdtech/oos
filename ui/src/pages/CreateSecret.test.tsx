@@ -213,46 +213,46 @@ describe("CreateSecret", () => {
 
   it("renders drop zone", () => {
     renderWithProviders(<CreateSecret />);
-    expect(screen.getByText("Drag & drop an image here")).toBeInTheDocument();
+    expect(screen.getByText("Drag & drop a file here")).toBeInTheDocument();
     expect(screen.getByText("or click to browse")).toBeInTheDocument();
     expect(screen.getByText(/Max 10 MB/)).toBeInTheDocument();
   });
 
   it("shows drag active state on dragenter", () => {
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
 
     fireEvent.dragEnter(dropzone, { dataTransfer: { files: [] } });
-    expect(screen.getByText("Drop your image here")).toBeInTheDocument();
+    expect(screen.getByText("Drop your file here")).toBeInTheDocument();
   });
 
   it("shows drag active state on dragover and resets on dragleave", () => {
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
 
     fireEvent.dragOver(dropzone, { dataTransfer: { files: [] } });
-    expect(screen.getByText("Drop your image here")).toBeInTheDocument();
+    expect(screen.getByText("Drop your file here")).toBeInTheDocument();
 
     fireEvent.dragLeave(dropzone, { dataTransfer: { files: [] } });
-    expect(screen.getByText("Drag & drop an image here")).toBeInTheDocument();
+    expect(screen.getByText("Drag & drop a file here")).toBeInTheDocument();
   });
 
-  it("rejects non-image files", async () => {
+  it("rejects unsupported file types", async () => {
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
-    const file = new File(["content"], "test.pdf", { type: "application/pdf" });
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
+    const file = new File(["content"], "test.txt", { type: "text/plain" });
 
     fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
-    expect(screen.getByText("Only images are allowed (JPEG, PNG, GIF, WebP)")).toBeInTheDocument();
+    expect(screen.getByText("Only images (JPEG, PNG, GIF, WebP) and PDFs are allowed")).toBeInTheDocument();
   });
 
   it("rejects files over 10MB", async () => {
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
     const bigFile = new File([new ArrayBuffer(11 * 1024 * 1024)], "large.png", { type: "image/png" });
 
     fireEvent.drop(dropzone, { dataTransfer: { files: [bigFile] } });
-    expect(screen.getByText("Image must be under 10 MB")).toBeInTheDocument();
+    expect(screen.getByText("File must be under 10 MB")).toBeInTheDocument();
   });
 
   it("shows preview for valid image", async () => {
@@ -260,13 +260,13 @@ describe("CreateSecret", () => {
     URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
 
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
     const file = new File(["image-data"], "photo.png", { type: "image/png" });
     Object.defineProperty(file, "size", { value: 5000 });
 
     fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
     expect(screen.getByText("photo.png")).toBeInTheDocument();
-    expect(screen.getByAltText("Image preview")).toBeInTheDocument();
+    expect(screen.getByAltText("File preview")).toBeInTheDocument();
   });
 
   it("removes image when X button is clicked", async () => {
@@ -275,15 +275,15 @@ describe("CreateSecret", () => {
 
     const user = userEvent.setup();
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
     const file = new File(["image-data"], "photo.png", { type: "image/png" });
 
     fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
     expect(screen.getByText("photo.png")).toBeInTheDocument();
 
-    await user.click(screen.getByLabelText("Remove image"));
+    await user.click(screen.getByLabelText("Remove file"));
     expect(screen.queryByText("photo.png")).not.toBeInTheDocument();
-    expect(screen.getByText("Drag & drop an image here")).toBeInTheDocument();
+    expect(screen.getByText("Drag & drop a file here")).toBeInTheDocument();
     expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock-url");
   });
 
@@ -293,7 +293,7 @@ describe("CreateSecret", () => {
 
     const user = userEvent.setup();
     renderWithProviders(<CreateSecret />);
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
     const file = new File(["image-data"], "photo.png", { type: "image/png" });
 
     fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
@@ -318,7 +318,7 @@ describe("CreateSecret", () => {
     renderWithProviders(<CreateSecret />);
 
     await user.type(screen.getByPlaceholderText(/paste your password/i), "my text");
-    const dropzone = screen.getByText("Drag & drop an image here").closest(".dropzone")!;
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
     const file = new File(["image-data"], "photo.png", { type: "image/png" });
     fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
 

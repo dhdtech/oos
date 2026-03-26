@@ -1024,5 +1024,81 @@ docker compose up -d</code></pre>
 <h2>Conclusión</h2>
 <p>Las imágenes contienen más información sensible de lo que la mayoría de la gente cree. Desde escaneos médicos hasta documentos de identidad y fotos privadas, las consecuencias de una filtración de imágenes suelen ser mucho peores que una contraseña filtrada. Los métodos tradicionales — correo, apps de mensajería, enlaces en la nube — no fueron diseñados para compartir de forma segura y única. Los enlaces cifrados y autodestructivos cierran esta brecha. La próxima vez que necesites compartir una imagen sensible, omite el archivo adjunto del correo y <a href="/">crea un enlace autodestructivo</a>.</p>
 `
+  },
+  "password-protected-photo-sharing": {
+    title: "Compartir fotos con protección de contraseña: cómo enviar imágenes privadas de forma segura",
+    description: "Aprende a compartir fotos de forma segura con protección de contraseña y cifrado de extremo a extremo. Descubre por qué los métodos tradicionales fallan y cómo los enlaces cifrados autodestructivos mantienen tus imágenes privadas protegidas.",
+    content: `
+<p>Compartir fotos de forma privada no debería significar confiar en un tercero con tus imágenes sin cifrar. Ya sea que estés enviando escaneos de tu documento de identidad a un banco, imágenes médicas a un médico, fotos familiares privadas a un familiar o capturas de pantalla confidenciales a un colega, necesitas un método que mantenga tus fotos protegidas desde el momento en que salen de tu dispositivo hasta que el destinatario las ve — y que luego las destruya de forma permanente.</p>
+
+<h2>¿Qué es compartir fotos con protección de contraseña?</h2>
+<p>Compartir fotos con protección de contraseña significa cifrar una foto antes de enviarla para que solo alguien con la clave o contraseña correcta pueda verla. El objetivo es garantizar que nadie — ni el servidor, ni la red, ni un hacker — pueda ver la foto sin autorización. La forma más sólida de esto es el <strong>cifrado de extremo a extremo</strong>, donde la foto se cifra en el dispositivo del remitente y solo se descifra en el dispositivo del destinatario.</p>
+<p>El intercambio "protegido con contraseña" tradicional — como proteger con contraseña un archivo ZIP o un enlace de Google Drive — sigue subiendo el archivo sin cifrar a un servidor. El servidor puede ver tu foto. La contraseña solo controla el acceso, no cifra el contenido. El verdadero intercambio de fotos con protección de contraseña significa que el servidor nunca ve la imagen original.</p>
+
+<h2>Por qué los métodos tradicionales de compartir fotos son inseguros</h2>
+<h3>Archivos adjuntos de correo electrónico</h3>
+<p>El correo electrónico almacena fotos indefinidamente en múltiples servidores (remitente, destinatario, copias de seguridad). La mayoría del correo no tiene cifrado de extremo a extremo. Una cuenta de correo comprometida expone cada foto enviada a través de ella. Los archivos adjuntos son trivialmente fáciles de reenviar, y "eliminar" un correo no lo borra de las copias de seguridad del servidor.</p>
+<h3>Apps de mensajería</h3>
+<p>WhatsApp, Telegram, Slack y Teams almacenan imágenes en sus servidores. Incluso las apps con funciones de "mensajes que desaparecen" no son confiables — los destinatarios pueden hacer capturas de pantalla, la app puede almacenar imágenes en caché localmente y las políticas de retención corporativa pueden anular la configuración de eliminación. La sincronización en la nube (iCloud, Google Fotos) significa que las imágenes eliminadas pueden persistir en las copias de seguridad.</p>
+<h3>Enlaces de almacenamiento en la nube</h3>
+<p>Los enlaces de Google Drive, Dropbox y OneDrive son persistentes por defecto. El archivo permanece en los servidores del proveedor indefinidamente. Revocar el acceso requiere acción manual, y los enlaces compartidos pueden reenviarse sin que el remitente lo sepa. El propio proveedor puede acceder a tus archivos sin cifrar.</p>
+<h3>Archivos ZIP protegidos con contraseña</h3>
+<p>Aunque mejor que el texto sin formato, la protección de contraseña de ZIP tiene debilidades graves. El archivo aún debe transmitirse a través de un canal inseguro. La propia contraseña necesita un canal seguro separado. El ZIP cifrado persiste dondequiera que se haya enviado. Y el cifrado ZIP común (ZipCrypto) es conocido por ser criptográficamente débil.</p>
+
+<h2>Cómo funcionan los enlaces cifrados autodestructivos</h2>
+<p>El enfoque más seguro para compartir fotos con protección de contraseña combina tres principios: <strong>cifrado del lado del cliente</strong>, <strong>arquitectura de conocimiento cero</strong> y <strong>recuperación única</strong>.</p>
+<ol>
+<li><strong>Cifrado del lado del cliente</strong> — Tu foto se cifra en tu navegador usando AES-256-GCM antes de salir de tu dispositivo. El servidor recibe solo bytes cifrados que no puede leer.</li>
+<li><strong>Arquitectura de conocimiento cero</strong> — La clave de cifrado se coloca en el fragmento de la URL (la parte después del #). Los navegadores nunca envían fragmentos de URL a los servidores. El servidor literalmente no puede descifrar tu foto aunque quisiera.</li>
+<li><strong>Recuperación única</strong> — Cuando el destinatario abre el enlace, la foto cifrada se obtiene y se elimina atómicamente del servidor en la misma operación. La foto solo se puede ver una vez y luego desaparece de forma permanente.</li>
+</ol>
+<p>Esto es fundamentalmente diferente a "proteger con contraseña" un archivo en un servicio en la nube. No hay ninguna copia sin cifrar en ningún servidor, ningún enlace persistente que pueda compartirse más y ninguna ventana en la que los datos puedan interceptarse.</p>
+
+<h2>Casos de uso en el mundo real</h2>
+<h3>Verificación de identidad</h3>
+<p>Los bancos, propietarios y empleadores solicitan habitualmente fotos de tu documento de identidad, pasaporte o carnet de conducir. Enviarlos por correo crea un registro permanente de tus documentos de identidad en múltiples cuentas de correo y copias de seguridad del servidor. Con enlaces cifrados autodestructivos, el verificador ve tu identificación una vez, confirma la información y la imagen se destruye permanentemente.</p>
+<h3>Imágenes médicas</h3>
+<p>Los médicos que comparten radiografías, resonancias magnéticas o resultados de laboratorio con especialistas necesitan un método que cumpla con HIPAA y GDPR. El correo electrónico no cumple estos requisitos. Un enlace cifrado y autodestructivo garantiza que la imagen sea vista una vez por el destinatario previsto y luego se elimine de forma permanente, satisfaciendo los principios de minimización de datos.</p>
+<h3>Documentos legales</h3>
+<p>Las fotos de contratos firmados, presentaciones judiciales o documentos notariados a menudo deben compartirse entre las partes. Estos no deberían persistir en hilos de correo que podrían reenviarse, solicitarse judicialmente o ser vulnerados. Un enlace cifrado de un solo uso garantiza que el documento se vea y luego desaparezca.</p>
+<h3>Fotos personales privadas</h3>
+<p>Las fotos familiares, momentos privados o imágenes personales sensibles merecen el mismo nivel de protección. Las apps de mensajería habituales almacenan estas imágenes en sus servidores, las sincronizan con copias de seguridad en la nube y las hacen buscables. Un enlace cifrado autodestructivo te devuelve el control de tus fotos privadas.</p>
+<h3>Capturas de pantalla empresariales y confidenciales</h3>
+<p>Las capturas de pantalla de paneles internos, informes financieros o diseños de productos no publicados se comparten frecuentemente entre miembros del equipo. Estos nunca deberían permanecer en canales de Slack o hilos de correo donde personas no autorizadas podrían acceder a ellos meses después.</p>
+
+<h2>Cómo Only Once Share gestiona el intercambio de fotos con protección de contraseña</h2>
+<p><a href="/">Only Once Share</a> proporciona intercambio de fotos con protección de contraseña con cifrado de grado militar:</p>
+<ol>
+<li><strong>Sube tu foto</strong> — Arrastra y suelta o haz clic para seleccionar una imagen (JPEG, PNG, GIF, WebP de hasta 10 MB). También puedes incluir un mensaje de texto o un PDF junto con la foto.</li>
+<li><strong>Cifrado automático</strong> — Tu foto se cifra en tu navegador usando AES-256-GCM con una clave derivada via HKDF-SHA-256. El servidor recibe solo bytes cifrados.</li>
+<li><strong>Obtén un enlace de un solo uso</strong> — La clave de cifrado está integrada en el fragmento de la URL (después del #) y nunca se envía a ningún servidor.</li>
+<li><strong>Comparte el enlace</strong> — Envía el enlace a través de cualquier canal (WhatsApp, correo, SMS). Incluso si el canal está comprometido, la foto cifrada no puede leerse sin la URL completa.</li>
+<li><strong>El destinatario la ve una vez</strong> — El destinatario abre el enlace, la foto se descifra en su navegador y los datos cifrados se eliminan permanentemente del servidor mediante eliminación atómica.</li>
+</ol>
+<p>Todo el proceso es gratuito, de código abierto y no requiere cuenta ni registro. Puedes <a href="/security">revisar la arquitectura de seguridad</a> o <a href="https://github.com/dhdtech/only-once-share">auditar el código fuente</a> tú mismo.</p>
+
+<h2>Qué buscar en una herramienta segura para compartir fotos</h2>
+<p>Al elegir una herramienta para compartir fotos con protección de contraseña, verifica estos criterios:</p>
+<ul>
+<li><strong>Cifrado del lado del cliente</strong> — La foto debe cifrarse en tu navegador, no en el servidor.</li>
+<li><strong>Arquitectura de conocimiento cero</strong> — El servidor nunca debería tener acceso a la clave de cifrado.</li>
+<li><strong>Recuperación única</strong> — La foto debe eliminarse de forma permanente después de la primera visualización.</li>
+<li><strong>Código abierto</strong> — Deberías poder auditar el código de cifrado.</li>
+<li><strong>Sin cuenta requerida</strong> — Crear cuentas introduce otra superficie de ataque.</li>
+<li><strong>Expiración automática</strong> — Incluso si el destinatario nunca abre el enlace, los datos cifrados deben eliminarse automáticamente después de un tiempo determinado.</li>
+</ul>
+
+<h2>Mejores prácticas para compartir fotos de forma segura</h2>
+<ul>
+<li><strong>Nunca envíes documentos de identidad o imágenes médicas por correo</strong> — Usa en su lugar enlaces cifrados de un solo uso.</li>
+<li><strong>Configura la expiración más corta posible</strong> — Si el destinatario lo verá en una hora, configura un TTL de 1 hora.</li>
+<li><strong>Verifica al destinatario</strong> — Un enlace autodestructivo es tan seguro como el canal que usas para enviarlo.</li>
+<li><strong>No uses almacenamiento en la nube para compartir una sola vez</strong> — Los enlaces de Google Drive y Dropbox persisten.</li>
+<li><strong>Verifica los requisitos de cumplimiento</strong> — Si manejas imágenes médicas (HIPAA), datos personales (GDPR) o registros financieros, los enlaces cifrados autodestructivos ayudan a cumplir con los requisitos de minimización de datos.</li>
+</ul>
+
+<h2>Conclusión</h2>
+<p>Compartir fotos con protección de contraseña no consiste solo en añadir una contraseña a un archivo — se trata de garantizar que tus fotos estén cifradas antes de salir de tu dispositivo, transmitidas a través de un servidor de conocimiento cero y destruidas permanentemente después de su visualización. Los métodos tradicionales como el correo, las apps de mensajería y los enlaces en la nube no cumplen ninguno de estos tres criterios. Los enlaces cifrados y autodestructivos proporcionan la forma más sólida de protección de fotos disponible hoy en día. La próxima vez que necesites compartir una foto sensible, omite el archivo adjunto del correo y <a href="/">crea un enlace cifrado autodestructivo</a>.</p>
+`
   }
 };
