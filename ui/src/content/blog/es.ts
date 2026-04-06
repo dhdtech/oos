@@ -1100,5 +1100,91 @@ docker compose up -d</code></pre>
 <h2>Conclusión</h2>
 <p>Compartir fotos con protección de contraseña no consiste solo en añadir una contraseña a un archivo — se trata de garantizar que tus fotos estén cifradas antes de salir de tu dispositivo, transmitidas a través de un servidor de conocimiento cero y destruidas permanentemente después de su visualización. Los métodos tradicionales como el correo, las apps de mensajería y los enlaces en la nube no cumplen ninguno de estos tres criterios. Los enlaces cifrados y autodestructivos proporcionan la forma más sólida de protección de fotos disponible hoy en día. La próxima vez que necesites compartir una foto sensible, omite el archivo adjunto del correo y <a href="/">crea un enlace cifrado autodestructivo</a>.</p>
 `
+  },
+  "when-to-share-pdfs-securely": {
+    title: "¿Cuándo necesitas realmente compartir PDFs de forma segura?",
+    description: "Los PDFs contienen contratos, historiales médicos, declaraciones de impuestos y mucho más. Conoce los escenarios reales donde compartir PDFs de forma segura es imprescindible — y por qué los archivos adjuntos de correo se quedan cortos.",
+    content: `
+<p>Los PDFs son el formato universal para los documentos que importan. Contratos, declaraciones de impuestos, historiales médicos, extractos bancarios, escritos judiciales — cuando la información es lo bastante importante como para formalizarse, casi siempre acaba en un PDF. Y sin embargo, la mayoría de las personas comparten estos documentos igual que comparten fotos de gatos: como archivos adjuntos de correo o enlaces de almacenamiento en la nube que persisten indefinidamente y pueden reenviarse a cualquiera.</p>
+
+<p>No todos los PDFs necesitan cifrado de grado militar. Pero muchos sí — y los momentos en que compartir de forma segura importa son más frecuentes de lo que crees.</p>
+
+<h2>Contratos y acuerdos legales</h2>
+<p>Cuando dos partes intercambian un contrato firmado, el PDF suele contener nombres, direcciones, condiciones financieras, firmas y, en ocasiones, números de identificación oficial. Enviar esto como archivo adjunto de correo significa que ambas partes tienen ahora una copia permanente en su correo — indexable, reenviable y vulnerable ante cualquier futura brecha de seguridad.</p>
+<p>Bufetes de abogados, agentes inmobiliarios y trabajadores independientes comparten contratos constantemente. Una sola cuenta de correo comprometida puede exponer decenas de acuerdos, cada uno con suficiente información personal para el robo de identidad. Compartir PDFs de forma segura con enlaces de un solo uso garantiza que el documento se visualice y luego se elimine permanentemente del servidor, sin dejar copias pendientes que los atacantes puedan encontrar.</p>
+
+<h2>Documentos fiscales y registros financieros</h2>
+<p>La temporada de impuestos es una mina de oro para los ladrones de identidad. Formularios W-2, 1099, declaraciones de la renta y extractos bancarios contienen números de la Seguridad Social, detalles de ingresos, información del empleador y números de cuenta bancaria — todo lo necesario para presentar una declaración fiscal fraudulenta o abrir líneas de crédito a nombre de otra persona.</p>
+<p>Los contadores y asesores fiscales reciben estos documentos de sus clientes habitualmente por correo electrónico. Algunos usan portales de cliente, pero muchos aún recurren a archivos adjuntos o enlaces compartidos de Google Drive. Cada una de estas copias persistentes es un riesgo. Un enlace cifrado autodestructivo elimina la ventana de exposición: el contador descarga el documento y la copia en el servidor desaparece.</p>
+
+<h2>Historiales médicos e información sanitaria</h2>
+<p>Los PDFs médicos — resultados de laboratorio, informes de imagen, recetas, reclamaciones al seguro — se encuentran entre los documentos más sensibles que una persona puede compartir. En Estados Unidos, HIPAA exige que la información de salud protegida (PHI) se transmita con las salvaguardas adecuadas. En la UE, el RGPD impone requisitos similares para los datos de salud.</p>
+<p>Los pacientes necesitan con frecuencia compartir historiales médicos con nuevos médicos, compañías de seguros o familiares. Enviar por correo un PDF con tus resultados de laboratorio significa que ese documento existe ahora en al menos cuatro lugares: tu carpeta de enviados, la bandeja del destinatario y los sistemas de respaldo de ambos proveedores de correo. Un enlace cifrado de conocimiento cero con expiración automática satisface el principio de minimización de datos que tanto HIPAA como el RGPD enfatizan.</p>
+
+<h2>Documentos de RR. HH. e incorporación de empleados</h2>
+<p>Los nuevos empleados envían una avalancha de PDFs sensibles durante la incorporación: documentos de identidad oficiales, tarjetas de la Seguridad Social, datos bancarios para la domiciliación de nómina, cartas de oferta firmadas con información salarial y autorizaciones de verificación de antecedentes. Los equipos de RR. HH. que recopilan todo esto por correo están creando un tesoro de datos personales dispersos por bandejas de entrada.</p>
+<p>Incluso las empresas con portales de RR. HH. adecuados a veces recurren al correo cuando el portal no funciona, el nuevo empleado trabaja en remoto o el proceso va con prisa. Compartir PDFs de forma segura ofrece una alternativa fiable que no compromete los datos del empleado. El equipo de RR. HH. recibe el documento y la copia cifrada se autodestruye.</p>
+
+<h2>Reclamaciones de seguros y documentación de respaldo</h2>
+<p>Presentar una reclamación de seguro suele requerir compartir PDFs de partes policiales, facturas médicas, peritajes de daños materiales y presupuestos de reparación. Estos documentos contienen datos personales, cifras económicas y, en ocasiones, fotografías de daños en propiedades o lesiones.</p>
+<p>Los agentes y peritos de seguros manejan miles de estos documentos. Una brecha en el correo de un agente de seguros podría exponer la información personal de cada cliente que haya presentado una reclamación por correo. Los enlaces cifrados de un solo uso limitan la exposición al instante de la visualización, tras el cual los datos dejan de existir en cualquier servidor.</p>
+
+<h2>Propiedad intelectual y documentos empresariales confidenciales</h2>
+<p>Acuerdos de confidencialidad, solicitudes de patentes, hojas de ruta de productos, proyecciones financieras y documentos de fusiones y adquisiciones se comparten habitualmente como PDFs entre empresas, bufetes y inversores. Estos documentos representan un valor comercial significativo y una ventaja competitiva.</p>
+<p>Una solicitud de patente filtrada puede destruir la posición competitiva de una empresa. Un documento de fusión reenviado puede desencadenar investigaciones por uso de información privilegiada. Los métodos tradicionales de compartir archivos — correo, Slack, Google Drive — crean copias persistentes a las que puede acceder cualquiera que obtenga acceso a la cuenta. Los enlaces cifrados autodestructivos garantizan que el documento sea visto únicamente por el destinatario previsto y solo una vez.</p>
+
+<h2>Documentos de identificación personal</h2>
+<p>Escaneos de pasaportes, copias de carnet de conducir, facturas de servicios como comprobante de domicilio y certificados de nacimiento se comparten con frecuencia como PDFs para verificación de identidad. Bancos, propietarios, empleadores y organismos gubernamentales solicitan estos documentos.</p>
+<p>Un escaneo de pasaporte robado es una de las mercancías más valiosas en la dark web. Sin embargo, las personas envían rutinariamente PDFs de pasaportes a propietarios para solicitudes de alquiler o a bancos para la apertura de cuentas. Cada correo crea una copia permanente que podría quedar expuesta en una futura brecha. Un enlace autodestructivo asegura que el verificador vea el documento y este desaparezca — sin copias persistentes, sin exposición a largo plazo.</p>
+
+<h2>Descubrimiento legal y documentos judiciales</h2>
+<p>Los abogados comparten PDFs relacionados con casos con clientes, co-abogados, peritos y tribunales. Estos documentos suelen contener transcripciones de testimonios, resúmenes de pruebas, ofertas de acuerdo y comunicaciones privilegiadas. El secreto profesional entre abogado y cliente puede perderse si documentos privilegiados se divulgan inadvertidamente a terceros.</p>
+<p>El uso de enlaces cifrados de un solo uso para compartir PDFs legales sensibles añade una capa de protección contra la divulgación accidental. Si el enlace ya ha sido abierto, un tercero no autorizado que obtenga la URL no encontrará nada — el documento ya no existe.</p>
+
+<h2>Por qué los archivos adjuntos de correo no son suficientes</h2>
+<p>El correo electrónico fue diseñado para la comunicación, no para la transferencia segura de documentos. Cuando adjuntas un PDF a un correo:</p>
+<ul>
+<li><strong>Persiste en múltiples ubicaciones</strong> — la bandeja de salida del remitente, la bandeja de entrada del destinatario, las copias de seguridad de ambos servidores de correo y cualquier copia reenviada</li>
+<li><strong>Puede reenviarse sin tu conocimiento</strong> — no tienes control sobre quién ve el documento después de enviarlo</li>
+<li><strong>Queda indexado y es fácilmente localizable</strong> — la búsqueda de correo hace que encontrar "declaración de la renta" o "pasaporte" en una cuenta comprometida sea trivial</li>
+<li><strong>Carece de cifrado en reposo</strong> — la mayoría de los proveedores de correo almacenan los mensajes de forma que sus propios empleados (o una orden judicial) pueden acceder</li>
+<li><strong>No tiene expiración</strong> — el archivo adjunto existe hasta que alguien lo elimine manualmente, cosa que la mayoría nunca hace</li>
+</ul>
+
+<h2>Por qué los enlaces de almacenamiento en la nube se quedan cortos</h2>
+<p>Compartir PDFs a través de enlaces de Google Drive, Dropbox u OneDrive es mejor que los archivos adjuntos de correo, pero sigue siendo problemático:</p>
+<ul>
+<li><strong>Los enlaces pueden compartirse más allá del destinatario previsto</strong> — cualquiera con el enlace (o que adivine el patrón de la URL) puede acceder al archivo</li>
+<li><strong>Los archivos persisten hasta que se eliminan manualmente</strong> — la mayoría de las personas olvida revocar el acceso o eliminar los archivos compartidos</li>
+<li><strong>El proveedor de la nube puede acceder a tus archivos</strong> — el PDF se almacena en texto plano en los servidores del proveedor</li>
+<li><strong>Los registros de acceso pueden ser requeridos judicialmente</strong> — quién accedió a qué documento y cuándo queda registrado por el proveedor</li>
+</ul>
+
+<h2>Cómo Only Once Share gestiona el intercambio seguro de PDFs</h2>
+<p><a href="/">Only Once Share</a> fue creado exactamente para estos escenarios. Así es como funciona:</p>
+<ol>
+<li><strong>Sube tu PDF</strong> — Selecciona un archivo PDF de hasta 10 MB. También puedes incluir un mensaje de texto o una imagen junto con él.</li>
+<li><strong>Cifrado en el navegador</strong> — El PDF se cifra en tu navegador usando AES-256-GCM con una clave derivada vía HKDF-SHA-256. El servidor solo ve bytes cifrados — no puede leer tu documento.</li>
+<li><strong>Obtén un enlace de un solo uso</strong> — La clave de cifrado se incrusta en el fragmento de la URL (después del #), que nunca se envía a ningún servidor.</li>
+<li><strong>Comparte el enlace</strong> — Envíalo a través de cualquier canal. Incluso si el canal está comprometido, el PDF cifrado no puede descifrarse sin la URL completa.</li>
+<li><strong>El destinatario lo ve una vez</strong> — El destinatario abre el enlace, el PDF se descifra en su navegador y los datos cifrados se eliminan permanentemente del servidor mediante eliminación atómica.</li>
+</ol>
+<p>Sin cuentas. Sin registro. Sin copias persistentes. <a href="/security">Revisa la arquitectura de seguridad completa</a> o <a href="https://github.com/dhdtech/only-once-share">audita el código fuente</a>.</p>
+
+<h2>Cuándo deberías usar el intercambio seguro de PDFs</h2>
+<p>Como regla general, usa enlaces cifrados autodestructivos siempre que un PDF contenga:</p>
+<ul>
+<li><strong>Identificadores personales</strong> — números de la Seguridad Social, números de pasaporte, números de carnet de conducir</li>
+<li><strong>Información financiera</strong> — números de cuenta bancaria, declaraciones de impuestos, datos salariales, registros de inversiones</li>
+<li><strong>Información sanitaria</strong> — historiales médicos, resultados de laboratorio, reclamaciones de seguros</li>
+<li><strong>Contenido legal</strong> — contratos, escritos judiciales, comunicaciones entre abogado y cliente</li>
+<li><strong>Secretos empresariales</strong> — secretos comerciales, solicitudes de patentes, proyecciones financieras, documentos de fusiones y adquisiciones</li>
+<li><strong>Credenciales de acceso</strong> — cualquier documento que contenga contraseñas, claves API o tokens de acceso</li>
+</ul>
+<p>Si el PDF causaría daño — financiero, legal, reputacional o personal — en caso de caer en manos equivocadas, merece un intercambio cifrado de un solo uso.</p>
+
+<h2>Conclusión</h2>
+<p>Los PDFs transportan la información más importante de nuestra vida profesional y personal. La comodidad de los archivos adjuntos de correo y los enlaces en la nube ha normalizado una práctica peligrosa: dejar documentos sensibles permanentemente accesibles en sistemas que nunca fueron diseñados para protegerlos. Los enlaces cifrados autodestructivos resuelven este problema garantizando que el documento exista solo durante el instante en que se necesita y se destruya permanentemente después. La próxima vez que necesites compartir un contrato, una declaración de impuestos, un historial médico o cualquier PDF sensible, omite el archivo adjunto del correo y <a href="/">crea un enlace seguro de un solo uso</a>.</p>
+`
   }
 };

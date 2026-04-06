@@ -1894,4 +1894,98 @@ docker compose up -d</code></pre>
 <p>Password protected photo sharing is not just about adding a password to a file — it is about ensuring your photos are encrypted before they leave your device, transmitted through a zero-knowledge server, and permanently destroyed after viewing. Traditional methods like email, messaging apps, and cloud links fail all three of these criteria. Encrypted, self-destructing links provide the strongest form of photo protection available today. The next time you need to share a sensitive photo, skip the email attachment and <a href="/">create a self-destructing encrypted link instead</a>.</p>
 `
   },
+
+  // ──────────────────────────────────────────────
+  // Post 23 — April 2026
+  // ──────────────────────────────────────────────
+  {
+    slug: "when-to-share-pdfs-securely",
+    title: "When Do You Actually Need to Share PDFs Securely?",
+    date: "2026-04-06",
+    description: "PDFs carry contracts, medical records, tax returns, and more. Learn the real-world scenarios where secure PDF sharing is essential — and why email attachments fall short.",
+    readingTime: 7,
+    tags: ["security", "PDF", "encryption"],
+    content: `
+<p>PDFs are the universal format for documents that matter. Contracts, tax returns, medical records, bank statements, legal filings — when information is important enough to be formalized, it almost always ends up in a PDF. And yet, most people share these documents the same way they share cat photos: as email attachments or cloud storage links that persist indefinitely and can be forwarded to anyone.</p>
+
+<p>Not every PDF needs military-grade encryption. But many do — and the moments when secure sharing matters are more common than you think.</p>
+
+<h2>Contracts and Legal Agreements</h2>
+<p>When two parties exchange a signed contract, the PDF typically contains names, addresses, financial terms, signatures, and sometimes government-issued ID numbers. Sending this as an email attachment means both parties now have a permanent copy sitting in their email — searchable, forwardable, and vulnerable to any future account breach.</p>
+<p>Law firms, real estate agents, and freelancers share contracts constantly. A single compromised email account can expose dozens of agreements, each containing enough personal information for identity theft. Secure PDF sharing with one-time links ensures the document is viewed and then permanently deleted from the server, leaving no lingering copy for attackers to find.</p>
+
+<h2>Tax Documents and Financial Records</h2>
+<p>Tax season is a goldmine for identity thieves. W-2 forms, 1099s, tax returns, and bank statements contain Social Security numbers, income details, employer information, and bank account numbers — everything needed to file a fraudulent tax return or open credit lines in someone else's name.</p>
+<p>Accountants and tax preparers routinely receive these documents from clients via email. Some use client portals, but many still rely on email attachments or shared Google Drive links. Every one of these persistent copies is a liability. A self-destructing encrypted link eliminates the exposure window: the accountant downloads the document, and the server-side copy is gone.</p>
+
+<h2>Medical Records and Health Information</h2>
+<p>Medical PDFs — lab results, imaging reports, prescriptions, insurance claims — are among the most sensitive documents a person can share. In the United States, HIPAA requires that protected health information (PHI) be transmitted using appropriate safeguards. In the EU, GDPR imposes similar requirements for health data.</p>
+<p>Patients frequently need to share medical records with new doctors, insurance companies, or family members. Emailing a PDF of your lab results means that document now exists in at least four places: your sent folder, the recipient's inbox, and both email providers' backup systems. A zero-knowledge encrypted link with automatic expiration satisfies the data minimization principle that both HIPAA and GDPR emphasize.</p>
+
+<h2>HR and Employee Onboarding Documents</h2>
+<p>New hires submit a flood of sensitive PDFs during onboarding: government-issued IDs, Social Security cards, bank details for direct deposit, signed offer letters with salary information, and background check authorizations. HR teams that collect these via email are creating a treasure trove of personal data scattered across inboxes.</p>
+<p>Even companies with proper HR portals sometimes fall back to email when the portal is down, the new hire is remote, or the process is rushed. Secure PDF sharing provides a reliable fallback that does not compromise employee data. The HR team receives the document, and the encrypted copy self-destructs.</p>
+
+<h2>Insurance Claims and Supporting Documents</h2>
+<p>Filing an insurance claim often requires sharing PDFs of police reports, medical bills, property damage assessments, and repair estimates. These documents contain personal details, financial figures, and sometimes photographs of damaged property or injuries.</p>
+<p>Insurance agents and adjusters handle thousands of these documents. A breach of an insurance agent's email could expose the personal information of every client who ever filed a claim via email. One-time encrypted links limit the exposure to the moment of viewing, after which the data no longer exists on any server.</p>
+
+<h2>Intellectual Property and Confidential Business Documents</h2>
+<p>NDAs, patent applications, product roadmaps, financial projections, and M&A documents are routinely shared as PDFs between companies, law firms, and investors. These documents represent significant business value and competitive advantage.</p>
+<p>A leaked patent application can destroy a company's competitive position. A forwarded M&A document can trigger insider trading investigations. Traditional file sharing methods — email, Slack, Google Drive — all create persistent copies that can be accessed by anyone who gains access to the account. Encrypted self-destructing links ensure the document is seen only by the intended recipient and only once.</p>
+
+<h2>Personal Identification Documents</h2>
+<p>Passport scans, driver's license copies, utility bills for proof of address, and birth certificates are frequently shared as PDFs for identity verification. Banks, landlords, employers, and government agencies all request these documents.</p>
+<p>A stolen passport scan is one of the most valuable commodities on the dark web. Yet people routinely email passport PDFs to landlords for rental applications or to banks for account opening. Each email creates a permanent copy that could be exposed in a future breach. A self-destructing link ensures the verifier sees the document and it disappears — no persistent copies, no long-term exposure.</p>
+
+<h2>Legal Discovery and Court Filings</h2>
+<p>Attorneys share case-related PDFs with clients, co-counsel, expert witnesses, and courts. These documents often contain testimony transcripts, evidence summaries, settlement offers, and privileged communications. Attorney-client privilege can be waived if privileged documents are inadvertently disclosed to third parties.</p>
+<p>Using encrypted one-time links for sharing sensitive legal PDFs adds a layer of protection against accidental disclosure. If the link has already been opened, an unauthorized party who obtains the URL will find nothing — the document no longer exists.</p>
+
+<h2>Why Email Attachments Are Not Enough</h2>
+<p>Email was designed for communication, not secure document transfer. When you attach a PDF to an email:</p>
+<ul>
+<li><strong>It persists in multiple locations</strong> — sender's outbox, recipient's inbox, both email servers' backups, and any forwarded copies</li>
+<li><strong>It can be forwarded without your knowledge</strong> — you have no control over who sees the document after you send it</li>
+<li><strong>It is indexed and searchable</strong> — email search makes it trivial to find "tax return" or "passport" in a compromised account</li>
+<li><strong>It lacks encryption at rest</strong> — most email providers store messages in a way that their own employees (or a court order) can access</li>
+<li><strong>It has no expiration</strong> — the attachment exists until someone manually deletes it, which most people never do</li>
+</ul>
+
+<h2>Why Cloud Storage Links Fall Short</h2>
+<p>Sharing PDFs via Google Drive, Dropbox, or OneDrive links is better than email attachments, but still problematic:</p>
+<ul>
+<li><strong>Links can be shared beyond the intended recipient</strong> — anyone with the link (or anyone who guesses the URL pattern) can access the file</li>
+<li><strong>Files persist until manually deleted</strong> — most people forget to revoke access or delete shared files</li>
+<li><strong>The cloud provider can access your files</strong> — the PDF is stored in plaintext on the provider's servers</li>
+<li><strong>Access logs can be subpoenaed</strong> — who accessed what document and when is tracked by the provider</li>
+</ul>
+
+<h2>How Only Once Share Handles Secure PDF Sharing</h2>
+<p><a href="/">Only Once Share</a> was built for exactly these scenarios. Here is how it works:</p>
+<ol>
+<li><strong>Upload your PDF</strong> — Select a PDF file up to 10 MB. You can also include a text message or image alongside it.</li>
+<li><strong>Browser-side encryption</strong> — The PDF is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server only ever sees encrypted bytes — it cannot read your document.</li>
+<li><strong>Get a one-time link</strong> — The encryption key is embedded in the URL fragment (after the #), which is never sent to any server.</li>
+<li><strong>Share the link</strong> — Send it via any channel. Even if the channel is compromised, the encrypted PDF cannot be decrypted without the full URL.</li>
+<li><strong>Recipient views once</strong> — The recipient opens the link, the PDF is decrypted in their browser, and the encrypted data is permanently deleted from the server via atomic deletion.</li>
+</ol>
+<p>No accounts. No registration. No persistent copies. <a href="/security">Review the full security architecture</a> or <a href="https://github.com/dhdtech/only-once-share">audit the source code</a>.</p>
+
+<h2>When You Should Use Secure PDF Sharing</h2>
+<p>As a rule of thumb, use encrypted self-destructing links whenever a PDF contains:</p>
+<ul>
+<li><strong>Personal identifiers</strong> — Social Security numbers, passport numbers, driver's license numbers</li>
+<li><strong>Financial information</strong> — bank account numbers, tax returns, salary details, investment records</li>
+<li><strong>Health information</strong> — medical records, lab results, insurance claims</li>
+<li><strong>Legal content</strong> — contracts, court filings, attorney-client communications</li>
+<li><strong>Business secrets</strong> — trade secrets, patent applications, financial projections, M&A documents</li>
+<li><strong>Authentication credentials</strong> — any document containing passwords, API keys, or access tokens</li>
+</ul>
+<p>If the PDF would cause harm — financial, legal, reputational, or personal — if it fell into the wrong hands, it deserves encrypted one-time sharing.</p>
+
+<h2>Conclusion</h2>
+<p>PDFs carry the most important information in our professional and personal lives. The convenience of email attachments and cloud links has normalized a dangerous practice: leaving sensitive documents permanently accessible in systems that were never designed to protect them. Encrypted, self-destructing links solve this by ensuring the document exists only for the moment it is needed and is permanently destroyed afterward. The next time you need to share a contract, tax return, medical record, or any sensitive PDF, skip the email attachment and <a href="/">create a secure one-time link instead</a>.</p>
+`
+  },
 ];
