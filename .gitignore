@@ -63,3 +63,4 @@ ui/dist
 
 # AI Stuff
 .superpowers
+docs/*
