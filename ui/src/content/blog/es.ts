@@ -1069,7 +1069,7 @@ docker compose up -d</code></pre>
 <h2>Cómo Only Once Share gestiona el intercambio de fotos con protección de contraseña</h2>
 <p><a href="/">Only Once Share</a> proporciona intercambio de fotos con protección de contraseña con cifrado de grado militar:</p>
 <ol>
-<li><strong>Sube tu foto</strong> — Arrastra y suelta o haz clic para seleccionar una imagen (JPEG, PNG, GIF, WebP de hasta 10 MB). También puedes incluir un mensaje de texto o un PDF junto con la foto.</li>
+<li><strong>Sube tu foto</strong> — Arrastra y suelta o haz clic para seleccionar una imagen (JPEG, PNG, GIF, WebP de hasta 10 MB). También puedes incluir un mensaje de texto, un PDF o un archivo ZIP junto con la foto.</li>
 <li><strong>Cifrado automático</strong> — Tu foto se cifra en tu navegador usando AES-256-GCM con una clave derivada via HKDF-SHA-256. El servidor recibe solo bytes cifrados.</li>
 <li><strong>Obtén un enlace de un solo uso</strong> — La clave de cifrado está integrada en el fragmento de la URL (después del #) y nunca se envía a ningún servidor.</li>
 <li><strong>Comparte el enlace</strong> — Envía el enlace a través de cualquier canal (WhatsApp, correo, SMS). Incluso si el canal está comprometido, la foto cifrada no puede leerse sin la URL completa.</li>
@@ -1185,6 +1185,73 @@ docker compose up -d</code></pre>
 
 <h2>Conclusión</h2>
 <p>Los PDFs transportan la información más importante de nuestra vida profesional y personal. La comodidad de los archivos adjuntos de correo y los enlaces en la nube ha normalizado una práctica peligrosa: dejar documentos sensibles permanentemente accesibles en sistemas que nunca fueron diseñados para protegerlos. Los enlaces cifrados autodestructivos resuelven este problema garantizando que el documento exista solo durante el instante en que se necesita y se destruya permanentemente después. La próxima vez que necesites compartir un contrato, una declaración de impuestos, un historial médico o cualquier PDF sensible, omite el archivo adjunto del correo y <a href="/">crea un enlace seguro de un solo uso</a>.</p>
+`
+  },
+  "share-zip-files-securely": {
+    title: "Cómo compartir archivos ZIP de forma segura: archivos cifrados con enlaces autodestructivos",
+    description: "Los archivos ZIP suelen contener lotes de documentos sensibles. Aprende a compartir archivos comprimidos de forma segura usando enlaces cifrados de un solo uso en lugar de adjuntos de correo o almacenamiento en la nube.",
+    content: `
+<p>Los archivos ZIP son la forma en que agrupamos documentos sensibles. Un paquete de contratación con cartas de oferta, formularios fiscales y escaneos de identificación. Una entrega de proyecto con código fuente y credenciales. Un paquete de descubrimiento legal con cientos de documentos del caso. Cuando comprimes archivos, normalmente estás creando un paquete de cosas que importan — y sin embargo, la mayoría de las personas comparten estos archivos comprimidos por correo electrónico o enlaces en la nube que persisten para siempre.</p>
+
+<p>Esto es un problema. Un archivo ZIP que contiene diez documentos sensibles multiplica por diez la exposición de compartir uno solo. Y el enfoque estándar — proteger el ZIP con contraseña — tiene debilidades serias que la mayoría de la gente no entiende.</p>
+
+<h2>Por qué los ZIP protegidos con contraseña no son suficientes</h2>
+<p>Cuando creas un archivo ZIP protegido con contraseña usando el método estándar ZipCrypto (el predeterminado en Windows y la mayoría de herramientas de compresión), el cifrado es notablemente débil. ZipCrypto tiene vulnerabilidades conocidas desde los años 90 y puede ser descifrado con herramientas disponibles gratuitamente. Incluso la opción más robusta AES-256 disponible en 7-Zip y WinRAR tiene un problema fundamental: necesitas compartir la contraseña por separado.</p>
+<p>La mayoría de las personas terminan enviando el ZIP en un correo y la contraseña en otro — o peor aún, en el mismo correo. Ambos correos persisten en bandejas de entrada, carpetas de enviados y copias de seguridad del servidor. Un atacante que comprometa cualquiera de las dos cuentas de correo obtiene tanto el archivo como la contraseña. La "protección" es pura fachada.</p>
+
+<h2>Cuándo necesitas compartir archivos comprimidos de forma segura</h2>
+
+<h3>Entregas de proyectos a clientes</h3>
+<p>Los freelancers y las agencias envían habitualmente entregables de proyectos como archivos ZIP: código fuente, recursos de diseño, exportaciones de bases de datos, archivos de configuración con claves API. Estos archivos comprimidos a menudo contienen credenciales o código propietario que no debería persistir en hilos de correo una vez completada la entrega.</p>
+
+<h3>Paquetes de documentos de RR. HH.</h3>
+<p>La incorporación de un nuevo empleado suele implicar la recopilación de un lote de documentos sensibles: carta de oferta firmada, escaneo de documento de identidad oficial, tarjeta de la Seguridad Social, formulario de domiciliación bancaria, autorización de verificación de antecedentes. Los equipos de RR. HH. que reciben todo esto como adjuntos ZIP crean un paquete concentrado de datos personales que permanece en su bandeja de entrada indefinidamente.</p>
+
+<h3>Paquetes de descubrimiento legal</h3>
+<p>Los bufetes de abogados intercambian grandes conjuntos de documentos durante el descubrimiento — transcripciones de declaraciones, contratos, registros financieros, correspondencia. Estos archivos ZIP a menudo contienen material privilegiado o confidencial que podría causar daños graves si se divulga a terceros no autorizados. La persistencia del correo convierte cada paquete transmitido en un riesgo a largo plazo.</p>
+
+<h3>Paquetes de documentos financieros</h3>
+<p>Contadores, auditores y asesores financieros reciben archivos ZIP que contienen declaraciones de impuestos, extractos bancarios, registros de inversiones e informes financieros corporativos. Cada archivo comprimido es un perfil financiero completo que podría facilitar el fraude o el robo de identidad si cayera en manos equivocadas.</p>
+
+<h3>Código fuente y credenciales</h3>
+<p>Los desarrolladores comparten archivos ZIP que contienen bases de código, configuraciones de entorno, claves SSH, credenciales de API y cadenas de conexión a bases de datos. Un solo archivo comprimido comprometido puede proporcionar acceso completo a sistemas en producción. Estos nunca deberían persistir en canales de comunicación.</p>
+
+<h3>Transferencias de historiales médicos</h3>
+<p>Los pacientes que cambian de proveedor de salud a menudo necesitan transferir conjuntos de historiales médicos — resultados de laboratorio, informes de imagen, historiales de recetas, documentos de seguro. HIPAA exige salvaguardas adecuadas para la información de salud protegida, y un archivo ZIP en una bandeja de entrada de correo no cumple con ese requisito.</p>
+
+<h2>El problema del correo electrónico y el almacenamiento en la nube</h2>
+<p>Compartir archivos ZIP por correo o enlaces en la nube presenta los mismos problemas fundamentales que compartir cualquier archivo sensible por estos canales, amplificados por el hecho de que los archivos comprimidos contienen múltiples documentos:</p>
+<ul>
+<li><strong>Persistencia</strong> — El ZIP permanece en carpetas de enviados, bandejas de entrada y copias de seguridad del servidor indefinidamente. Una sola cuenta comprometida expone todo el paquete.</li>
+<li><strong>Reenvío</strong> — El destinatario puede reenviar el paquete completo a cualquier persona sin tu conocimiento.</li>
+<li><strong>Acceso en la nube</strong> — Google Drive, Dropbox y OneDrive almacenan tus archivos en texto plano en sus servidores. El proveedor (y cualquiera que comprometa al proveedor) puede acceder a ellos.</li>
+<li><strong>Sin expiración</strong> — Los enlaces y adjuntos permanecen accesibles hasta que alguien los elimine manualmente, lo cual casi nunca sucede.</li>
+<li><strong>Exposición multiplicada</strong> — Un ZIP con 20 documentos representa 20 veces la exposición de la filtración de un solo archivo.</li>
+</ul>
+
+<h2>Cómo Only Once Share gestiona el intercambio seguro de archivos comprimidos</h2>
+<p><a href="/">Only Once Share</a> resuelve estos problemas con enlaces cifrados y autodestructivos:</p>
+<ol>
+<li><strong>Sube tu archivo ZIP</strong> — Selecciona un archivo ZIP, RAR, 7Z o TAR.GZ de hasta 10 MB. También puedes incluir un mensaje de texto junto con él.</li>
+<li><strong>Cifrado en el navegador</strong> — El archivo se cifra en tu navegador usando AES-256-GCM con una clave derivada vía HKDF-SHA-256. El servidor solo ve bytes cifrados — no puede leer ni extraer tus archivos.</li>
+<li><strong>Obtén un enlace de un solo uso</strong> — La clave de cifrado está integrada en el fragmento de la URL (después del #) y nunca se envía a ningún servidor.</li>
+<li><strong>Comparte el enlace</strong> — Envíalo a través de cualquier canal. Incluso si el canal está comprometido, el archivo cifrado no puede descifrarse sin la URL completa.</li>
+<li><strong>El destinatario lo descarga una vez</strong> — El destinatario abre el enlace, el archivo se descifra en su navegador y queda disponible para descargar. Los datos cifrados se eliminan permanentemente del servidor mediante eliminación atómica.</li>
+</ol>
+<p>Sin contraseñas que compartir por separado. Sin copias persistentes en ningún servidor. Sin cuentas requeridas. <a href="/security">Revisa la arquitectura de seguridad</a> o <a href="https://github.com/dhdtech/only-once-share">audita el código fuente</a>.</p>
+
+<h2>Mejores prácticas para compartir archivos comprimidos de forma segura</h2>
+<ul>
+<li><strong>No confíes solo en las contraseñas de ZIP</strong> — El cifrado estándar ZipCrypto es débil. Incluso los ZIP cifrados con AES requieren compartir una contraseña por un canal separado (a menudo inseguro).</li>
+<li><strong>Configura la expiración más corta posible</strong> — Si el destinatario lo descargará en una hora, usa un TTL de 1 hora. Ventanas más cortas significan menos exposición.</li>
+<li><strong>Elimina archivos innecesarios antes de comprimir</strong> — Incluye solo lo que el destinatario realmente necesita. Cada archivo adicional es exposición extra si algo sale mal.</li>
+<li><strong>No uses almacenamiento en la nube para transferencias de una sola vez</strong> — Si alguien solo necesita los archivos una vez, un enlace autodestructivo es más seguro que un enlace persistente de Drive o Dropbox.</li>
+<li><strong>Verifica a tu destinatario</strong> — Un enlace autodestructivo es tan seguro como el canal que usas para enviarlo. Envíalo a un contacto verificado.</li>
+<li><strong>Revisa los requisitos de cumplimiento</strong> — Si tus archivos contienen datos de salud (HIPAA), datos personales (RGPD) o registros financieros, los enlaces cifrados autodestructivos ayudan a cumplir con los requisitos de minimización de datos.</li>
+</ul>
+
+<h2>Conclusión</h2>
+<p>Los archivos ZIP concentran información sensible en un solo paquete, lo que hace que su manejo seguro sea más importante — no menos. Los ZIP protegidos con contraseña proporcionan una falsa sensación de seguridad, y los adjuntos de correo o enlaces en la nube dejan los archivos expuestos indefinidamente. Los enlaces cifrados y autodestructivos garantizan que tu archivo exista solo durante el momento en que se necesita y se destruya permanentemente después. La próxima vez que necesites enviar una entrega de proyecto, un paquete de documentos de RR. HH. o cualquier archivo ZIP sensible, omite el adjunto de correo y <a href="/">crea un enlace seguro de un solo uso</a>.</p>
 `
   }
 };
