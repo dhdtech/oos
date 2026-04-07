@@ -263,5 +263,62 @@ describe("ViewSecret", () => {
       unmount();
       expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock-url");
     });
+
+    it("renders download UI for ZIP archive", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "application/zip", data: new Uint8Array([1, 2, 3]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByText("view.archiveAttached")).toBeInTheDocument();
+        expect(screen.getByText("view.downloadArchive")).toBeInTheDocument();
+      });
+    });
+
+    it("renders download UI for RAR archive", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "application/vnd.rar", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByText("view.archiveAttached")).toBeInTheDocument();
+      });
+    });
+
+    it("sets correct file extension for archive download", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "application/zip", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        const link = screen.getByText("view.downloadArchive").closest("a");
+        expect(link).toHaveAttribute("download", "secret.zip");
+      });
+    });
+
+    it("revokes archive blob URL on unmount", async () => {
+      vi.mocked(cryptoLib.decodePayload).mockReturnValue({
+        text: "",
+        image: { mime: "application/zip", data: new Uint8Array([1]) },
+      });
+      vi.mocked(api.getSecret).mockResolvedValue({ ciphertext: "ct", id: "uuid" });
+
+      const { unmount } = renderWithProviders(<ViewSecret />);
+      await waitFor(() => {
+        expect(screen.getByText("view.archiveAttached")).toBeInTheDocument();
+      });
+
+      unmount();
+      expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock-url");
+    });
   });
 });

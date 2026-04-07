@@ -12,6 +12,7 @@ import {
   FileText,
   Download,
   ExternalLink,
+  Archive,
 } from "lucide-react";
 import { importKey, decrypt, decodePayload } from "../lib/crypto";
 import { getSecret } from "../lib/api";
@@ -28,6 +29,8 @@ export default function ViewSecret() {
   const [copied, setCopied] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
+  const [archiveUrl, setArchiveUrl] = useState("");
+  const [archiveMime, setArchiveMime] = useState("");
   const [showImageModal, setShowImageModal] = useState(false);
 
   const hasFetched = useRef(false);
@@ -53,8 +56,12 @@ export default function ViewSecret() {
         if (decoded.image) {
           const blob = new Blob([decoded.image.data as BlobPart], { type: decoded.image.mime });
           const url = URL.createObjectURL(blob);
-          if (decoded.image.mime === "application/pdf") {
+          const mime = decoded.image.mime;
+          if (mime === "application/pdf") {
             setPdfUrl(url);
+          } else if (mime.includes("zip") || mime.includes("rar") || mime.includes("7z") || mime.includes("gzip") || mime.includes("tar")) {
+            setArchiveUrl(url);
+            setArchiveMime(mime);
           } else {
             setImageUrl(url);
           }
@@ -81,8 +88,9 @@ export default function ViewSecret() {
     return () => {
       if (imageUrl) URL.revokeObjectURL(imageUrl);
       if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+      if (archiveUrl) URL.revokeObjectURL(archiveUrl);
     };
-  }, [imageUrl, pdfUrl]);
+  }, [imageUrl, pdfUrl, archiveUrl]);
 
   async function handleCopy() {
     await navigator.clipboard.writeText(plaintext);
@@ -158,6 +166,25 @@ export default function ViewSecret() {
                   >
                     <ExternalLink size={16} />
                     {t("view.viewPdf")}
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {archiveUrl && (
+              <div className="secret-pdf-container">
+                <div className="pdf-preview">
+                  <Archive size={48} />
+                  <p>{t("view.archiveAttached")}</p>
+                </div>
+                <div className="pdf-actions">
+                  <a
+                    href={archiveUrl}
+                    download={`secret${archiveMime.includes("rar") ? ".rar" : archiveMime.includes("7z") ? ".7z" : archiveMime.includes("gzip") ? ".tar.gz" : archiveMime.includes("tar") ? ".tar" : ".zip"}`}
+                    className="btn btn-secondary"
+                  >
+                    <Download size={16} />
+                    {t("view.downloadArchive")}
                   </a>
                 </div>
               </div>
