@@ -12,7 +12,7 @@ const GLOBAL_SCHEMA = JSON.stringify([
     name: "Only Once Share",
     url: "https://ooshare.io",
     description:
-      "Password protected photo, document, and secret sharing with one-time self-destructing links. Share passwords, images, PDFs, and sensitive information securely. End-to-end AES-256 encryption with zero-knowledge architecture. Free and open source.",
+      "Password protected photo, document, archive, and secret sharing with one-time self-destructing links. Share passwords, images, PDFs, ZIP archives, and sensitive information securely. End-to-end AES-256 encryption with zero-knowledge architecture. Free and open source.",
     applicationCategory: "SecurityApplication",
     operatingSystem: "Any",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -26,8 +26,9 @@ const GLOBAL_SCHEMA = JSON.stringify([
       "Zero-knowledge architecture",
       "Password protected photo sharing (JPEG, PNG, GIF, WebP up to 10 MB)",
       "Encrypted PDF and document sharing (up to 10 MB)",
+      "Encrypted archive sharing (ZIP, RAR, 7Z, TAR.GZ up to 10 MB)",
       "Single-use self-destructing links",
-      "Text, image, and PDF secrets in one link",
+      "Text, image, PDF, and archive secrets in one link",
       "No account required",
       "Open source",
       "6-language support",
@@ -48,7 +49,7 @@ const GLOBAL_SCHEMA = JSON.stringify([
     name: "Only Once Share",
     url: "https://ooshare.io",
     description:
-      "Free, open-source, end-to-end encrypted secret, image, and document sharing tool. Password protected photo sharing.",
+      "Free, open-source, end-to-end encrypted secret, image, document, and archive sharing tool. Password protected photo and file sharing.",
     publisher: { "@type": "Organization", name: "DHD Tech" },
   },
 ]);
