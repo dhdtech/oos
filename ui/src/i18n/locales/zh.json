@@ -1,14 +1,14 @@
 {
   "meta": {
-    "title": "Only Once Share — 安全一次性秘密、图像和PDF分享",
-    "description": "通过一次性自毁链接安全发送密码、图像、PDF、API密钥和敏感文档。密码保护照片分享，采用AES-256加密和零知识架构。免费开源，无需注册账户。"
+    "title": "Only Once Share — 安全一次性秘密、图像、PDF和压缩文件分享",
+    "description": "通过一次性自毁链接安全发送密码、图像、PDF、ZIP压缩文件、API密钥和敏感文档。密码保护照片分享，采用AES-256加密和零知识架构。免费开源，无需注册账户。"
   },
   "header": {
     "title": "Only Once Share"
   },
   "hero": {
     "title": "安全分享秘密",
-    "subtitle": "在您的浏览器中端到端加密。分享文本、图像和PDF。服务器永远不会看到您的数据。链接在查看一次后自动销毁。"
+    "subtitle": "在您的浏览器中端到端加密。分享文本、图像、PDF和压缩文件。服务器永远不会看到您的数据。链接在查看一次后自动销毁。"
   },
   "create": {
     "label": "秘密内容",
@@ -30,9 +30,9 @@
     "emailBody": "我正在与您分享一个秘密。打开此链接查看 — 仅可打开一次：\n\n{{link}}",
     "dropzone.label": "在此拖放文件",
     "dropzone.hint": "或点击浏览",
-    "dropzone.sizeLimit": "最大 10 MB · 图像（JPEG、PNG、GIF、WebP）或PDF",
+    "dropzone.sizeLimit": "最大 10 MB · 图像（JPEG、PNG、GIF、WebP）、PDF或压缩文件（ZIP、RAR、7Z）",
     "dropzone.dragActive": "在此放下您的文件",
-    "file.invalidType": "仅允许图像（JPEG、PNG、GIF、WebP）和PDF",
+    "file.invalidType": "仅允许图像（JPEG、PNG、GIF、WebP）、PDF和压缩文件（ZIP、RAR、7Z、TAR.GZ）",
     "file.tooLarge": "文件必须小于 10 MB",
     "file.remove": "删除文件",
     "file.preview": "文件预览"
@@ -56,7 +56,9 @@
     "imageModal.close": "关闭图像",
     "pdfAttached": "此秘密附带了一个PDF文件",
     "downloadPdf": "下载PDF",
-    "viewPdf": "在新标签页打开"
+    "viewPdf": "在新标签页打开",
+    "archiveAttached": "此密钥附带了一个压缩文件",
+    "downloadArchive": "下载压缩文件"
   },
   "nav": {
     "security": "安全",
@@ -72,13 +74,13 @@
       "metaTitle": "工作原理 — 安全与加密 | Only Once Share",
       "metaDesc": "了解Only Once Share如何通过AES-256-GCM加密、零知识架构和客户端密钥管理保护您的秘密。",
       "title": "Only Once Share如何保护您的秘密",
-      "lead": "Only Once Share使用端到端AES-256-GCM加密和零知识架构。您的文字、图像和PDF在离开设备之前就在浏览器中加密 — 我们的服务器永远不会看到您的明文数据。",
+      "lead": "Only Once Share使用端到端AES-256-GCM加密和零知识架构。您的文字、图像、PDF和压缩文件在离开设备之前就在浏览器中加密 — 我们的服务器永远不会看到您的明文数据。",
       "cta": "试用Only Once Share — 免费且安全",
       "e2eTitle": "端到端加密",
-      "serverContent": "与某些执行服务器端加密的竞争工具不同（意味着服务器会短暂看到您的明文数据），Only Once Share完全在浏览器中加密。服务器永远不会接收：您的明文文字、图像或PDF、加密密钥，或任何可用于解密您数据的信息。它甚至无法区分秘密是否包含文字、图像、PDF或任何组合。即使我们的服务器遭到泄露，您的秘密仍将保持加密且无法读取。",
-      "step3": "<strong>加密</strong> — AES-256-GCM使用随机96位IV和秘密ID作为AAD将您的文字和图像加密为单个载荷",
-      "step7": "<strong>解密</strong> — 收件人的浏览器使用URL片段中的密钥解密文字和图像",
-      "whyP2": "使用客户端加密（如Only Once Share），您的文字和图像在离开设备之前已被加密。服务器仅处理它无法读取的加密数据。这是隐私的黄金标准，也是Signal等端到端加密消息应用程序背后的相同原则。"
+      "serverContent": "与某些执行服务器端加密的竞争工具不同（意味着服务器会短暂看到您的明文数据），Only Once Share完全在浏览器中加密。服务器永远不会接收：您的明文文字、图像、PDF或压缩文件、加密密钥，或任何可用于解密您数据的信息。它甚至无法区分秘密是否包含文字、图像、PDF、压缩文件或任何组合。即使我们的服务器遭到泄露，您的秘密仍将保持加密且无法读取。",
+      "step3": "<strong>加密</strong> — AES-256-GCM使用随机96位IV和秘密ID作为AAD将您的文字、图像和压缩文件加密为单个载荷",
+      "step7": "<strong>解密</strong> — 收件人的浏览器使用URL片段中的密钥解密文字、图像和压缩文件",
+      "whyP2": "使用客户端加密（如Only Once Share），您的文字、图像和压缩文件在离开设备之前已被加密。服务器仅处理它无法读取的加密数据。这是隐私的黄金标准，也是Signal等端到端加密消息应用程序背后的相同原则。"
     },
     "about": {
       "metaTitle": "关于 — Only Once Share | DHD Tech",
@@ -86,26 +88,26 @@
       "title": "关于Only Once Share",
       "lead": "我们构建Only Once Share是因为分享密码和敏感信息不应该需要将数据托付给第三方 — 也不应该为此付费。",
       "feature2Title": "免费且无限制",
-      "feature2Desc": "没有人为限制，没有「每月仅限8条秘密」。可分享最多50,000字符的文字和最大10 MB的文件（图像或PDF），完全免费，无需注册账户。",
+      "feature2Desc": "没有人为限制，没有「每月仅限8条秘密」。可分享最多50,000字符的文字和最大10 MB的文件（图像、PDF或压缩文件），完全免费，无需注册账户。",
       "viewOnGithub": "在GitHub上查看"
     },
     "why": {
-      "metaTitle": "为什么选择 Only Once Share？— 安全密钥、图片和PDF分享对比",
-      "metaDesc": "对比 Only Once Share 与 OneTimeSecret、Privnote、Scrt.link 和 Password.link。唯一支持加密图片和PDF分享、真正零知识架构且无限制的工具——免费开源。",
+      "metaTitle": "为什么选择 Only Once Share？— 安全密钥、图片、PDF和压缩文件分享对比",
+      "metaDesc": "对比 Only Once Share 与 OneTimeSecret、Privnote、Scrt.link 和 Password.link。唯一支持加密图片、PDF和压缩文件分享、真正零知识架构且无限制的工具——免费开源。",
       "title": "为什么选择 Only Once Share？",
-      "lead": "唯一支持加密图片和PDF分享的密钥分享工具，真正的零知识架构，无任何限制——完全免费且开源。",
+      "lead": "唯一支持加密图片、PDF和压缩文件分享的密钥分享工具，真正的零知识架构，无任何限制——完全免费且开源。",
       "benefit1Title": "真正的零知识",
       "benefit1Desc": "加密完全在浏览器中完成。服务器永远看不到您的数据——甚至连短暂接触都不会。解密密钥仅存在于 URL 片段中，浏览器永远不会将其发送到服务器。",
-      "benefit2Title": "文本、图片和PDF分享",
-      "benefit2Desc": "通过一个加密链接分享密码、API 密钥、截图、文档和敏感PDF。没有其他密钥分享工具提供加密文件支持。",
+      "benefit2Title": "文本、图片、PDF和压缩文件分享",
+      "benefit2Desc": "通过一个加密链接分享密码、API 密钥、截图、文档、敏感PDF和压缩文件。没有其他密钥分享工具提供加密文件支持。",
       "benefit3Title": "免费且无限制",
-      "benefit3Desc": "没有人为限制，没有付费计划，无需注册帐户。分享最多 50,000 个字符的文本和 10 MB 的图片——无限次数。",
+      "benefit3Desc": "没有人为限制，没有付费计划，无需注册帐户。分享最多 50,000 个字符的文本和 10 MB 的图片或压缩文件——无限次数。",
       "benefit4Title": "开源且可自托管",
       "benefit4Desc": "所有代码在 GitHub 上以 MIT 许可证公开。您可以自行审计加密实现，或使用 Docker 部署到自己的基础设施。",
       "tableTitle": "功能对比",
       "feature": "功能",
       "e2e": "客户端加密",
-      "imageSharing": "加密文件分享（图片+PDF）",
+      "imageSharing": "加密文件分享（图片+PDF+压缩文件）",
       "free": "免费且无限制",
       "openSource": "开源",
       "noAccount": "无需注册",
@@ -116,7 +118,7 @@
       "detail1Title": "客户端加密 vs 服务器端加密",
       "detail1Desc": "大多数密钥分享工具（包括 OneTimeSecret 和 Privnote）在服务器上加密您的数据。这意味着您的明文在加密前会短暂地对服务器可见。Only Once Share 使用 Web Crypto API 的 AES-256-GCM 在浏览器中加密所有内容。服务器只处理它无法读取的加密数据。",
       "detail2Title": "加密文件分享——业界首创",
-      "detail2Desc": "没有其他密钥分享工具支持加密图片和PDF分享。使用 Only Once Share，您可以安全地分享截图、文档照片、签署的合同、敏感图表等任何不超过 10 MB 的文件。文件和文本被打包成单个加密载荷——服务器甚至无法区分秘密包含什么类型的内容。",
+      "detail2Desc": "没有其他密钥分享工具支持加密图片、PDF和压缩文件分享。使用 Only Once Share，您可以安全地分享截图、文档照片、签署的合同、敏感图表、压缩文件等任何不超过 10 MB 的文件。文件和文本被打包成单个加密载荷——服务器甚至无法区分秘密包含什么类型的内容。",
       "detail3Title": "无付费墙，无限制，无锁定",
       "detail3Desc": "许多竞争对手限制免费用户每月只能分享少量密钥、有限的过期时间或缩小的载荷大小。Only Once Share 完全免费，没有人为限制。而且因为它以 MIT 许可证开源，您可以在自己的基础设施上自托管——您的数据，您做主。",
       "ctaText": "准备好安全分享秘密了吗？",
@@ -130,11 +132,11 @@
       "moreQuestions": "还有其他问题？",
       "askGithub": "在GitHub上提问",
       "q1": "Only Once Share是如何工作的？",
-      "a1": "当您创建秘密时——无论是文字、图像、PDF，还是任意组合——您的浏览器会通过Web Crypto API生成一个随机的AES-256-GCM加密密钥。所有内容均在您的浏览器中完成加密，明文不会离开您的设备。加密数据被发送到我们的服务器并临时存储在Redis中。加密密钥放置在URL片段（#号之后），浏览器永远不会将其发送到服务器。收件人打开链接时，加密数据将被检索并通过单次原子操作永久删除。随后，他们的浏览器使用URL中的密钥解密秘密。",
+      "a1": "当您创建秘密时——无论是文字、图像、PDF、压缩文件，还是任意组合——您的浏览器会通过Web Crypto API生成一个随机的AES-256-GCM加密密钥。所有内容均在您的浏览器中完成加密，明文不会离开您的设备。加密数据被发送到我们的服务器并临时存储在Redis中。加密密钥放置在URL片段（#号之后），浏览器永远不会将其发送到服务器。收件人打开链接时，加密数据将被检索并通过单次原子操作永久删除。随后，他们的浏览器使用URL中的密钥解密秘密。",
       "q7": "Only Once Share是免费的吗？",
-      "a7": "是的，完全免费且无任何限制。与某些对免费用户每月限制少量秘密或设置容量上限的竞品不同，Only Once Share没有任何人为限制。您可以分享最多50,000字符的文字秘密，并附加最大10 MB的图像或PDF（JPEG、PNG、GIF、WebP、PDF），无需注册账户。本工具同样在MIT许可证下开源。",
+      "a7": "是的，完全免费且无任何限制。与某些对免费用户每月限制少量秘密或设置容量上限的竞品不同，Only Once Share没有任何人为限制。您可以分享最多50,000字符的文字秘密，并附加最大10 MB的图像、PDF或压缩文件（JPEG、PNG、GIF、WebP、PDF、ZIP、RAR、7Z），无需注册账户。本工具同样在MIT许可证下开源。",
       "q8": "我需要创建账户吗？",
-      "a8": "不需要。Only Once Share无需注册、无需邮箱、无需账户。只需输入您的文字、可选择附加图像或PDF、选择过期时间，然后分享生成的链接即可。这种零摩擦的方式意味着没有个人数据需要保护，也没有可能被盗用的凭证。"
+      "a8": "不需要。Only Once Share无需注册、无需邮箱、无需账户。只需输入您的文字、可选择附加图像、PDF或压缩文件、选择过期时间，然后分享生成的链接即可。这种零摩擦的方式意味着没有个人数据需要保护，也没有可能被盗用的凭证。"
     },
     "blog": {
       "metaTitle": "博客 — 安全、加密与秘密分享 | Only Once Share",
@@ -166,7 +168,7 @@
     "aadTitle": "认证数据绑定",
     "aadDesc": "秘密ID在加密过程中作为附加认证数据（AAD）绑定。如果任何人篡改秘密ID或在秘密之间交换密文，解密将失败。",
     "zkTitle": "零知识",
-    "zkDesc": "服务器仅存储加密数据 — 它无法区分文字、图像还是PDF。我们无法读取、解密或以任何方式访问您的秘密。解密密钥仅存在于分享链接的URL片段中。",
+    "zkDesc": "服务器仅存储加密数据 — 它无法区分文字、图像、PDF还是压缩文件。我们无法读取、解密或以任何方式访问您的秘密。解密密钥仅存在于分享链接的URL片段中。",
     "keyTitle": "密钥不离开浏览器",
     "keyDesc": "解密密钥放置在URL的#号之后。浏览器URL片段永远不会发送到服务器 — 不在请求中，不在日志中，不在任何地方。",
     "oneTimeTitle": "一次性查看",
