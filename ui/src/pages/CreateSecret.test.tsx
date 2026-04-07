@@ -246,6 +246,48 @@ describe("CreateSecret", () => {
     expect(screen.getByText("Only images (JPEG, PNG, GIF, WebP) and PDFs are allowed")).toBeInTheDocument();
   });
 
+  it("accepts ZIP archive files", async () => {
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
+    const file = new File(["zip-data"], "archive.zip", { type: "application/zip" });
+    Object.defineProperty(file, "size", { value: 5000 });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+    expect(screen.getByText("archive.zip")).toBeInTheDocument();
+    expect(screen.queryByText(/Only images/)).not.toBeInTheDocument();
+  });
+
+  it("accepts RAR archive files", async () => {
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
+    const file = new File(["rar-data"], "archive.rar", { type: "application/vnd.rar" });
+    Object.defineProperty(file, "size", { value: 5000 });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+    expect(screen.getByText("archive.rar")).toBeInTheDocument();
+  });
+
+  it("shows archive icon for ZIP files (no image preview)", async () => {
+    URL.createObjectURL = vi.fn().mockReturnValue("blob:mock-url") as typeof URL.createObjectURL;
+    URL.revokeObjectURL = vi.fn() as typeof URL.revokeObjectURL;
+
+    renderWithProviders(<CreateSecret />);
+    const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;
+    const file = new File(["zip-data"], "docs.zip", { type: "application/zip" });
+    Object.defineProperty(file, "size", { value: 5000 });
+
+    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
+    expect(screen.getByText("docs.zip")).toBeInTheDocument();
+    // Should NOT show an img element (archives get icon, not thumbnail)
+    expect(screen.queryByAltText("File preview")).not.toBeInTheDocument();
+  });
+
   it("rejects files over 10MB", async () => {
     renderWithProviders(<CreateSecret />);
     const dropzone = screen.getByText("Drag & drop a file here").closest(".dropzone")!;

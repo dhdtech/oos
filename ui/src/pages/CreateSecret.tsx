@@ -15,6 +15,7 @@ import {
   X,
   ArrowRight,
   FileText,
+  Archive,
 } from "lucide-react";
 import { generateKey, exportKey, encrypt, encodePayload } from "../lib/crypto";
 import { createSecret } from "../lib/api";
@@ -57,11 +58,23 @@ export default function CreateSecret() {
     "image/gif",
     "image/webp",
     "application/pdf",
+    "application/zip",
+    "application/x-zip-compressed",
+    "application/vnd.rar",
+    "application/x-rar-compressed",
+    "application/x-7z-compressed",
+    "application/gzip",
+    "application/x-tar",
   ];
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
   function isPdf(file: File | null): boolean {
     return file?.type === "application/pdf";
+  }
+
+  function isArchive(file: File | null): boolean {
+    if (!file) return false;
+    return file.type.includes("zip") || file.type.includes("rar") || file.type.includes("7z") || file.type.includes("gzip") || file.type.includes("tar");
   }
 
   function handleFile(file: File) {
@@ -75,11 +88,11 @@ export default function CreateSecret() {
       return;
     }
     setAttachedFile(file);
-    // Only create object URL preview for images, not PDFs
-    if (!file.type.startsWith("application/pdf")) {
-      setFilePreview(URL.createObjectURL(file));
+    // Only create object URL preview for images, not PDFs or archives
+    if (file.type.startsWith("application/pdf") || file.type.includes("zip") || file.type.includes("rar") || file.type.includes("7z") || file.type.includes("gzip") || file.type.includes("tar")) {
+      setFilePreview(""); // No visual preview for PDFs or archives
     } else {
-      setFilePreview(""); // No visual preview for PDFs
+      setFilePreview(URL.createObjectURL(file));
     }
   }
 
@@ -154,7 +167,7 @@ export default function CreateSecret() {
       posthog.capture("secret_created", {
         ttl_hours: ttlHours,
         has_attachment: !!attachedFile,
-        attachment_type: attachedFile ? (isPdf(attachedFile) ? "pdf" : "image") : null,
+        attachment_type: attachedFile ? (isPdf(attachedFile) ? "pdf" : isArchive(attachedFile) ? "archive" : "image") : null,
       });
       setSecret("");
       removeFile();
@@ -228,16 +241,16 @@ export default function CreateSecret() {
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/jpeg,image/png,image/gif,image/webp,application/pdf"
+                accept="image/jpeg,image/png,image/gif,image/webp,application/pdf,application/zip,application/x-zip-compressed,application/vnd.rar,application/x-rar-compressed,application/x-7z-compressed,application/gzip,application/x-tar,.zip,.rar,.7z,.tar.gz,.tgz"
                 onChange={handleFileInput}
                 style={{ display: "none" }}
               />
 
               {attachedFile ? (
                 <div className="file-preview">
-                  {isPdf(attachedFile) ? (
+                  {(isPdf(attachedFile) || isArchive(attachedFile)) ? (
                     <div className="file-preview-pdf">
-                      <FileText size={32} />
+                      {isArchive(attachedFile) ? <Archive size={32} /> : <FileText size={32} />}
                       <div className="file-preview-info">
                         <div className="file-preview-name">{attachedFile.name}</div>
                         <div className="file-preview-size">{formatFileSize(attachedFile.size)}</div>
