@@ -243,7 +243,7 @@ describe("CreateSecret", () => {
     const file = new File(["content"], "test.txt", { type: "text/plain" });
 
     fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
-    expect(screen.getByText("Only images (JPEG, PNG, GIF, WebP) and PDFs are allowed")).toBeInTheDocument();
+    expect(screen.getByText("Only images (JPEG, PNG, GIF, WebP), PDFs, and archives (ZIP, RAR, 7Z, TAR.GZ) are allowed")).toBeInTheDocument();
   });
 
   it("accepts ZIP archive files", async () => {

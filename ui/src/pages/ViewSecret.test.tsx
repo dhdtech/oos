@@ -273,8 +273,8 @@ describe("ViewSecret", () => {
 
       renderWithProviders(<ViewSecret />);
       await waitFor(() => {
-        expect(screen.getByText("view.archiveAttached")).toBeInTheDocument();
-        expect(screen.getByText("view.downloadArchive")).toBeInTheDocument();
+        expect(screen.getByText("An archive file is attached to this secret")).toBeInTheDocument();
+        expect(screen.getByText("Download Archive")).toBeInTheDocument();
       });
     });
 
@@ -287,7 +287,7 @@ describe("ViewSecret", () => {
 
       renderWithProviders(<ViewSecret />);
       await waitFor(() => {
-        expect(screen.getByText("view.archiveAttached")).toBeInTheDocument();
+        expect(screen.getByText("An archive file is attached to this secret")).toBeInTheDocument();
       });
     });
 
@@ -300,7 +300,7 @@ describe("ViewSecret", () => {
 
       renderWithProviders(<ViewSecret />);
       await waitFor(() => {
-        const link = screen.getByText("view.downloadArchive").closest("a");
+        const link = screen.getByText("Download Archive").closest("a");
         expect(link).toHaveAttribute("download", "secret.zip");
       });
     });
@@ -314,7 +314,7 @@ describe("ViewSecret", () => {
 
       const { unmount } = renderWithProviders(<ViewSecret />);
       await waitFor(() => {
-        expect(screen.getByText("view.archiveAttached")).toBeInTheDocument();
+        expect(screen.getByText("An archive file is attached to this secret")).toBeInTheDocument();
       });
 
       unmount();

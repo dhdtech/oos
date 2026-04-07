@@ -1,14 +1,14 @@
 {
   "meta": {
-    "title": "Only Once Share — Secure One-Time Secret, Image & PDF Sharing",
-    "description": "Send passwords, images, PDFs, API keys, and sensitive documents securely with one-time self-destructing links. Password protected photo and document sharing with AES-256 encryption and zero-knowledge architecture. Free and open source — no account required."
+    "title": "Only Once Share — Secure One-Time Secret, Image, PDF & File Sharing",
+    "description": "Send passwords, images, PDFs, ZIP archives, API keys, and sensitive documents securely with one-time self-destructing links. Password protected photo and document sharing with AES-256 encryption and zero-knowledge architecture. Free and open source — no account required."
   },
   "header": {
     "title": "Only Once Share"
   },
   "hero": {
     "title": "Share secrets securely",
-    "subtitle": "End-to-end encrypted in your browser. Share text, images, and PDFs. The server never sees your data. Links self-destruct after one view."
+    "subtitle": "End-to-end encrypted in your browser. Share text, images, PDFs, and archives. The server never sees your data. Links self-destruct after one view."
   },
   "create": {
     "label": "Secret content",
@@ -30,9 +30,9 @@
     "emailBody": "I'm sharing a secret with you. Open this link to view it — it can only be opened once:\n\n{{link}}",
     "dropzone.label": "Drag & drop a file here",
     "dropzone.hint": "or click to browse",
-    "dropzone.sizeLimit": "Max 10 MB · Images (JPEG, PNG, GIF, WebP) or PDF",
+    "dropzone.sizeLimit": "Max 10 MB · Images, PDF, or archives (ZIP, RAR, 7Z)",
     "dropzone.dragActive": "Drop your file here",
-    "file.invalidType": "Only images (JPEG, PNG, GIF, WebP) and PDFs are allowed",
+    "file.invalidType": "Only images (JPEG, PNG, GIF, WebP), PDFs, and archives (ZIP, RAR, 7Z, TAR.GZ) are allowed",
     "file.tooLarge": "File must be under 10 MB",
     "file.remove": "Remove file",
     "file.preview": "File preview"
@@ -56,7 +56,9 @@
     "imageModal.close": "Close image",
     "pdfAttached": "A PDF file is attached to this secret",
     "downloadPdf": "Download PDF",
-    "viewPdf": "Open in new tab"
+    "viewPdf": "Open in new tab",
+    "archiveAttached": "An archive file is attached to this secret",
+    "downloadArchive": "Download Archive"
   },
   "nav": {
     "security": "Security",
@@ -72,10 +74,10 @@
       "metaTitle": "How It Works — Security & Encryption | Only Once Share",
       "metaDesc": "Learn how Only Once Share protects your secrets with AES-256-GCM encryption, zero-knowledge architecture, and client-side key management.",
       "title": "How Only Once Share Keeps Your Secrets Safe",
-      "lead": "Only Once Share uses end-to-end AES-256-GCM encryption with a zero-knowledge architecture. Your text, images, and PDFs are encrypted in your browser before they ever leave your device — our server never sees your plaintext data.",
+      "lead": "Only Once Share uses end-to-end AES-256-GCM encryption with a zero-knowledge architecture. Your text, images, PDFs, and archives are encrypted in your browser before they ever leave your device — our server never sees your plaintext data.",
       "cta": "Try Only Once Share — Free & Secure",
       "e2eTitle": "End-to-End Encryption",
-      "e2eContent": "When you create a secret, your browser generates a random cryptographic key using the Web Crypto API. Your text and any attached files (images or PDFs) are packed into a single encrypted payload using <strong>AES-256-GCM</strong> — the same encryption standard used by governments and financial institutions worldwide. The encryption happens entirely in your browser. The encrypted data (ciphertext) is the only thing sent to our server.",
+      "e2eContent": "When you create a secret, your browser generates a random cryptographic key using the Web Crypto API. Your text and any attached files (images, PDFs, or archives) are packed into a single encrypted payload using <strong>AES-256-GCM</strong> — the same encryption standard used by governments and financial institutions worldwide. The encryption happens entirely in your browser. The encrypted data (ciphertext) is the only thing sent to our server.",
       "hkdfTitle": "HKDF Key Derivation",
       "hkdfContent": "Each secret gets its own unique encryption key derived using <strong>HKDF-SHA-256</strong> (HMAC-based Key Derivation Function) with the secret's ID as context. This means even if someone obtained the master key material, each secret remains cryptographically independent. Compromising one secret cannot compromise another.",
       "aadTitle": "Authenticated Data Binding",
@@ -83,7 +85,7 @@
       "zkTitle": "Zero-Knowledge Architecture",
       "zkContent": "Our server stores only encrypted blobs. We cannot read, decrypt, or access your secrets in any way. The decryption key is placed after the <code>#</code> symbol in the URL (the \"fragment\"). Browser URL fragments are <strong>never sent to servers</strong> — not in HTTP requests, not in server logs, not anywhere. This is a fundamental property of how web browsers work, defined in RFC 3986.",
       "serverTitle": "What the Server Never Sees",
-      "serverContent": "Unlike some competing tools that perform encryption on the server (meaning the server briefly sees your plaintext data), Only Once Share encrypts <strong>entirely in the browser</strong>. The server never receives: your plaintext text, images, or PDFs, the encryption key, or any information that could be used to decrypt your data. It cannot even distinguish whether a secret contains text, an image, a PDF, or any combination. Even if our server were compromised, your secrets would remain encrypted and unreadable.",
+      "serverContent": "Unlike some competing tools that perform encryption on the server (meaning the server briefly sees your plaintext data), Only Once Share encrypts <strong>entirely in the browser</strong>. The server never receives: your plaintext text, images, PDFs, or archives, the encryption key, or any information that could be used to decrypt your data. It cannot even distinguish whether a secret contains text, an image, a PDF, or any combination. Even if our server were compromised, your secrets would remain encrypted and unreadable.",
       "oneTimeTitle": "One-Time Viewing & Auto-Expiration",
       "oneTimeContent": "When a recipient opens a secret link, the encrypted data is retrieved and <strong>atomically deleted</strong> from storage in the same Redis GETDEL operation. There is no window where a second read is possible. Additionally, all secrets automatically expire after the chosen TTL (1–72 hours) via Redis key expiration, even if never viewed. No data persists beyond the expiration window.",
       "ossTitle": "Open Source & Auditable",
@@ -98,7 +100,7 @@
       "step7": "<strong>Decryption</strong> — The recipient's browser decrypts the text and files using the key from the URL fragment",
       "whyTitle": "Why Client-Side Encryption Matters",
       "whyP1": "Many secret sharing tools claim to be \"encrypted\" but perform encryption on the server. This means your plaintext secret travels over the network and is briefly visible to the server before encryption. Server-side encryption protects data at rest, but it requires you to trust the server operator.",
-      "whyP2": "With client-side encryption (like Only Once Share), your text, images, and PDFs are encrypted <em>before</em> they leave your device. The server only ever handles encrypted data it cannot read. This is the gold standard for privacy and is the same principle behind end-to-end encrypted messaging apps like Signal."
+      "whyP2": "With client-side encryption (like Only Once Share), your text, images, PDFs, and archives are encrypted <em>before</em> they leave your device. The server only ever handles encrypted data it cannot read. This is the gold standard for privacy and is the same principle behind end-to-end encrypted messaging apps like Signal."
     },
     "about": {
       "metaTitle": "About — Only Once Share | DHD Tech",
@@ -117,7 +119,7 @@
       "feature1Title": "True Zero-Knowledge",
       "feature1Desc": "Unlike tools that encrypt on the server, we encrypt in your browser. The encryption key lives only in the URL fragment — it's never transmitted to any server.",
       "feature2Title": "Free & Unlimited",
-      "feature2Desc": "No artificial limits. No \"8 secrets per month.\" Share text up to 50,000 characters and files (images or PDFs) up to 10 MB, completely free, with no account required.",
+      "feature2Desc": "No artificial limits. No \"8 secrets per month.\" Share text up to 50,000 characters and files (images, PDFs, or archives) up to 10 MB, completely free, with no account required.",
       "feature3Title": "Open Source (MIT)",
       "feature3Desc": "Every line of code is public and auditable. Self-host on your own infrastructure with Docker. Contribute on GitHub.",
       "feature4Title": "6 Languages",
@@ -130,19 +132,19 @@
       "metaTitle": "Why Only Once Share? — Secure Secret, Image & PDF Sharing Compared",
       "metaDesc": "Compare Only Once Share vs OneTimeSecret, Privnote, Scrt.link, and Password.link. The only tool with encrypted image and PDF sharing, true zero-knowledge, and no limits — free and open source.",
       "title": "Why Only Once Share?",
-      "lead": "The only secret sharing tool with encrypted image and PDF support, truly zero-knowledge architecture, and no limits — completely free and open source.",
+      "lead": "The only secret sharing tool with encrypted image, PDF, and archive support, truly zero-knowledge architecture, and no limits — completely free and open source.",
       "benefit1Title": "True Zero-Knowledge",
       "benefit1Desc": "Encryption happens entirely in your browser. The server never sees your data — not even briefly. The decryption key lives only in the URL fragment, which browsers never send to servers.",
       "benefit2Title": "Text, Image & PDF Sharing",
-      "benefit2Desc": "Share passwords, API keys, screenshots, documents, and sensitive PDFs in one encrypted link. No other secret sharing tool offers encrypted file support.",
+      "benefit2Desc": "Share passwords, API keys, screenshots, documents, sensitive PDFs, and ZIP archives in one encrypted link. No other secret sharing tool offers encrypted file support.",
       "benefit3Title": "Free & Unlimited",
-      "benefit3Desc": "No artificial limits, no paid plans, no account required. Share up to 50,000 characters of text and 10 MB files (images or PDFs) — as many secrets as you need.",
+      "benefit3Desc": "No artificial limits, no paid plans, no account required. Share up to 50,000 characters of text and 10 MB files (images, PDFs, or archives) — as many secrets as you need.",
       "benefit4Title": "Open Source & Self-Hostable",
       "benefit4Desc": "Every line of code is public on GitHub under MIT license. Audit the encryption yourself or deploy on your own infrastructure with Docker.",
       "tableTitle": "How We Compare",
       "feature": "Feature",
       "e2e": "Client-side encryption",
-      "imageSharing": "Encrypted file sharing (images + PDF)",
+      "imageSharing": "Encrypted file sharing (images + PDF + archives)",
       "free": "Free & unlimited",
       "openSource": "Open source",
       "noAccount": "No account required",
@@ -153,7 +155,7 @@
       "detail1Title": "Client-Side Encryption vs Server-Side",
       "detail1Desc": "Most secret sharing tools — including OneTimeSecret and Privnote — encrypt your data on the server. This means your plaintext secret travels over the network and is briefly visible to the server before encryption. Only Once Share encrypts everything in your browser using AES-256-GCM via the Web Crypto API. The server only ever handles encrypted blobs it cannot read.",
       "detail2Title": "Encrypted File Sharing — A First",
-      "detail2Desc": "No other secret sharing tool supports encrypted image and PDF sharing. With Only Once Share, you can securely share screenshots, photos of documents, signed contracts, sensitive diagrams, and any file up to 10 MB. Files and text are packed into a single encrypted payload — the server cannot even tell what type of content a secret contains.",
+      "detail2Desc": "No other secret sharing tool supports encrypted image, PDF, and archive sharing. With Only Once Share, you can securely share screenshots, photos of documents, signed contracts, sensitive diagrams, and any file up to 10 MB. Files and text are packed into a single encrypted payload — the server cannot even tell what type of content a secret contains.",
       "detail3Title": "No Paywalls, No Limits, No Lock-In",
       "detail3Desc": "Many competitors restrict free users to a handful of secrets per month, limited expiration times, or reduced payload sizes. Only Once Share is completely free with no artificial limits. And because it's open source under the MIT license, you can self-host it on your own infrastructure — your data, your rules.",
       "ctaText": "Ready to share secrets securely?",
@@ -167,7 +169,7 @@
       "moreQuestions": "Have more questions?",
       "askGithub": "Ask on GitHub",
       "q1": "How does Only Once Share work?",
-      "a1": "When you create a secret — whether it's text, an image, a PDF, or a combination — your browser generates a random AES-256-GCM encryption key using the Web Crypto API. Everything is encrypted entirely in your browser — the plaintext never leaves your device. The encrypted data is sent to our server and stored temporarily in Redis. The encryption key is placed in the URL fragment (after the # symbol), which browsers never send to servers. When the recipient opens the link, the encrypted data is retrieved and permanently deleted in a single atomic operation. Their browser then decrypts the secret using the key from the URL.",
+      "a1": "When you create a secret — whether it's text, an image, a PDF, an archive, or a combination — your browser generates a random AES-256-GCM encryption key using the Web Crypto API. Everything is encrypted entirely in your browser — the plaintext never leaves your device. The encrypted data is sent to our server and stored temporarily in Redis. The encryption key is placed in the URL fragment (after the # symbol), which browsers never send to servers. When the recipient opens the link, the encrypted data is retrieved and permanently deleted in a single atomic operation. Their browser then decrypts the secret using the key from the URL.",
       "q2": "Is my secret truly private?",
       "a2": "Yes. Only Once Share uses a zero-knowledge architecture, meaning our server only stores encrypted data it cannot read. The encryption key exists only in the URL fragment, which is never transmitted to any server — this is a fundamental property of how web browsers handle URL fragments (defined in RFC 3986). Even if our server were compromised, your secrets would remain encrypted and unreadable.",
       "q3": "What encryption does Only Once Share use?",
@@ -179,9 +181,9 @@
       "q6": "How long do secrets last?",
       "a6": "You can choose an expiration time between 1 and 72 hours (1h, 4h, 12h, 24h, 48h, or 72h). Secrets automatically expire after the chosen time even if they are never viewed. Once expired or viewed, the data is permanently deleted from our servers. No data persists beyond the expiration window.",
       "q7": "Is Only Once Share free?",
-      "a7": "Yes, completely free with no limits. Unlike some competitors that restrict free users to a handful of secrets per month or impose size caps, Only Once Share has no artificial limitations. You can share text secrets up to 50,000 characters and attach images or PDFs up to 10 MB (JPEG, PNG, GIF, WebP, PDF), with no account required. The tool is also open source under the MIT license.",
+      "a7": "Yes, completely free with no limits. Unlike some competitors that restrict free users to a handful of secrets per month or impose size caps, Only Once Share has no artificial limitations. You can share text secrets up to 50,000 characters and attach images, PDFs, or archives up to 10 MB (JPEG, PNG, GIF, WebP, PDF, ZIP, RAR, 7Z, TAR.GZ), with no account required. The tool is also open source under the MIT license.",
       "q8": "Do I need to create an account?",
-      "a8": "No. Only Once Share requires no registration, no email, no account. Just enter your text, optionally attach an image or PDF, choose an expiration time, and share the generated link. This zero-friction approach means there's no personal data to protect and no credentials that could be compromised.",
+      "a8": "No. Only Once Share requires no registration, no email, no account. Just enter your text, optionally attach an image, PDF, or archive, choose an expiration time, and share the generated link. This zero-friction approach means there's no personal data to protect and no credentials that could be compromised.",
       "q9": "Can I self-host Only Once Share?",
       "a9": "Yes. Only Once Share is fully open source and designed for easy self-hosting with Docker. Clone the repository from GitHub, configure your environment variables, and run docker compose up. The entire stack (React frontend, Flask API, Redis storage) runs in containers. Self-hosting gives you complete control over your data and is ideal for organizations with data residency requirements.",
       "q10": "Is Only Once Share open source?",
@@ -221,7 +223,7 @@
     "aadTitle": "Authenticated Data Binding",
     "aadDesc": "The secret ID is bound as Additional Authenticated Data (AAD) during encryption. If anyone tampers with the secret ID or swaps ciphertext between secrets, decryption will fail.",
     "zkTitle": "Zero Knowledge",
-    "zkDesc": "The server only stores encrypted data — it cannot distinguish text from images or PDFs. We cannot read, decrypt, or access your secrets in any way. The decryption key exists only in the shared link's URL fragment.",
+    "zkDesc": "The server only stores encrypted data — it cannot distinguish text from images, PDFs, or archives. We cannot read, decrypt, or access your secrets in any way. The decryption key exists only in the shared link's URL fragment.",
     "keyTitle": "Key Never Leaves the Browser",
     "keyDesc": "The decryption key is placed after the # in the URL. Browser URL fragments are never sent to servers — not in requests, not in logs, not anywhere.",
     "oneTimeTitle": "One-Time Viewing",
