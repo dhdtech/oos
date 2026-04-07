@@ -1774,7 +1774,7 @@ docker compose up -d</code></pre>
 <h2>How Only Once Share Handles Image Sharing</h2>
 <p><a href="/">Only Once Share</a> supports encrypted image sharing alongside text. Here is how it works:</p>
 <ol>
-<li><strong>Select or drop your image</strong> — Drag and drop or click to select an image file. You can also include a text message alongside the image.</li>
+<li><strong>Select or drop your image</strong> — Drag and drop or click to select an image file. You can also include a text message, a PDF, or a ZIP archive alongside the image.</li>
 <li><strong>Client-side encryption</strong> — The image is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server receives only encrypted bytes.</li>
 <li><strong>Share the link</strong> — You get a one-time link. The encryption key is embedded in the URL fragment and never sent to the server.</li>
 <li><strong>Recipient views once</strong> — The recipient opens the link, the image is decrypted in their browser, and the encrypted data is permanently deleted from the server via atomic deletion.</li>
@@ -1860,7 +1860,7 @@ docker compose up -d</code></pre>
 <p><a href="/">Only Once Share</a> provides password protected photo sharing with military-grade encryption:</p>
 
 <ol>
-<li><strong>Drop your photo</strong> — Drag and drop or click to select an image (JPEG, PNG, GIF, WebP up to 10 MB). You can also include a text message or a PDF alongside the photo.</li>
+<li><strong>Drop your photo</strong> — Drag and drop or click to select an image (JPEG, PNG, GIF, WebP up to 10 MB). You can also include a text message, a PDF, or a ZIP archive alongside the photo.</li>
 <li><strong>Automatic encryption</strong> — Your photo is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server receives only encrypted bytes.</li>
 <li><strong>Get a one-time link</strong> — The encryption key is embedded in the URL fragment (after the #) and never sent to any server.</li>
 <li><strong>Share the link</strong> — Send the link via any channel (WhatsApp, email, SMS). Even if the channel is compromised, the encrypted photo cannot be read without the full URL.</li>
@@ -1964,7 +1964,7 @@ docker compose up -d</code></pre>
 <h2>How Only Once Share Handles Secure PDF Sharing</h2>
 <p><a href="/">Only Once Share</a> was built for exactly these scenarios. Here is how it works:</p>
 <ol>
-<li><strong>Upload your PDF</strong> — Select a PDF file up to 10 MB. You can also include a text message or image alongside it.</li>
+<li><strong>Upload your PDF</strong> — Select a PDF file up to 10 MB. You can also include a text message, image, or ZIP archive alongside it.</li>
 <li><strong>Browser-side encryption</strong> — The PDF is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server only ever sees encrypted bytes — it cannot read your document.</li>
 <li><strong>Get a one-time link</strong> — The encryption key is embedded in the URL fragment (after the #), which is never sent to any server.</li>
 <li><strong>Share the link</strong> — Send it via any channel. Even if the channel is compromised, the encrypted PDF cannot be decrypted without the full URL.</li>
@@ -1986,6 +1986,81 @@ docker compose up -d</code></pre>
 
 <h2>Conclusion</h2>
 <p>PDFs carry the most important information in our professional and personal lives. The convenience of email attachments and cloud links has normalized a dangerous practice: leaving sensitive documents permanently accessible in systems that were never designed to protect them. Encrypted, self-destructing links solve this by ensuring the document exists only for the moment it is needed and is permanently destroyed afterward. The next time you need to share a contract, tax return, medical record, or any sensitive PDF, skip the email attachment and <a href="/">create a secure one-time link instead</a>.</p>
+`
+  },
+
+  // ──────────────────────────────────────────────
+  // Post 24 — April 2026
+  // ──────────────────────────────────────────────
+  {
+    slug: "share-zip-files-securely",
+    title: "How to Share ZIP Files Securely: Encrypted Archives with Self-Destructing Links",
+    date: "2026-04-07",
+    description: "ZIP files often contain batches of sensitive documents. Learn how to share archives securely using encrypted one-time links instead of email attachments or cloud storage.",
+    readingTime: 6,
+    tags: ["security", "archives", "encryption"],
+    content: `
+<p>ZIP files are how we bundle sensitive documents together. A hiring packet with offer letters, tax forms, and ID scans. A project handoff with source code and credentials. A legal discovery bundle with hundreds of case documents. When you zip files together, you're usually creating a package of things that matter — and yet most people share these archives through email or cloud links that persist forever.</p>
+
+<p>This is a problem. A ZIP file containing ten sensitive documents is ten times the exposure of sharing one. And the standard approach — password-protecting the ZIP itself — has serious weaknesses that most people don't understand.</p>
+
+<h2>Why Password-Protected ZIPs Are Not Enough</h2>
+<p>When you create a password-protected ZIP file using the standard ZipCrypto method (the default in Windows and most ZIP tools), the encryption is remarkably weak. ZipCrypto has known vulnerabilities dating back to the 1990s and can be cracked with freely available tools. Even the stronger AES-256 option available in 7-Zip and WinRAR has a fundamental problem: you need to share the password separately.</p>
+<p>Most people end up sending the ZIP in one email and the password in another — or worse, in the same email. Both emails persist in inboxes, sent folders, and server backups. An attacker who compromises either email account gets both the archive and the password. The "protection" is theater.</p>
+
+<h2>When You Need to Share Archives Securely</h2>
+
+<h3>Client Project Handoffs</h3>
+<p>Freelancers and agencies routinely send project deliverables as ZIP files: source code, design assets, database exports, configuration files with API keys. These archives often contain credentials or proprietary code that should not persist in email threads after the handoff is complete.</p>
+
+<h3>HR Document Packages</h3>
+<p>Onboarding a new employee often means collecting a bundle of sensitive documents: signed offer letter, government ID scan, Social Security card, direct deposit form, background check authorization. HR teams that receive these as ZIP attachments create a concentrated package of personal data sitting in their inbox indefinitely.</p>
+
+<h3>Legal Discovery Bundles</h3>
+<p>Law firms exchange large document sets during discovery — deposition transcripts, contracts, financial records, correspondence. These ZIP files often contain privileged or confidential material that could cause serious harm if disclosed to unauthorized parties. Email persistence makes every transmitted bundle a long-term liability.</p>
+
+<h3>Financial Document Packages</h3>
+<p>Accountants, auditors, and financial advisors receive ZIP files containing tax returns, bank statements, investment records, and corporate financial reports. Each archive is a comprehensive financial profile that could enable fraud or identity theft if it fell into the wrong hands.</p>
+
+<h3>Source Code and Credentials</h3>
+<p>Developers share ZIP files containing codebases, environment configurations, SSH keys, API credentials, and database connection strings. A single compromised archive can provide complete access to production systems. These should never persist in communication channels.</p>
+
+<h3>Medical Record Transfers</h3>
+<p>Patients changing healthcare providers often need to transfer bundles of medical records — lab results, imaging reports, prescription histories, insurance documents. HIPAA requires appropriate safeguards for protected health information, and a ZIP file sitting in an email inbox does not qualify.</p>
+
+<h2>The Problem with Email and Cloud Storage</h2>
+<p>Sharing ZIP files via email or cloud links has the same fundamental issues as sharing any sensitive file through these channels, amplified by the fact that archives contain multiple documents:</p>
+<ul>
+<li><strong>Persistence</strong> — The ZIP sits in sent folders, inboxes, and server backups indefinitely. One compromised account exposes the entire bundle.</li>
+<li><strong>Forwarding</strong> — The recipient can forward the entire package to anyone without your knowledge.</li>
+<li><strong>Cloud access</strong> — Google Drive, Dropbox, and OneDrive store your files in plaintext on their servers. The provider (and anyone who compromises the provider) can access them.</li>
+<li><strong>No expiration</strong> — Links and attachments remain accessible until someone manually deletes them, which almost never happens.</li>
+<li><strong>Multiplied exposure</strong> — A ZIP with 20 documents is 20 times the exposure of a single file breach.</li>
+</ul>
+
+<h2>How Only Once Share Handles Secure Archive Sharing</h2>
+<p><a href="/">Only Once Share</a> solves these problems with encrypted, self-destructing links:</p>
+<ol>
+<li><strong>Upload your ZIP file</strong> — Select a ZIP, RAR, 7Z, or TAR.GZ archive up to 10 MB. You can also include a text message alongside it.</li>
+<li><strong>Browser-side encryption</strong> — The archive is encrypted in your browser using AES-256-GCM with a key derived via HKDF-SHA-256. The server only ever sees encrypted bytes — it cannot read or extract your files.</li>
+<li><strong>Get a one-time link</strong> — The encryption key is embedded in the URL fragment (after the #), which is never sent to any server.</li>
+<li><strong>Share the link</strong> — Send it via any channel. Even if the channel is compromised, the encrypted archive cannot be decrypted without the full URL.</li>
+<li><strong>Recipient downloads once</strong> — The recipient opens the link, the archive is decrypted in their browser and available for download. The encrypted data is permanently deleted from the server via atomic deletion.</li>
+</ol>
+<p>No passwords to share separately. No persistent copies on any server. No accounts required. <a href="/security">Review the security architecture</a> or <a href="https://github.com/dhdtech/only-once-share">audit the source code</a>.</p>
+
+<h2>Best Practices for Sharing Archives Securely</h2>
+<ul>
+<li><strong>Don't rely on ZIP passwords alone</strong> — Standard ZipCrypto encryption is weak. Even AES-encrypted ZIPs require sharing a password through a separate (often insecure) channel.</li>
+<li><strong>Set the shortest practical expiration</strong> — If the recipient will download within an hour, use a 1-hour TTL. Shorter windows mean less exposure.</li>
+<li><strong>Remove unnecessary files before zipping</strong> — Only include what the recipient actually needs. Every extra file is additional exposure if something goes wrong.</li>
+<li><strong>Don't use cloud storage for one-time transfers</strong> — If someone only needs the files once, a self-destructing link is more secure than a persistent Drive or Dropbox link.</li>
+<li><strong>Verify your recipient</strong> — A self-destructing link is only as secure as the channel you use to deliver it. Send it to a verified contact.</li>
+<li><strong>Check compliance requirements</strong> — If your archives contain health data (HIPAA), personal data (GDPR), or financial records, encrypted self-destructing links help meet data minimization requirements.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>ZIP files concentrate sensitive information into a single package, making secure handling more important — not less. Password-protected ZIPs provide a false sense of security, and email or cloud links leave archives exposed indefinitely. Encrypted, self-destructing links ensure your archive exists only for the moment it's needed and is permanently destroyed afterward. The next time you need to send a project handoff, an HR document bundle, or any sensitive ZIP file, skip the email attachment and <a href="/">create a secure one-time link instead</a>.</p>
 `
   },
 ];
